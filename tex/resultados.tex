@@ -1,0 +1,148 @@
+\chapter[RESULTADOS E DISCUSSÃO]{RESULTADOS E DISCUSSÃO}
+
+\section{Visão Geral dos Experimentos}
+
+Esta seção apresenta uma visão consolidada da organização experimental adotada para avaliar o desempenho do sistema proposto. A avaliação diagnóstica (LLMs e \textit{baseline}) foi conduzida sobre um subconjunto balanceado do PH2 \cite{mendonca2013ph2}, obtido por \textit{undersampling} da base original (200 imagens dermoscópicas, 40 melanomas e 160 lesões não-melanoma): 25 imagens de melanoma e 25 imagens de não-melanoma, totalizando 50 imagens, selecionadas por amostragem aleatória simples com semente fixa (\textit{seed}=42), utilizando as máscaras de segmentação de referência (\textit{ground truth}) disponíveis no banco de dados. Essa escolha metodológica permitiu isolar a avaliação da capacidade diagnóstica das LLMs da variabilidade introduzida por modelos de segmentação automática, conforme detalhado no Capítulo~4.
+
+O protocolo experimental foi dividido em dois eixos principais. O primeiro corresponde ao \textit{baseline} supervisionado, no qual um modelo ResNet-50 foi treinado diretamente sobre o conjunto PH2, por meio de uma divisão treino/teste estratificada de 70/30 (\textit{seed}=42), estabelecendo uma referência quantitativa para as comparações subsequentes. Cabe ressaltar que, em razão da divisão estratificada aplicada sobre a base PH2 completa (200 imagens), o conjunto de teste do \textit{baseline} (60 imagens: 52 não-melanoma e 8 melanoma) difere em composição do subconjunto balanceado de 50 imagens utilizado na avaliação das LLMs; essa diferença é discutida como limitação na Seção~\ref{sec:limitacoes}. O segundo eixo abrange a avaliação dos modelos de linguagem multimodal, GPT-5.4-nano e Gemini-3.1-flash-lite, submetidos à mesma tarefa de detecção de melanoma sobre o subconjunto balanceado do PH2, utilizando pares de imagens (original e segmentada por GT) como entrada ao sistema multiagente. As métricas consideradas foram acurácia, precisão, sensibilidade e F1-score, complementadas por análises qualitativas da consistência textual das respostas geradas.
+
+A apresentação dos resultados segue esta organização: primeiramente são discutidos os resultados quantitativos do \textit{baseline} supervisionado; em seguida, o desempenho dos modelos LLM na detecção de melanoma; posteriormente, a consistência textual das respostas; e, por fim, a síntese integrada e as limitações experimentais.
+
+
+\section{Resultados Quantitativos do Diagnóstico}
+\subsection{Desempenho do Modelo de Visão Computacional (ResNet-50)}
+
+Como \textit{baseline} tradicional, foi utilizado um modelo ResNet-50 pré-treinado em ImageNet (\textit{transfer learning}), ajustado sobre o conjunto PH2 em regime de \textit{fine-tuning} completo (backbone não congelado), para a tarefa de detecção binária (melanoma vs.\ não-melanoma). O treinamento utilizou divisão treino/teste estratificada de 70/30 (\textit{seed}=42, garantindo amostragem representativa das classes), até 50 épocas com \textit{early stopping} (paciência de 15 épocas, monitorando o F1-score de validação; melhor época obtida na época 14), otimizador AdamW (\textit{learning rate}=0,0001, \textit{weight decay}=0,0001), agendador de taxa de aprendizado \textit{cosine annealing}, tamanho de lote (\textit{batch size}) igual a 8, ponderação de classes na função de perda (\textit{pos\_weight}=2,5, para compensar o desequilíbrio entre melanoma e não-melanoma) e imagens redimensionadas para $224\times224$ pixels com normalização segundo as estatísticas do ImageNet. Para mitigar o sobreajuste, foram aplicadas técnicas de \textit{data augmentation} no conjunto de treino: espelhamento horizontal e vertical, rotação aleatória de até 30°, \textit{jitter} de cor (brilho, contraste e saturação em 0,2; matiz em 0,05) e \textit{random erasing} (probabilidade de 0,2). O objetivo dessa etapa foi estabelecer uma referência quantitativa para as avaliações realizadas com LLMs. A Tabela~\ref{tab:resnet_results_real} apresenta as métricas obtidas sobre o conjunto de teste estratificado do PH2 (60 imagens: 52 não-melanoma e 8 melanoma).
+
+\begin{table}[H]
+	\centering
+	\caption{Desempenho do modelo ResNet-50 como baseline de classificação binária.}
+	\label{tab:resnet_results_real}
+	\begin{tabular}{lcccc}
+		\hline
+		\textbf{Modelo} & \textbf{Acurácia} & \textbf{Precisão} & \textbf{Sensibilidade} & \textbf{F1-score} \\
+		\hline
+		ResNet-50 & 0.90 & 0.57 & 1.00 & 0.73 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Os resultados indicam que a ResNet-50 apresenta acurácia elevada (0,90) e, mais relevante para o contexto de triagem médica, \textbf{sensibilidade perfeita} (1,00): todos os 8 melanomas presentes no conjunto de teste foram corretamente identificados, sem nenhum falso negativo. Em contrapartida, a precisão de 0,57 revela uma quantidade relevante de falsos positivos (6 imagens não-melanoma classificadas como melanoma, de um total de 52), refletindo um comportamento conservador do classificador, favorecido pela ponderação de classes (\textit{pos\_weight}=2,5) aplicada durante o treinamento para privilegiar a detecção da classe minoritária. O F1-score resultante (0,73) equilibra esses dois efeitos. A especificidade (0,88), a acurácia balanceada (0,94) e a área sob a curva ROC (\textit{AUC}=0,95) corroboram um desempenho consistentemente forte do modelo, com um perfil de erro deliberadamente inclinado para a segurança clínica: o modelo prefere gerar falsos alarmes a deixar passar despercebido um melanoma.
+
+É importante destacar duas limitações do protocolo experimental adotado nesta fase. Primeiro, o conjunto de teste do \textit{baseline}, decorrente da divisão estratificada 70/30 sobre o PH2 completo, contém apenas 8 imagens de melanoma (52 não-melanoma), o que torna a estimativa de sensibilidade e F1-score sensível a cada acerto ou erro individual. Segundo, esse conjunto de teste \textbf{difere em composição} do subconjunto balanceado de 50 imagens (25 melanoma e 25 não-melanoma) utilizado na avaliação das LLMs, de modo que a comparação direta de métricas entre a ResNet-50 e os modelos de linguagem multimodal (Seção~\ref{sec:consistency_llm} em diante) deve ser interpretada com cautela, já que os dois grupos não foram avaliados sobre exatamente as mesmas imagens. Ainda assim, o baseline serve como referência quantitativa para avaliar os ganhos e limitações das abordagens baseadas em LLMs nas seções seguintes.
+
+\subsection{Desempenho das LLMs no Diagnóstico}
+
+Além do modelo convencional baseado em visão computacional, este trabalho avaliou o desempenho de modelos de linguagem multimodais (LLMs) aplicados à detecção de melanoma no conjunto PH2. Para essa etapa, cada LLM recebeu duas entradas simultâneas: a imagem original e sua respectiva máscara de segmentação de referência (\textit{ground truth}) do PH2. O diagnóstico final (melanoma ou não-melanoma) foi extraído da estrutura JSON produzida pelo agente sumarizador, assegurando um processo padronizado de decisão.
+
+Conforme detalhado adiante na Seção~\ref{sec:consistency_llm}, uma parcela relevante das respostas, especialmente do GPT-5.4-nano, não produziu diagnóstico binário direto, resultando em classificações do tipo ``indeterminada''. Para que fosse possível calcular as métricas quantitativas sobre o conjunto completo de amostras, adotou-se um critério explícito de desambiguação: a resposta textual da validação foi lida integralmente e classificada com base no direcionamento semântico predominante. Em casos nos quais nenhum sinal de suspeição estava presente (ex.: \textit{``Não foi possível determinar com os dados disponíveis''}), a predição foi atribuída como \textbf{não-melanoma}. Quando a resposta indicava evidência ou suspeição, mesmo que não conclusiva (ex.: \textit{``Não foi possível determinar, mas existem evidências sugestivas de melanoma''}), a predição foi atribuída como \textbf{melanoma}. Esse critério foi aplicado de forma consistente em todos os casos ambíguos, privilegiando a leitura conservadora na ausência de evidência explícita. Os valores da Tabela~\ref{tab:llm_results} refletem esse procedimento de desambiguação.
+
+A Tabela~\ref{tab:llm_results} apresenta os resultados obtidos pelos modelos Gemini-3.1-flash-lite e GPT-5.4-nano, avaliados sobre o subconjunto balanceado de 50 amostras do PH2 descrito na Seção~\ref{sec:data_preprocessing}, distinto do conjunto de teste estratificado utilizado na avaliação do \textit{baseline} ResNet-50 (Seção~\ref{sec:limitacoes}).
+
+\begin{table}[H]
+	\centering
+	\caption{Desempenho dos modelos LLM no diagnóstico binário.}
+	\label{tab:llm_results}
+	\begin{tabular}{lcccc}
+		\hline
+		\textbf{Modelo} & \textbf{Acurácia} & \textbf{Precisão} & \textbf{Sensibilidade} & \textbf{F1-score} \\
+		\hline
+		Gemini-3.1-flash-lite & 0.76 & 0.81  & 0.68 & 0.74 \\
+		GPT-5.4-nano & 0.68 & 0.68 & 0.68 & 0.68 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Os resultados obtidos mostram que, do ponto de vista estritamente quantitativo, os modelos LLM apresentam desempenho inferior ao da ResNet-50 na maior parte das métricas clássicas de classificação. O \textit{baseline} ResNet-50 obteve acurácia de 0,90 e, sobretudo, sensibilidade perfeita (1,00), identificando corretamente todos os 8 melanomas de seu conjunto de teste, ante sensibilidade de 0,68 em ambas as LLMs. O F1-score da ResNet-50 (0,73) também supera o do GPT-5.4-nano (0,68) e é próximo ao do Gemini-3.1-flash-lite (0,74). A única métrica em que as LLMs se destacam é a precisão: o Gemini-3.1-flash-lite (0,81) e o GPT-5.4-nano (0,68) superam a ResNet-50 (0,57), cujo comportamento mais conservador, favorecido pela ponderação de classes aplicada no treinamento, gera mais falsos positivos. Cabe ressaltar que essa comparação deve ser interpretada com cautela, uma vez que a ResNet-50 e as LLMs foram avaliadas sobre conjuntos de teste distintos em composição (Seção~\ref{sec:limitacoes}). Ainda assim, o resultado é consistente com a expectativa de que um classificador supervisionado, treinado e ajustado especificamente para a tarefa, tende a superar modelos multimodais generalistas em métricas de classificação binária.
+
+Apesar do desempenho quantitativo inferior ao do \textit{baseline} na maioria das métricas, a escolha de LLMs neste estudo se justifica pela sua \textit{interpretabilidade estrutural}. Ao contrário de classificadores tradicionais, que fornecem apenas um rótulo final, os agentes baseados em LLMs expressam explicitamente os critérios utilizados em suas decisões, permitindo auditoria, rastreamento de inconsistências e análise qualitativa dos achados. Essa característica se mostra especialmente relevante em contexto médico, no qual a transparência do raciocínio diagnóstico é tão essencial quanto o resultado numérico.
+
+Ainda assim, a complexidade intrínseca da tarefa impõe um desafio aos modelos generalistas: os critérios finos dos protocolos ABCD, Menzies e SPCL, padrões estruturais sutis, variações de textura e microtexturas características de imagens dermatoscópicas, demandam reconhecimento visual especializado que LLMs de propósito geral, sem \textit{fine-tuning} em bases dermatológicas, ainda não reproduzem com fidelidade plena. A ausência de ajuste fino supervisionado em domínio médico específico permanece como a principal limitação arquitetural dos modelos avaliados, e explica por que nenhum dos dois modelos atinge desempenho ótimo em todas as métricas simultaneamente.
+
+A comparação direta entre as LLMs evidencia que maior sofisticação em raciocínio textual não implica necessariamente melhor desempenho quantitativo em classificação visual. Os indicadores de calibração e consistência inter-protocolos, analisados na Seção~\ref{sec:consistency_llm}, mostram diferenças substantivas entre os modelos, com vantagem clara do Gemini-3.1-flash-lite em todas as dimensões avaliadas.
+
+Assim, embora os modelos LLM não superem o \textit{baseline} convencional na maior parte das métricas de classificação, eles introduzem uma dimensão interpretativa ausente no classificador supervisionado, mensurável objetivamente pelo framework de cinco eixos apresentado a seguir e retomado na Discussão Integrada (Seção~\ref{sec:limitacoes} e seguintes). Esse resultado nuançado reforça a necessidade de análises que vão além da acurácia agregada, e abre caminho para abordagens híbridas futuras, incluindo \textit{fine-tuning} supervisionado, técnicas multimodais avançadas e incorporação de dados dermatoscópicos de maior fidelidade.
+
+\subsection{Avaliação da Consistência Textual das LLMs}
+\label{sec:consistency_llm}
+
+Além da classificação binária, foi realizada uma análise estrutural e lógica das respostas produzidas pelos agentes, organizada nos cinco eixos definidos na Seção~\ref{sec:avaliacao_experimental}. A Tabela~\ref{tab:consistency_metrics} apresenta os resultados por modelo para cada eixo.
+
+\begin{table}[H]
+	\centering
+	\caption{Indicadores de consistência estrutural e lógica dos relatórios gerados pelas LLMs (n=50 imagens por modelo).}
+	\label{tab:consistency_metrics}
+	\begin{tabular}{lcc}
+		\hline
+		\textbf{Eixo / Métrica} & \textbf{GPT-5.4-nano} & \textbf{Gemini-3.1-flash-lite} \\
+		\hline
+		E1 - Completude de campos                     & 100\%  & 100\%  \\
+		\hline
+		E2 - Aritmética ABCD correta                  &  96\%  & 100\%  \\
+		E2 - Scores imprecisos (ex.: ``7/8'')         &  38\%  &   0\%  \\
+		\hline
+		E3 - Aderência plena ao limiar ABCD           &   6\%  &  46\%  \\
+		E3 - Diagnósticos não-definitivos             &  82\%  &  46\%  \\
+		\hline
+		E4 - Consenso total entre métodos             &  46\%  &  78\%  \\
+		E4 - Validação concorda com consenso          &   8,7\% & 53,8\% \\
+		\hline
+		E5 - Acurácia (casos definitivos)             &  22,2\% & 85,2\% \\
+		E5 - Suspeita $\rightarrow$ \% melanoma real  &  28,6\% & 75,0\% \\
+		E5 - Indeterminado $\rightarrow$ \% melanoma real & 56,1\% & 83,3\% \\
+		\hline
+	\end{tabular}
+\end{table}
+
+No que diz respeito à conformidade estrutural, ambos os modelos atingiram 100\% de completude: todos os 50 relatórios por modelo continham a totalidade dos campos esperados nos protocolos ABCD, Menzies, SPCL e validação, indicando que as LLMs avaliadas seguem de forma confiável o \textit{schema} de saída especificado.
+
+A análise aritmética do protocolo ABCD revelou um contraste relevante. O Gemini-3.1-flash-lite acertou 100\% das somas ponderadas sem nenhum caso de pontuação imprecisa. O GPT-5.4-nano, embora com 96\% de acerto aritmético, expressou os \textit{scores} individuais em notação de intervalo (por exemplo, ``7/8'') em 38\% das respostas, o que exige pós-processamento adicional e pode introduzir ambiguidade na integração com sistemas automatizados.
+
+A diferença mais expressiva entre os modelos emerge na aderência ao limiar declarado. O Gemini-3.1-flash-lite alinhou a sua validação final com a decisão implícita do protocolo ABCD em 46\% dos casos, adotando diagnóstico ``indeterminado'' nos demais 46\% como postura de cautela interpretativa. O GPT-5.4-nano, por sua vez, emitiu diagnóstico não-definitivo em 82\% das respostas, convergindo ao limiar calculado em apenas 6\% dos casos. Esse padrão indica que o agente sumarizador do GPT-5.4-nano sistematicamente opta pela incerteza mesmo quando os protocolos apontam para benignidade, o que limita sua utilidade prática como ferramenta de triagem.
+
+No eixo de concordância inter-métodos, o Gemini-3.1-flash-lite registrou consenso total entre ABCD, Menzies e SPCL em 78\% dos casos, com o agente validador concordando com esse consenso em 53,8\% das vezes. O GPT-5.4-nano obteve consenso total em apenas 46\% das respostas, com o agente validador respeitando esse consenso em somente 8,7\% deles, evidenciando que a etapa de síntese não integra adequadamente as evidências convergentes dos três protocolos.
+
+A análise de calibração da incerteza é o indicador mais informativo sobre a qualidade do raciocínio diagnóstico. O Gemini-3.1-flash-lite atingiu acurácia de 85,2\% nos casos com diagnóstico definitivo e apresentou calibração coerente: casos rotulados como ``suspeita'' corresponderam a 75,0\% de melanomas reais, e os casos ``indeterminados'' a 83,3\%, indicando que o modelo concentra sua hesitação justamente nas imagens mais desafiadoras. O GPT-5.4-nano, em contraste, obteve apenas 22,2\% de acurácia nos casos definitivos e apresentou calibração invertida: as duas imagens rotuladas como ``maligna'' continham 0\% de melanoma real, enquanto os casos ``indeterminados'' (n=41) correspondiam a 56,1\% de melanomas, evidenciando que o modelo não discrimina adequadamente os casos de maior risco.
+
+Em conjunto, os resultados apontam perfis de comportamento distintos. O Gemini-3.1-flash-lite demonstra melhor aderência aos limiares declarados, maior concordância inter-protocolos e calibração clinicamente coerente. O GPT-5.4-nano, por sua vez, adota postura de incerteza excessiva e sistemática, o que, embora preserve a completude estrutural dos relatórios, compromete sua utilidade clínica para apoio à decisão. Ambos os modelos reforçam que a qualidade dos relatórios gerados extrapola a acurácia binária e demanda avaliação da confiabilidade do raciocínio expresso.
+
+\subsection{Síntese Integrada dos Resultados}
+
+A integração dos resultados obtidos permite uma visão mais ampla do desempenho do \textit{pipeline} completo, que combina máscaras de segmentação de referência do PH2, diagnóstico textual mediado por LLMs e coordenação via arquitetura multiagente. De forma geral, os achados mostram que o sistema possui componentes fortes e fracos em diferentes etapas, revelando um comportamento complementar entre os módulos de visão computacional e os modelos de linguagem.
+
+A adoção das máscaras GT do PH2 garantiu entradas visuais padronizadas e de alta fidelidade, eliminando a variabilidade introduzida por segmentação automática. Essa consistência é particularmente relevante para a validade interna dos experimentos, pois permite atribuir as diferenças de desempenho observadas exclusivamente ao módulo de raciocínio linguístico, e não a artefatos de segmentação. Essa base controlada é essencial para a interpretação dos resultados apresentados a seguir.
+
+Entretanto, a etapa de classificação mediada pelas LLMs apresentou desempenho inferior ao baseline supervisionado (ResNet-50) na maior parte das métricas quantitativas avaliadas, com exceção da precisão, na qual o Gemini-3.1-flash-lite superou o \textit{baseline}. Tanto o GPT-5.4-nano quanto o Gemini-3.1-flash-lite demonstraram dificuldades em transformar as características visuais das imagens segmentadas em diagnósticos binários tão sensíveis quanto os do classificador supervisionado. Esse resultado é coerente com o fato de que LLMs generalistas, mesmo multimodais, não são otimizadas para tarefas de discriminação fina, especialmente em domínios como dermatologia, onde pequenas variações de textura, cor e morfologia têm impacto significativo na interpretação clínica. Ainda assim, as LLMs mostraram força em outro aspecto: a \emph{explicabilidade}. Os relatórios gerados apresentam raciocínio estruturado, justificativas auditáveis e consistência textual superior, sobretudo no caso do Gemini-3.1-flash-lite, o que representa um diferencial em contextos assistivos.
+
+A análise integrada evidencia uma complementaridade interessante: a visão computacional apresenta forte desempenho quantitativo, mas fornece pouca interpretabilidade; as LLMs, por sua vez, apresentam raciocínio rico e estruturado, mas fraco desempenho classificatório. O sistema multiagente atua como conexão entre esses dois polos, permitindo que múltiplas interpretações textuais independentes sejam sintetizadas em um parecer consolidado. Essa estrutura se aproxima de uma dinâmica de “segunda opinião” distribuída, aumentando a robustez interpretativa, ainda que sem resolver integralmente o problema da acurácia diagnóstica.
+
+Em conjunto, os resultados reforçam que modelos generalistas de linguagem não substituem abordagens supervisionadas especializadas em tarefas de visão, mas podem complementá-las ao oferecer transparência, estruturação e justificativa clínica, elementos frequentemente ausentes em classificadores convencionais. O pipeline proposto, portanto, não atinge desempenho clínico comparável ao estado da arte em classificação dermatoscópica, mas demonstra potencial significativo como ferramenta de apoio, especialmente quando integrado a modelos visuais mais especializados ou submetido a fine-tuning em bases médicas.
+
+\subsection{Limitações dos Resultados}
+\label{sec:limitacoes}
+
+A análise dos resultados obtidos evidencia avanços importantes, mas também limitações estruturais que precisam ser consideradas para uma interpretação adequada da eficácia do sistema proposto. A primeira limitação decorre do tamanho reduzido do conjunto PH2 (200 imagens, sendo apenas 40 melanomas ao todo), que restringiu o subconjunto de teste balanceado a apenas 50 imagens (25 melanomas e 25 não-melanomas). Embora as imagens sejam de alta qualidade e acompanhadas de anotações especializadas, o volume limitado restringe a robustez estatística das métricas obtidas e a capacidade de generalização do sistema para populações clínicas mais amplas e diversas. O procedimento de \textit{undersampling} adotado para balancear as classes, embora necessário para permitir comparações justas entre os modelos, reduz ainda mais a diversidade de padrões morfológicos representados na classe não-melanoma.
+
+Outra limitação relevante está relacionada ao escopo restrito da tarefa de detecção. Ao focar exclusivamente na distinção melanoma vs.\ não-melanoma, o sistema não aborda a diversidade completa de lesões cutâneas presentes na prática clínica. A inclusão de classes adicionais (carcinoma basocelular, carcinoma espinocelular, queratose seborreica, entre outras) constituiria uma extensão importante, mas que demandaria conjuntos de dados mais amplos e anotados.
+
+No caso específico das LLMs, o baixo desempenho quantitativo observado indica uma limitação arquitetural: modelos multimodais generalistas não foram treinados para discriminar padrões sutis típicos de lesões cutâneas. Ainda que apresentem excelente capacidade de descrição textual, sua habilidade de transformar sinais visuais em decisões binárias clínicamente úteis permanece limitada. Esse descompasso se evidencia sobretudo no recall e no F1-score, métricas sensíveis à capacidade do modelo de identificar corretamente casos positivos.
+
+Além disso, a etapa multiagente não corrige os erros fundamentais de interpretação visual, pois opera exclusivamente sobre a saída textual dos agentes anteriores. Em outras palavras, o sistema de síntese agrega coerência narrativa, mas não aumenta a acurácia diagnóstica se os julgamentos intermediários forem imprecisos, uma limitação inerente a arquiteturas que dependem estritamente de LLMs para a etapa classificatória.
+
+Por fim, o custo computacional associado à inferência de modelos de larga escala via API impôs restrições ao volume experimental. A necessidade de limitar o número de amostras avaliadas reduz a abrangência estatística dos resultados e restringe análises de variância mais amplas entre subgrupos do PH2.
+
+Em conjunto, essas limitações reforçam que os resultados apresentados devem ser interpretados como prova de conceito, e não como validação clínica definitiva. Elas também motivam diretamente as direções propostas na seção de trabalhos futuros, especialmente o uso de modelos visuais dedicados e o fine-tuning supervisionado de LLMs para domínios médicos.
+
+\section{Discussão Integrada}
+
+A análise integrada dos resultados evidencia que o \textit{baseline} supervisionado (ResNet-50) apresentou desempenho quantitativo superior às LLMs na maior parte das métricas de classificação, incluindo justamente a sensibilidade (1,00 vs.\ 0,68 em ambas as LLMs), a métrica mais crítica para uma tarefa de triagem de melanoma, na qual deixar de detectar um caso maligno é o erro mais custoso. As LLMs avaliadas exibiram, portanto, limitações claras nessa dimensão quantitativa, mas introduziram uma capacidade ausente no classificador convencional: a explicabilidade estruturada do raciocínio diagnóstico, mensurável de forma objetiva por meio do framework de cinco eixos apresentado na Seção~\ref{sec:consistency_llm}.
+
+A adoção das máscaras GT do PH2 como entrada ao sistema revelou-se uma decisão metodológica acertada: ao eliminar a segmentação automática como variável, foi possível isolar o componente de raciocínio linguístico e atribuir as diferenças de desempenho exclusivamente à capacidade diagnóstica das LLMs. Essa validade interna é essencial para a interpretação dos resultados, pois garante que as métricas obtidas reflitam genuinamente a capacidade dos modelos de linguagem, e não variações introduzidas por erros de contorno ou subajuste morfológico.
+
+Os resultados quantitativos das LLMs revelam um desafio arquitetural esperado: modelos multimodais generalistas não foram otimizados para discriminação fina de padrões dermatoscópicos sutis. A ResNet-50, treinada diretamente sobre o PH2 com ponderação de classes para privilegiar a detecção da classe minoritária, atingiu acurácia de 0,90, sensibilidade perfeita (1,00) e F1-score de 0,73 em seu conjunto de teste estratificado (60 imagens, das quais 8 de melanoma), superando ambas as LLMs na maioria das métricas, o Gemini-3.1-flash-lite alcançou F1=0,74 e sensibilidade=0,68, e o GPT-5.4-nano F1=0,68 e sensibilidade=0,68, ambos sobre o subconjunto balanceado de 50 imagens. A única métrica em que as LLMs se aproximam ou superam o \textit{baseline} é a precisão, na qual o Gemini-3.1-flash-lite (0,81) supera a ResNet-50 (0,57). Essa diferença de desempenho não invalida a proposta, mas delimita com clareza os papéis complementares de cada abordagem: o classificador supervisionado é mais eficaz na decisão binária, especialmente na identificação exaustiva de casos positivos; as LLMs são mais eficazes na estruturação e justificativa do raciocínio clínico, e o framework de cinco eixos revela diferenças de confiabilidade entre elas que a acurácia, isoladamente, não captura.
+
+A estrutura multiagente mostrou utilidade qualitativa relevante. Ao consolidar pareceres independentes de três agentes especializados em protocolos clínicos distintos (ABCD, Menzies e SPCL), o agente sumarizador demonstrou capacidade de integrar divergências e gerar justificativas detalhadas e rastreáveis, mesmo em casos de diagnóstico incorreto. Essa capacidade de articular raciocínio clínico estruturado aproxima o sistema de um processo de segunda opinião médica distribuída. Contudo, a eficácia global permanece limitada pela capacidade discriminativa dos modelos subjacentes: a lógica multiagente é complementar, mas não substitutiva à necessidade de modelos visuais robustos.
+
+A análise de consistência textual acrescentou uma dimensão diagnóstica ausente nas métricas convencionais. O Gemini-3.1-flash-lite demonstrou calibração de incerteza clinicamente coerente, concentrando sua hesitação nos casos com maior prevalência real de melanoma, enquanto o GPT-5.4-nano adotou postura sistematicamente indeterminada, comprometendo sua utilidade para triagem direta. Esse contraste reforça que a escolha do modelo de linguagem impacta não apenas o desempenho quantitativo, mas a confiabilidade estrutural dos relatórios gerados.
+
+Em conjunto, os resultados confirmam que o sistema proposto cumpre seu papel como \emph{prova de conceito}: demonstra a viabilidade técnica de combinar máscaras de segmentação de referência, LLMs multimodais e arquitetura multiagente para a detecção de melanoma com diagnósticos explicáveis, ao mesmo tempo em que expõe limites claros que motivam investigações futuras, especialmente o \textit{fine-tuning} supervisionado das LLMs e a integração de um módulo de segmentação automática ao \textit{pipeline}.

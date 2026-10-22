@@ -1,0 +1,25 @@
+\chapter{Conclusão}
+\label{chap:conclusao}
+
+Este trabalho apresentou o desenvolvimento e a avaliação de um sistema automatizado de apoio à detecção de melanoma, integrando máscaras de segmentação de referência, modelos de linguagem multimodal e uma arquitetura multiagente coordenada via LangGraph. A abordagem proposta visa complementar o raciocínio clínico humano, oferecendo diagnósticos estruturados, explicáveis e auditáveis a partir de imagens dermoscópicas do conjunto PH2 \cite{mendonca2013ph2}.
+
+A adoção das máscaras de segmentação de referência (\textit{ground truth}) do PH2 como entrada ao sistema, em lugar de segmentações automáticas, foi uma decisão metodológica central que aumentou a validade interna dos experimentos. Ao eliminar a variabilidade introduzida por modelos de segmentação, foi possível atribuir as diferenças de desempenho exclusivamente à capacidade de raciocínio das LLMs, isolando o componente de interesse para avaliação. O conjunto PH2, composto por 200 imagens dermoscópicas (40 melanomas e 160 não-melanomas) com anotações especializadas, mostrou-se adequado para a prova de conceito proposta.
+
+Na etapa de detecção de melanoma, o \textit{baseline} supervisionado (ResNet-50) obteve acurácia de 0,85 e F1-score de 0,84, superando os modelos de linguagem multimodal em todas as métricas quantitativas. O GPT-5.4-nano \cite{openai2025gpt5nano} atingiu acurácia de 0,68 e F1-score de 0,68, enquanto o Gemini-3.1-flash-lite \cite{google2025gemini31} obteve acurácia de 0,76 e F1-score de 0,74. Embora as LLMs não superem o \textit{baseline} convencional, elas introduzem uma dimensão interpretativa ausente em classificadores tradicionais: a capacidade de expressar explicitamente os critérios ABCD utilizados na decisão, produzindo relatórios auditáveis e rastreáveis.
+
+A análise de consistência textual revelou que o GPT-5.4-nano gerou respostas mais estruturadas, com 82\% de conformidade com o formato JSON requerido, 91\% de presença de campos obrigatórios e 93\% de uso consistente da escala ABCD. O Gemini-3.1-flash-lite apresentou maior variabilidade, com 57\% de conformidade JSON e 63\% de coerência lógica entre pontuação e justificativa. Esse contraste reforça que a escolha do LLM impacta tanto o desempenho diagnóstico quanto a qualidade estrutural dos relatórios gerados.
+
+A arquitetura multiagente, ao consolidar pareceres independentes de três agentes especializados no método ABCD em um relatório unificado pelo agente sumarizador, demonstrou utilidade qualitativa relevante: mesmo quando o diagnóstico final era incorreto, as justificativas geradas eram semanticamente coerentes e rastreáveis. Esse comportamento aproxima o sistema de um processo de segunda opinião médica distribuída, aumentando a robustez interpretativa sem substituir a necessidade de modelos visuais especializados.
+
+Os resultados confirmam que o sistema proposto funciona como uma \emph{prova de conceito} válida, demonstrando a viabilidade técnica de combinar imagens dermoscópicas, segmentação por referência, LLMs multimodais e estruturas multiagentes para a detecção de melanoma com diagnósticos explicáveis. No entanto, expõe limites claros que motivam investigações futuras, em especial quanto à acurácia classificatória das LLMs e à escala dos experimentos.
+
+Como direções para trabalhos futuros, propõe-se:
+\begin{itemize}
+    \item \textit{Fine-tuning} supervisionado dos modelos LLM em bases dermoscópicas especializadas, visando melhorar o desempenho na detecção de melanoma;
+    \item Integração de um módulo de segmentação automático ao \textit{pipeline}, substituindo as máscaras GT por predições de modelos U-Net ou similares, para avaliação do impacto da qualidade da segmentação no diagnóstico final;
+    \item Expansão para conjuntos de dados maiores e mais diversificados (e.g., ISIC, HAM10000), permitindo análises estatísticas mais robustas e maior generalização;
+    \item Ampliação do escopo diagnóstico para além do melanoma, incluindo outras neoplasias cutâneas como carcinoma basocelular e carcinoma espinocelular;
+    \item Avaliação clínica prospectiva do sistema por profissionais de dermatologia, visando à validação em cenários reais de triagem.
+\end{itemize}
+
+A integração de LLMs multimodais e sistemas multiagentes para a detecção de melanoma representa uma abordagem ainda incipiente na literatura, com potencial significativo para democratizar o acesso ao diagnóstico assistido por IA em regiões com escassez de especialistas. O sistema proposto, apesar de suas limitações atuais, estabelece uma base metodológica sólida e replicável para investigações futuras nessa interseção entre inteligência artificial e medicina clínica.

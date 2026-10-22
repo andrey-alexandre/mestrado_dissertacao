@@ -1,0 +1,161 @@
+% %tabulacao para a listagem
+% %\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+% %\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+% %inicio do capitulo
+
+
+
+% %Cap 1 - Introdução 
+% %   --> Tentem escrever nessa ordem (não precisa criar subseção): 
+% %        Contextualização do Tema; Descrição do Problema; Proposta; Limitações; Justificativa
+% %   1.1 Objetivos: Geral e Específicos
+% %   1.2 Materiais e Métodos
+
+% \chapter[INTRODUÇÃO]{INTRODUÇÃO}
+% O câncer de pele é amplamente prevalente em nível global, representando uma grande parcela dos diagnósticos oncológicos em países desenvolvidos e em desenvolvimento. Segundo estimativas de \cite{cp2023inca}, mais de 30\% dos casos de câncer no Brasil no triênio de 2023-2025 serão de câncer de pele. De acordo com a Sociedade Brasileira de Dermatologia \cite{SBD_2024}, os tipos mais comuns são o carcinoma basocelular e o carcinoma espinocelular, enquanto o melanoma, embora mais raro, é a variante mais agressiva e com maior taxa de mortalidade. A incidência de câncer de pele tem aumentado em países com alta exposição solar, como o Brasil, devido à intensa radiação ultravioleta (UV). Estudos indicam que a falta de proteção solar é um fator determinante para esse aumento.
+
+% Além da exposição à radiação UV, fatores como predisposição genética, pigmentação cutânea, histórico de queimaduras solares e idade têm impacto relevante no desenvolvimento do câncer de pele \cite{shraim2023systematic}. No contexto brasileiro, a conscientização sobre o diagnóstico precoce é fundamental, especialmente em regiões com acesso limitado a especialistas. A detecção precoce é crucial para reduzir a mortalidade e os custos com o tratamento de estágios avançados. Nesse cenário, tecnologias baseadas em inteligência artificial (IA) surgem como uma alternativa promissora, ampliando o acesso ao diagnóstico e aumentando a precisão, mesmo em locais com escassez de especialistas.
+
+% Esta pesquisa propõe o desenvolvimento de um modelo baseado na rede neural LAMMA3, treinado, validado e testado com imagens fornecidas pela Society for Imaging Informatics in Medicine (SIIM) e pelo International Skin Imaging Collaboration (ISIC). O objetivo é maximizar a acurácia no diagnóstico e reduzir a incidência de falsos positivos em lesões cutâneas suspeitas. A proposta acompanha os recentes avanços do aprendizado profundo na medicina, buscando oferecer uma solução inovadora que una precisão diagnóstica e acessibilidade, atendendo às crescentes demandas por tecnologias eficazes e inclusivas na dermatologia.
+
+% \section{Motivação}
+% Nos últimos anos, as técnicas de aprendizado profundo e aprendizado de máquina têm demonstrado grande potencial como ferramentas auxiliares em diagnósticos médicos, especialmente em áreas com escassez de especialistas. Na dermatologia, esses métodos têm se mostrado essenciais para a detecção precoce de lesões cutâneas, permitindo que sistemas baseados em IA reconheçam padrões em imagens de pele e identifiquem sinais de malignidade com acurácia comparável à de especialistas. Devido à sua extensão territorial e desigualdades regionais, o Brasil enfrenta desafios significativos para garantir o diagnóstico precoce para toda a população. Assim, o desenvolvimento de modelos computacionais aplicáveis remotamente surge como uma alternativa viável para promover uma saúde pública mais acessível.
+
+% Além disso, a eficácia de algoritmos no diagnóstico de melanoma é cada vez mais relevante, visto que o melanoma, embora menos comum, é responsável pela maior taxa de mortalidade entre os cânceres de pele. Esta pesquisa visa demonstrar a capacidade de um modelo avançado de redes neurais para melhorar a detecção precoce do câncer de pele e, assim, contribuir para aumentar a sobrevida de pacientes diagnosticados com a doença. A presente investigação se destaca pela integração de redes neurais para a segmentação de lesões cutâneas, complementadas por sistemas multiagentes para análise e diagnóstico, permitindo maior confiabilidade na tomada de decisões.
+
+% \section{Lacuna do Conhecimento}
+% Embora existam modelos que realizam com precisão a segmentação de imagens de lesões cutâneas e a classificação das mesmas, ainda há escassez de pesquisas que explorem a combinação desses resultados com sistemas multiagentes para diagnósticos automatizados e precisos. A integração dessas abordagens é uma área pouco explorada, e a combinação de segmentação, classificação e sistemas multiagentes pode melhorar o diagnóstico diferencial em câncer de pele.
+
+% A literatura atual foca amplamente na segmentação e classificação de lesões de pele, mas observa-se uma limitação na aplicação prática desses algoritmos em contextos clínicos, devido à falta de integração com sistemas que gerem diagnósticos em tempo real a partir de dados coletados automaticamente. Ao implementar um sistema multiagente em conjunto com redes neurais, espera-se que esta pesquisa ofereça uma contribuição inédita, preenchendo a lacuna de integração entre processamento de imagens e suporte ao diagnóstico automatizado. Essa inovação visa proporcionar um diagnóstico mais preciso e viável em regiões com acesso limitado a especialistas, contribuindo para a democratização do diagnóstico de câncer de pele.
+
+% \section{Proposta da Pesquisa}
+% Esta pesquisa propõe a aplicação de sistemas multiagentes para desenvolver um diagnóstico diferencial, avaliando a acurácia e a eficiência diagnóstica do sistema com base em imagens segmentadas e classificações externas.
+
+% A arquitetura proposta será organizada em três módulos principais: (i) segmentação de lesões cutâneas, (ii) classificação da natureza da lesão (benigna ou maligna), e (iii) diagnóstico diferencial via sistema multiagente com validação crítica. O desempenho será avaliado por meio de métricas clínicas como acurácia, sensibilidade e precisão, bem como por critérios de completude e consistência textual dos pareceres gerados.
+
+% Apesar do potencial da abordagem proposta, este trabalho apresenta limitações inerentes ao uso de modelos de linguagem para diagnóstico clínico, incluindo a sensibilidade a variações de prompt, a ausência de contexto clínico complementar e a dependência da qualidade das segmentações. Além disso, a validação do sistema ocorre em um ambiente experimental controlado, o que pode limitar a generalização para contextos clínicos reais. Tais limitações são reconhecidas e apontam para direções futuras de pesquisa.
+
+% Esta pesquisa propõe a aplicação de sistemas multiagentes para desenvolver um diagnóstico diferencial, avaliando a acurácia e a eficiência diagnóstica do sistema com base em imagens segmentadas e classificações externas.
+
+% \section{Objetivos}
+% \subsection{Objetivo Principal}
+% Avaliar a eficácia de modelos multiagentes no diagnóstico diferencial do câncer de pele, em combinação com algoritmos de segmentação e classificação de imagem.
+
+% \subsection{Objetivos Específicos}
+% \begin{itemize}
+%     \item Realizar revisão bibliográfica sobre o tema;
+%     \item Desenvolver um algoritmo de segmentação para imagens de lesões de pele;
+%     \item Desenvolver um algoritmo de classificação para categorizar as lesões conforme o tipo (ou ausência) de câncer de pele;
+%     \item Implementar um sistema multiagente capaz de realizar o diagnóstico diferencial.
+% \end{itemize}
+
+
+\chapter[INTRODUÇÃO]{INTRODUÇÃO}
+
+O câncer de pele é uma das neoplasias mais prevalentes mundialmente, representando parcela significativa dos diagnósticos oncológicos em países desenvolvidos e em desenvolvimento. Estimativas do Instituto Nacional de Câncer (INCA) indicam que, no Brasil, mais de 30\% dos casos de câncer previstos para o triênio 2023–2025 serão de câncer de pele \cite{cp2023inca}. De acordo com a Sociedade Brasileira de Dermatologia (SBD) \cite{SBD_2024}, os tipos mais comuns são o carcinoma basocelular e o carcinoma espinocelular, enquanto o melanoma, embora menos frequente, apresenta alta letalidade e maior taxa de mortalidade. Em países com elevada exposição solar, como o Brasil, a incidência tende a aumentar devido à intensa radiação ultravioleta (UV), sendo a ausência de proteção solar um fator determinante nesse cenário.
+
+Além da radiação UV, fatores como predisposição genética, pigmentação cutânea, histórico de queimaduras solares e idade influenciam significativamente o desenvolvimento da doença \cite{shraim2023systematic}. No contexto brasileiro, a conscientização sobre diagnóstico precoce é essencial, sobretudo em áreas com acesso limitado a especialistas. A detecção precoce reduz mortalidade e custos associados ao tratamento em estágios avançados. Nesse sentido, tecnologias baseadas em inteligência artificial (IA) mostram-se promissoras para ampliar o acesso ao diagnóstico e elevar a precisão, mesmo em regiões com escassez de recursos humanos especializados.
+
+Esta pesquisa propõe o desenvolvimento de um sistema baseado em \textit{Large Language Models} (LLMs), mais especificamente os modelos GPT-5.4-nano \cite{openai2025gpt5nano} (OpenAI) e Gemini-3.1-flash-lite \cite{google2025gemini31} (Google), empregando sua capacidade multimodal de análise visual e geração de linguagem natural para a \textbf{detecção de melanoma} em imagens dermoscópicas. Os experimentos utilizam o conjunto PH2 \cite{mendonca2013ph2}, composto por 200 imagens dermoscópicas com diagnósticos e máscaras de segmentação anotadas por especialistas, o que permite isolar a avaliação diagnóstica das LLMs da variabilidade introduzida por modelos de segmentação automática. O objetivo central é avaliar a acurácia diagnóstica, a interpretabilidade clínica e a consistência textual dos pareceres gerados, contribuindo para o desenvolvimento de ferramentas de triagem assistida por IA acessíveis e explicáveis.
+
+\section{Motivação}
+
+Nos últimos anos, técnicas de aprendizado profundo e aprendizado de máquina vêm demonstrando alto potencial como ferramentas auxiliares em diagnósticos médicos, com especial utilidade em regiões com déficit de especialistas. Na dermatologia, Esteva et al. \cite{esteva2017dermatologist} demonstraram que redes neurais profundas atingem acurácia equivalente à de dermatologistas na classificação de câncer de pele; Haenssle et al. \cite{haenssle2018man} compararam uma rede convolucional a 58 especialistas em melanoma, obtendo desempenho diagnóstico superior; e Brinker et al. \cite{brinker2019deep} superaram 136 dos 157 dermatologistas avaliados em tarefa de classificação dermatoscópica.
+ 
+
+O Brasil, devido à sua extensão territorial e desigualdades regionais, enfrenta desafios para garantir diagnóstico precoce universal. Assim, modelos computacionais aplicáveis de forma remota tornam-se alternativas viáveis para promover saúde pública mais acessível. A relevância é ainda maior para o melanoma, que, apesar de menos incidente, responde pela maioria das mortes por câncer de pele. Esta investigação se diferencia pela integração entre modelos de linguagem multimodal com máscaras de segmentação de referência e sistemas multiagentes para análise e emissão de diagnósticos, ampliando a interpretabilidade e a confiabilidade na tomada de decisão.
+
+\section{Lacuna do Conhecimento}
+
+Embora existam modelos capazes de segmentar e classificar imagens de lesões cutâneas com alta precisão, há uma escassez de trabalhos que integrem esses resultados a sistemas multiagentes para diagnósticos automatizados. A combinação de segmentação, LLMs multimodais e suporte multiagente é uma abordagem pouco explorada e com potencial para melhorar a detecção de melanoma de forma automatizada e explicável. Estudos recentes têm demonstrado a eficácia de arquiteturas que unificam segmentação e classificação, como o MT-TransUNet, que emprega \textit{transformers} multitarefa para integrar ambas as etapas \cite{chen2021mt-transunet}, o modelo de \textit{bootstrapping} mútuo (MB-DCNN), que permite que segmentação e classificação se reforcem reciprocamente \cite{xia_mutual_bootstrapping_2019}, e o GS-TransUNet, que combina \textit{Gaussian Splatting} e \textit{Transformer UNet} para alcançar desempenho superior em benchmarks dermatológicos \cite{anand2025gs-transunet}. Ainda assim, poucos estudos avançam além da integração em redes unificadas, propondo arquiteturas baseadas em sistemas multiagentes que possam distribuir e orquestrar diferentes competências diagnósticas de forma colaborativa.
+
+
+Grande parte da literatura concentra-se nas etapas isoladas de segmentação e classificação, mas carece de aplicações práticas que integrem essas fases a sistemas de suporte à decisão em tempo real. Ao propor a integração entre LLMs multimodais e sistemas multiagentes para a detecção de melanoma, esta pesquisa visa preencher essa lacuna, oferecendo um método capaz de proporcionar diagnósticos explicáveis e aplicáveis a regiões com recursos limitados, contribuindo para a democratização do acesso ao diagnóstico.
+
+\section{Proposta da Pesquisa}
+
+Propõe-se a aplicação de sistemas multiagentes para a detecção de melanoma em imagens dermoscópicas, avaliando a acurácia diagnóstica e a consistência textual dos pareceres gerados a partir de imagens e suas respectivas máscaras de segmentação de referência.
+
+A arquitetura será composta por três módulos principais:
+\begin{enumerate}
+    \item Uso das máscaras de segmentação de referência do conjunto PH2 como entrada padronizada ao sistema;
+    \item Detecção de melanoma por modelos de linguagem multimodal (melanoma vs.\ não-melanoma);
+    \item Diagnóstico de melanoma via sistema multiagente com validação crítica.
+\end{enumerate}
+
+A avaliação contemplará métricas clínicas como acurácia, sensibilidade e precisão, bem como critérios de completude e consistência textual dos pareceres. Entre as limitações previstas, destacam-se a sensibilidade dos modelos de linguagem a variações de \textit{prompt}, a ausência de contexto clínico complementar e o tamanho reduzido do conjunto PH2 (200 imagens), que poderá limitar a generalização dos resultados. A validação ocorrerá em ambiente experimental controlado, o que deverá ser considerado na interpretação das métricas obtidas.
+
+\section{Objetivos}
+
+\subsection{Objetivo Principal}
+Avaliar a eficácia de modelos multiagentes na detecção de melanoma em imagens dermoscópicas, utilizando máscaras de segmentação de referência do conjunto PH2 e o protocolo ABCD como base do raciocínio clínico.
+
+
+\subsection{Objetivos Específicos}
+\begin{itemize}
+    \item Objetivos até a qualificação
+    \begin{itemize}
+        \item Investigar o estado da arte em segmentação de imagens, classificação de lesões cutâneas e sistemas diagnósticos baseados em inteligência artificial aplicados à dermatologia
+        \begin{itemize}
+            \item Capítulo de revisão bibliográfica na dissertação;
+            \item Documento de mapeamento de protocolos clínicos (ABCD, Menzies, SPCL);
+            \item Arquivo de referências bibliográficas organizado (\texttt{.bib});
+            \item Quadro comparativo entre abordagens existentes.
+        \end{itemize}
+    
+        \item Preparar o conjunto PH2 e suas máscaras de segmentação de referência como base para a avaliação diagnóstica
+        \begin{itemize}
+            \item Pré-processamento e normalização das imagens PH2;
+            \item Integração das máscaras de referência (\textit{ground truth}) ao \textit{pipeline} de inferência das LLMs;
+            \item Organização do conjunto em subconjuntos para avaliação binária (melanoma vs.\ não-melanoma).
+        \end{itemize}
+    
+        \item Avaliar a eficácia de diferentes modelos de linguagem natural (LLMs) na detecção de melanoma com base na imagem dermoscópica e sua máscara de segmentação de referência
+        \begin{itemize}
+            \item Relatório comparativo das LLMs testadas (GPT-5.4-nano e Gemini-3.1-flash-lite);
+            \item Base de prompts (Chain of Thought, Risk Prompt, etc.);
+            \item Tabela de desempenho quantitativo com métricas clássicas;
+            \item Discussão qualitativa das respostas geradas pelas LLMs.
+        \end{itemize}
+    
+        \item Implementar um sistema multiagente baseado em LLMs para geração de diagnósticos estruturados, considerando diferentes protocolos clínicos
+        \begin{itemize}
+            \item Arquitetura funcional implementada com LangChain/LangGraph;
+            \item Diagrama do fluxo de agentes e estados do sistema;
+        \end{itemize}
+    \end{itemize}
+    \item Objetivos até a defesa
+    \begin{itemize}
+        \item Implementar um sistema multiagente baseado em LLMs para geração de diagnósticos estruturados, considerando diferentes protocolos clínicos
+        \begin{itemize}
+            \item Diagnósticos gerados pelos agentes com base em diferentes protocolos;
+            \item Código-fonte modularizado e reusável.
+        \end{itemize}
+    
+        \item Validar o desempenho do sistema proposto por meio de comparação com modelos tradicionais de visão computacional e análise de consistência textual
+        \begin{itemize}
+            \item Tabelas comparativas com modelo baseline (e.g., ResNet);
+            \item Análise estatística com desvio padrão via bootstrap;
+            \item Avaliação da completude e estrutura das respostas em linguagem natural;
+            \item Discussão sobre limitações, false positives e interpretabilidade.
+        \end{itemize}
+    
+        \item Organizar os resultados obtidos em um protótipo funcional e documentar as análises por meio de relatórios técnicos e artigos científicos
+        \begin{itemize}
+            \item Protótipo final em ambiente executável (e.g., Colab ou App);
+            \item Relatório técnico consolidado com testes e resultados;
+            \item Artigo científico no formato IEEE ou Elsevier;
+            \item Materiais de apoio à defesa (slides e roteiro).
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+
+\section{Metodologia}
+
+A pesquisa é de natureza aplicada e experimental, estruturada em quatro etapas interdependentes: (i) revisão do estado da arte em detecção de melanoma e diagnóstico assistido por IA em dermatologia; (ii) preparação do conjunto PH2 \cite{mendonca2013ph2} e integração de suas máscaras de segmentação de referência ao \textit{pipeline} diagnóstico, eliminando a variabilidade de modelos de segmentação automática; (iii) avaliação comparativa dos modelos de linguagem multimodal GPT-5.4-nano \cite{openai2025gpt5nano} e Gemini-3.1-flash-lite \cite{google2025gemini31} para detecção de melanoma e geração de pareceres clínicos estruturados; e (iv) implementação e validação de um sistema multiagente coordenado pelos \textit{frameworks} LangChain e LangGraph. O detalhamento de conjuntos de dados, arquiteturas, estratégias de \textit{prompting} e métricas de avaliação é apresentado no Capítulo~3.
+
+
+
+\section{Estrutura da Dissertação}
+Esta dissertação está organizada da seguinte forma: o Capítulo 2 trata do referencial teórico, no qual são discutidos os principais conceitos e abordagens relacionados à segmentação de imagens dermatológicas, ao uso de modelos de linguagem natural na medicina e à aplicação de sistemas multiagentes em diagnósticos automatizados. O Capítulo 3 aborda a metodologia empregada no desenvolvimento da pesquisa, incluindo as etapas de coleta de dados, segmentação de imagens, estruturação dos agentes baseados em LLMs e estratégias de avaliação. O Capítulo 4 apresenta os resultados obtidos, tanto quantitativos quanto qualitativos, com ênfase na comparação entre diferentes modelos e na análise da consistência das respostas geradas. Por fim, o Capítulo 5 reúne as conclusões do trabalho, destacando as contribuições alcançadas, as limitações encontradas e as perspectivas para estudos futuros.

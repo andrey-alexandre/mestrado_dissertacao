@@ -1,0 +1,74 @@
+\changetocdepth {4}
+\babel@toc {brazil}{}\relax 
+\babel@toc {brazil}{}\relax 
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\babel@toc {english}{}\relax 
+\babel@toc {brazil}{}\relax 
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase []{INTRODUÇÃO}}{11}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivação}{11}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Lacuna do Conhecimento}{12}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Proposta da Pesquisa}{13}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Objetivos}{13}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Objetivo Principal}{13}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Objetivos Específicos}{13}{subsection.1.4.2}%
+\contentsline {section}{\numberline {1.5}Metodologia}{16}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Estrutura da Dissertação}{16}{section.1.6}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{CONCEITOS TEÓRICOS E FUNDAMENTAÇÃO}}{18}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Câncer de Pele}{18}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Epidemiologia e relevância clínica}{18}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Características clínicas e dermatoscópicas}{19}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Redes Neurais Artificiais}{21}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Fundamentos das RNAs}{21}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Redes Neurais Convolucionais (CNNs)}{22}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Redes de Atenção e Transformers}{23}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Segmentação de Imagens}{25}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Tipos de Segmentação de Imagens Médicas}{26}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Arquiteturas baseadas em U-Net}{27}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Modelos de Linguagem de Larga Escala (LLMs)}{29}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Fundamentos}{29}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}LLMs com capacidade multimodal}{29}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Desafios e limitações em saúde}{30}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Sistemas Multiagentes}{30}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Fundamentos}{30}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Aplicações em saúde}{32}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Desafios na Aplicação de IA em Dermatologia}{32}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Limitações de dados}{32}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Aspectos de interpretabilidade}{32}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Questões éticas e de equidade}{33}{subsection.2.6.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{REVISÃO DO ESTADO DA ARTE}}{34}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Classificação Automatizada de Lesões Cutâneas}{34}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Modelos de Linguagem Multimodal em Diagnóstico Médico}{35}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Sistemas Multiagentes para Suporte Diagnóstico}{35}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Posicionamento deste Trabalho}{36}{section.3.4}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{MATERIAIS E MÉTODOS}}{38}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Estrutura Geral da Pesquisa}{38}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Coleta e Pré-processamento dos Dados}{39}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Segmentação: Uso de Máscaras de Referência}{41}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Modelos de Linguagem de Grande Escala (LLMs)}{42}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Integração Multiagente e Consolidação Diagnóstica}{43}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Avaliação Experimental}{45}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Validação e Reprodutibilidade}{47}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Síntese e Limitações da Metodologia}{48}{section.4.8}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{RESULTADOS E DISCUSSÃO}}{50}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Visão Geral dos Experimentos}{50}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Resultados Quantitativos do Diagnóstico}{50}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Desempenho do Modelo de Visão Computacional (ResNet-50)}{50}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Desempenho das LLMs no Diagnóstico}{52}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Avaliação da Consistência Textual das LLMs}{54}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Síntese Integrada dos Resultados}{55}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Limitações dos Resultados}{56}{subsection.5.2.5}%
+\contentsline {section}{\numberline {5.3}Discussão Integrada}{57}{section.5.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÃO}}{60}{chapter.6}%
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\contentsline {chapter}{Cronograma de Execução}{63}{chapter*.24}%
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\contentsline {chapter}{\MakeTextUppercase []{REFERÊNCIAS}}{64}{section*.27}%
+\vspace {\cftbeforechapterskip }

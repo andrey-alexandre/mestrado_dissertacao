@@ -1,0 +1,1356 @@
+%% This BibTeX bibliography file was created using BibDesk.
+%% http://bibdesk.sourceforge.net/
+
+
+%% Created for Lauro Cesar Araujo at 2013-08-21 10:57:09 -0300 
+
+
+%% Saved with string encoding Unicode (UTF-8) 
+######################
+### Câncer de Pele ###
+######################
+
+@article{cp2023inca,
+  title={Estimativa de incid{\^e}ncia de c{\^a}ncer no Brasil, 2023-2025},
+  author={de Oliveira Santos, Marceli and de Lima, Fernanda Cristina da Silva and Martins, Lu{\'\i}s Felipe Leite and Oliveira, Julio Fernando Pinto and de Almeida, Liz Maria and de Camargo Cancela, Marianna},
+  journal={Revista Brasileira de Cancerologia},
+  volume={69},
+  number={1},
+  year={2023}
+}
+
+@misc{SBD_2024, 
+    url={https://www.sbd.org.br/doencas/cancer-da-pele},
+    author={SBD}, 
+    journal={SBD}, 
+    year={2024}, 
+    month={Oct}
+} 
+
+@article{shraim2023systematic,
+  title={Systematic review on gene--sun exposure interactions in skin cancer},
+  author={Shraim, Rasha and Farran, Mohamed Ziad and He, George and Marunica Karsaj, Jelena and Zgaga, Lina and McManus, Ross},
+  journal={Molecular genetics \& genomic medicine},
+  volume={11},
+  number={10},
+  pages={e2259},
+  year={2023},
+  publisher={Wiley Online Library}
+}
+
+@article{boehm2022harnessing,
+  title={Harnessing multimodal data integration to advance precision oncology},
+  author={Boehm, Kevin M and Khosravi, Pegah and Vanguri, Rami and Gao, Jianjiong and Shah, Sohrab P},
+  journal={Nature Reviews Cancer},
+  volume={22},
+  number={2},
+  pages={114--126},
+  year={2022},
+  publisher={Nature Publishing Group UK London}
+}
+
+
+@misc{iarc2022skincancer,
+  author    = {International Agency for Research on Cancer (IARC)},
+  title     = {Skin Cancer - Cancer Today},
+  year      = {2022},
+  howpublished = {\url{https://www.iarc.who.int/cancer-type/skin-cancer/}},
+  note      = {Acesso em: 29 set. 2025}
+}
+
+@article{wang2025global,
+  title={Recent global patterns in skin cancer incidence, mortality, and prevalence},
+  author={Wang, Mingyue and Gao, Xinghua and Zhang, Li},
+  journal={Chinese Medical Journal},
+  volume={138},
+  number={2},
+  pages={185--192},
+  year={2025},
+  publisher={LWW}
+}
+
+@article{zhou2025gbd,
+  title={Global, regional, and national trends in the burden of melanoma and non-melanoma skin cancer: Insights from the global burden of disease study 1990--2021},
+  author={Lei, et al.},
+  journal={Scientific Reports},
+  volume={15},
+  number={1},
+  pages={5996},
+  year={2025},
+  publisher={Nature Publishing Group UK London}
+}
+
+@misc{inca2023estimativa,
+  author    = {Instituto Nacional de Câncer (INCA)},
+  title     = {Estimativa 2023--2025: Incidência de Câncer no Brasil},
+  year      = {2023},
+  howpublished = {\url{https://www.gov.br/inca/pt-br/assuntos/cancer/numeros/estimativa}},
+  note      = {Acesso em: 29 set. 2025}
+}
+
+@article{garbe2009melanoma,
+  title={Melanoma epidemiology and trends},
+  author={Garbe, Claus and Leiter, Ulrike},
+  journal={Clinics in dermatology},
+  volume={27},
+  number={1},
+  pages={3--9},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@article{abbasi2004early,
+  title={Early diagnosis of cutaneous melanoma: revisiting the ABCD criteria},
+  author={Abbasi, et al.},
+  journal={Jama},
+  volume={292},
+  number={22},
+  pages={2771--2776},
+  year={2004},
+  publisher={American Medical Association}
+}
+
+@article{kittler2002diagnostic,
+  title={Diagnostic accuracy of dermoscopy},
+  author={Kittler, et al.},
+  journal={The lancet oncology},
+  volume={3},
+  number={3},
+  pages={159--165},
+  year={2002},
+  publisher={Elsevier}
+}
+
+@article{nachbar1994abcd,
+  title={The ABCD rule of dermatoscopy: high prospective value in the diagnosis of doubtful melanocytic skin lesions},
+  author={Nachbar, et al.},
+  journal={Journal of the American Academy of Dermatology},
+  volume={30},
+  number={4},
+  pages={551--559},
+  year={1994},
+  publisher={Elsevier}
+}
+
+@article{argenziano2003consensus,
+  title={Dermoscopy of pigmented skin lesions: results of a consensus meeting via the Internet},
+  author={Argenziano, et al.},
+  journal={Journal of the American Academy of Dermatology},
+  volume={48},
+  number={5},
+  pages={679--693},
+  year={2003},
+  publisher={Elsevier}
+}
+
+@article{argenziano2010sevenpoint,
+  title={Seven-point checklist of dermoscopy revisited},
+  author={Argenziano, et al.},
+  journal={British Journal of Dermatology},
+  volume={164},
+  number={4},
+  pages={785--790},
+  year={2011},
+  publisher={Blackwell Publishing Ltd Oxford, UK}
+}
+
+@article{menzies1996frequency,
+  title={Frequency and morphologic characteristics of invasive melanomas lacking specific surface microscopic features},
+  author={Menzies, et al.},
+  journal={Archives of dermatology},
+  volume={132},
+  number={10},
+  pages={1178--1182},
+  year={1996},
+  publisher={American Medical Association}
+}
+
+@article{tschandl2018ham10000,
+  title={The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions},
+  author={Tschandl, Philipp and Rosendahl, Cliff and Kittler, Harald},
+  journal={Scientific data},
+  volume={5},
+  number={1},
+  pages={1--9},
+  year={2018},
+  publisher={Nature Publishing Group}
+}
+
+@article{haenssle2018man,
+  title={Man against machine: diagnostic performance of a deep learning convolutional neural network for dermoscopic melanoma recognition in comparison to 58 dermatologists},
+  author={Haenssle, Holger A and Fink, Christine and Schneiderbauer, Roland and Toberer, Ferdinand and Buhl, Timo and Blum, Andreas and Kalloo, Aadi and Hassen, A Ben Hadj and Thomas, Luc and Enk, Alexander and others},
+  journal={Annals of oncology},
+  volume={29},
+  number={8},
+  pages={1836--1842},
+  year={2018},
+  publisher={Elsevier}
+}
+
+
+@misc{iarc2022globocan,
+	author       = {{International Agency for Research on Cancer}},
+	title        = {Cancer Today: Estimated cumulative risk (\%) of melanoma and non-melanoma skin cancer, both sexes, age 0–74, in 2022},
+	year         = {2022},
+	howpublished = {\url{https://gco.iarc.who.int/today/data/factsheets/cancers/16-Melanoma-of-skin-fact-sheet.pdf}},
+	note         = {Acesso em: outubro de 2025}
+}
+
+#####################
+### Redes Neurais ###
+#####################
+
+@article{rumelhart1986learning,
+  author  = {Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.},
+  title   = {Learning representations by back-propagating errors},
+  journal = {Nature},
+  year    = {1986},
+  volume  = {323},
+  number  = {6088},
+  pages   = {533--536},
+  doi     = {10.1038/323533a0}
+}
+
+@article{lecun2015deep,
+  author  = {LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey},
+  title   = {Deep learning},
+  journal = {Nature},
+  year    = {2015},
+  volume  = {521},
+  number  = {7553},
+  pages   = {436--444},
+  doi     = {10.1038/nature14539}
+}
+
+@article{schmidhuber2015deep,
+  author  = {Schmidhuber, J{\"u}rgen},
+  title   = {Deep learning in neural networks: An overview},
+  journal = {Neural Networks},
+  volume  = {61},
+  pages   = {85--117},
+  year    = {2015},
+  doi     = {10.1016/j.neunet.2014.09.003}
+}
+
+@book{goodfellow2016deep,
+  title     = {Deep Learning},
+  author    = {Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron},
+  publisher = {MIT Press},
+  year      = {2016},
+  url       = {http://www.deeplearningbook.org}
+}
+
+@article{lecun1998gradient,
+  author  = {LeCun, Yann and Bottou, L{\'e}on and Bengio, Yoshua and Haffner, Patrick},
+  title   = {Gradient-based learning applied to document recognition},
+  journal = {Proceedings of the IEEE},
+  year    = {1998},
+  volume  = {86},
+  number  = {11},
+  pages   = {2278--2324},
+  doi     = {10.1109/5.726791}
+}
+
+@inproceedings{krizhevsky2012imagenet,
+  author    = {Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E.},
+  title     = {ImageNet classification with deep convolutional neural networks},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2012},
+  volume    = {25},
+  pages     = {1097--1105}
+}
+
+@article{esteva2017dermatologist,
+  author  = {Esteva, Andre and Kuprel, Brett and Novoa, Roberto A. and Ko, Justin and Swetter, Susan M. and Blau, Helen M. and Thrun, Sebastian},
+  title   = {Dermatologist-level classification of skin cancer with deep neural networks},
+  journal = {Nature},
+  year    = {2017},
+  volume  = {542},
+  number  = {7639},
+  pages   = {115--118},
+  doi     = {10.1038/nature21056}
+}
+
+@article{haenssle2018man,
+  author  = {Haenssle, Holger A. and Fink, Claudia and Schneiderbauer, Rainer and Toberer, Florian and Buhl, Tobias and Blum, Andreas and K{\"a}lloo, Aditi and Hassen, Anas Ben and Thomas, Luc and Enk, Alexander and others},
+  title   = {Man against machine: diagnostic performance of a deep learning convolutional neural network for dermoscopic melanoma recognition in comparison to 58 dermatologists},
+  journal = {Annals of Oncology},
+  year    = {2018},
+  volume  = {29},
+  number  = {8},
+  pages   = {1836--1842},
+  doi     = {10.1093/annonc/mdy166}
+}
+
+@article{holzinger2017we,
+  author  = {Holzinger, Andreas and Biemann, Chris and Pattichis, Constantinos S. and Kell, Douglas B.},
+  title   = {What do we need to build explainable AI systems for the medical domain?},
+  journal = {Review in Methods of Information in Medicine},
+  year    = {2017},
+  volume  = {56},
+  number  = {4},
+  pages   = {e1--e6},
+  doi     = {10.3414/ME17-02-0022}
+}
+
+@inproceedings{ronneberger2015unet,
+  author    = {Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+  title     = {U-Net: Convolutional networks for biomedical image segmentation},
+  booktitle = {Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+  year      = {2015},
+  pages     = {234--241},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-319-24574-4_28}
+}
+
+@inproceedings{zhou2018unetpp,
+  author    = {Zhou, Zongwei and Siddiquee, Md Mahfuzur Rahman and Tajbakhsh, Nima and Liang, Jianming},
+  title     = {UNet++: A nested U-Net architecture for medical image segmentation},
+  booktitle = {Deep Learning in Medical Image Analysis and Multimodal Learning for Clinical Decision Support (DLMIA)},
+  year      = {2018},
+  pages     = {3--11},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-030-00889-5_1}
+}
+
+@inproceedings{oktay2018attentionunet,
+  author    = {Oktay, Ozan and Schlemper, Jo and Folgoc, Loic Le and Lee, Matthew and Heinrich, Mattias and Misawa, Kazunari and Mori, Kensaku and McDonagh, Steven and Hammerla, Nils Y. and Kainz, Bernhard and Glocker, Ben and Rueckert, Daniel},
+  title     = {Attention U-Net: Learning where to look for the pancreas},
+  booktitle = {Medical Imaging with Deep Learning (MIDL)},
+  year      = {2018},
+  url       = {https://arxiv.org/abs/1804.03999}
+}
+
+@inproceedings{chen2021transunet,
+  author    = {Chen, Jieneng and Lu, Yongyi and Yu, Qihang and Luo, Xiangde and Adeli, Ehsan and Wang, Yan and Lu, Le and Yuille, Alan L. and Zhou, Yuyin},
+  title     = {TransUNet: Transformers make strong encoders for medical image segmentation},
+  booktitle = {Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+  year      = {2021},
+  pages     = {485--495},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-030-87193-2_42}
+}
+
+@inproceedings{isic2019challenge,
+  author    = {Codella, Noel and Rotemberg, Veronica and Tschandl, Philipp and Celebi, M. Emre and Dusza, Stephen and Gutman, David and Helba, Brian and Kalloo, Aditi and Liopyris, Konstantinos and Marchetti, Michael and others},
+  title     = {Skin lesion analysis toward melanoma detection 2019: A challenge hosted by the International Skin Imaging Collaboration (ISIC)},
+  booktitle = {arXiv preprint arXiv:1902.03368},
+  year      = {2019}
+}
+
+@article{tschandl2018ham10000,
+  author  = {Tschandl, Philipp and Rosendahl, Cliff and Kittler, Harald},
+  title   = {The {HAM10000} dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions},
+  journal = {Scientific Data},
+  year    = {2018},
+  volume  = {5},
+  pages   = {180161},
+  doi     = {10.1038/sdata.2018.161}
+}
+
+@inproceedings{bahdanau2014neural,
+  author    = {Bahdanau, Dzmitry and Cho, Kyunghyun and Bengio, Yoshua},
+  title     = {Neural machine translation by jointly learning to align and translate},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2015},
+  url       = {https://arxiv.org/abs/1409.0473}
+}
+
+@inproceedings{vaswani2017attention,
+  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  title     = {Attention is all you need},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2017},
+  volume    = {30},
+  pages     = {6000--6010}
+}
+
+@inproceedings{dosovitskiy2021an,
+  author    = {Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and Uszkoreit, Jakob and Houlsby, Neil},
+  title     = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2010.11929}
+}
+
+@inproceedings{chen2021transunet,
+  author    = {Chen, Jieneng and Lu, Yongyi and Yu, Qihang and Luo, Xiangde and Adeli, Ehsan and Wang, Yan and Lu, Le and Yuille, Alan L. and Zhou, Yuyin},
+  title     = {TransUNet: Transformers make strong encoders for medical image segmentation},
+  booktitle = {Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+  year      = {2021},
+  pages     = {485--495},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-030-87193-2_42}
+}
+
+@inproceedings{liu2021swin,
+  author    = {Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  title     = {Swin Transformer: Hierarchical vision transformer using shifted windows},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2021},
+  pages     = {10012--10022},
+  doi       = {10.1109/ICCV48922.2021.00986}
+}
+
+@inproceedings{raghu2021vision,
+  author    = {Raghu, Maithra and Unterthiner, Thomas and Kornblith, Simon and Zhang, Chiyuan and Dosovitskiy, Alexey},
+  title     = {Do vision transformers see like convolutional neural networks?},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2021},
+  volume    = {34},
+  pages     = {12116--12128}
+}
+
+@article{khan2022transformers,
+  author  = {Khan, Salman and Naseer, Muzammal and Hayat, Munawar and Zamir, Syed Waqas and Khan, Fahad Shahbaz and Shah, Mubarak},
+  title   = {Transformers in vision: A survey},
+  journal = {ACM Computing Surveys},
+  year    = {2022},
+  volume  = {54},
+  number  = {10s},
+  pages   = {1--41},
+  doi     = {10.1145/3505244}
+}
+
+
+
+
+
+###################
+### Segmentação ###
+###################
+
+@article{litjens2017survey,
+	author    = {Litjens, Geert and Kooi, Thijs and Bejnordi, Babak Ehteshami and Setio, Arnaud Arindra Adiyoso and Ciompi, Francesco and Ghafoorian, M. and van der Laak, Jeroen A.W.M. and van Ginneken, Bram and S\'anchez, Clara I.},
+	title     = {A Survey on Deep Learning in Medical Image Analysis},
+	journal   = {Medical Image Analysis},
+	volume    = {42},
+	pages     = {60--88},
+	year      = {2017},
+	doi       = {10.1016/j.media.2017.07.005}
+}
+
+@article{litjens2017survey,
+	author    = {Litjens, Geert and Kooi, Thijs and Bejnordi, Babak Ehteshami and Setio, Arnaud Arindra Adiyoso and Ciompi, Francesco and Ghafoorian, M. and van der Laak, Jeroen A.W.M. and van Ginneken, Bram and S\'anchez, Clara I.},
+	title     = {A Survey on Deep Learning in Medical Image Analysis},
+	journal   = {Medical Image Analysis},
+	volume    = {42},
+	pages     = {60--88},
+	year      = {2017},
+	doi       = {10.1016/j.media.2017.07.005}
+}
+
+@article{minaee2021image,
+	author    = {Minaee, Shervin and Boykov, Yuri Y. and Porikli, Fatih and Plaza, Antonio J. and Kehtarnavaz, Nasser and Terzopoulos, Demetri},
+	title     = {Image Segmentation Using Deep Learning: A Survey},
+	journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	volume    = {44},
+	number    = {7},
+	pages     = {3523--3542},
+	year      = {2021},
+	doi       = {10.1109/TPAMI.2021.3059968}
+}
+
+@inproceedings{long2015fully,
+	author    = {Long, Jonathan and Shelhamer, Evan and Darrell, Trevor},
+	title     = {Fully Convolutional Networks for Semantic Segmentation},
+	booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+	pages     = {3431--3440},
+	year      = {2015},
+	doi       = {10.1109/CVPR.2015.7298965}
+}
+
+@article{he2017maskrcnn,
+	author    = {He, Kaiming and Gkioxari, Georgia and Doll\'ar, Piotr and Girshick, Ross},
+	title     = {Mask R-CNN},
+	journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	volume    = {42},
+	number    = {2},
+	pages     = {386--397},
+	year      = {2020},
+	doi       = {10.1109/TPAMI.2018.2844175}
+}
+
+@article{kirillov2023segment,
+	author    = {Kirillov, Alexander and Mintun, Eric and Ravi, Nikhila and Mao, Hanzi and Rolland, Camille and Gustafson, Laura and Xiao, Tete and Whitehead, Spencer and Berg, Alexander C. and Lo, Wan-Yen and Doll{\'a}r, Piotr and Girshick, Ross},
+	title     = {Segment Anything},
+	journal   = {International Journal of Computer Vision},
+	volume    = {131},
+	number    = {8},
+	pages     = {2037--2050},
+	year      = {2023},
+	doi       = {10.1007/s11263-023-01863-8}
+}
+
+@inproceedings{zhou2018unetpp,
+	author    = {Zhou, Zongwei and Siddiquee, Md Mahfuzur Rahman and Tajbakhsh, Nima and Liang, Jianming},
+	title     = {UNet++: A Nested U-Net Architecture for Medical Image Segmentation},
+	booktitle = {Deep Learning in Medical Image Analysis and Multimodal Learning for Clinical Decision Support (DLMIA)},
+	pages     = {3--11},
+	publisher = {Springer},
+	year      = {2018},
+	doi       = {10.1007/978-3-030-00889-5_1}
+}
+
+@inproceedings{oktay2018attentionunet,
+	author    = {Oktay, Ozan and Schlemper, Jo and Le Folgoc, Loic and Lee, Matthew and Heinrich, Mattias and Misawa, Kazunari and Mori, Kensaku and McDonagh, Steven and Hammerla, Nils Y. and Kainz, Bernhard and Glocker, Ben and Rueckert, Daniel},
+	title     = {Attention U-Net: Learning Where to Look for the Pancreas},
+	booktitle = {arXiv preprint arXiv:1804.03999},
+	year      = {2018}
+}
+
+@inproceedings{chen2021transunet,
+	author    = {Chen, Jieneng and Lu, Yutong and Yu, Qihang and Luo, Xiangde and Adeli, Ehsan and Wang, Yan and Lu, Le and Yuille, Alan L. and Zhou, Yuyin},
+	title     = {TransUNet: Transformers Make Strong Encoders for Medical Image Segmentation},
+	booktitle = {Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+	year      = {2021},
+	pages     = {485--495},
+	doi       = {10.1007/978-3-030-87199-4_40}
+}
+
+@article{reinke2021common,
+	author    = {Reinke, Annika and Eisenmann, Matthias and Tizabi, Mersedeh and Sudre, Carole H. and Rieke, Nicola and others},
+	title     = {Common Limitations of Image Processing Metrics: A Picture Story},
+	journal   = {arXiv preprint arXiv:2104.05642},
+	year      = {2021},
+	url       = {https://arxiv.org/abs/2104.05642}
+}
+
+@article{minaee2021image,
+	author    = {Minaee, Shervin and Boykov, Yuri Y. and Porikli, Fatih and Plaza, Antonio J. and Kehtarnavaz, Nasser and Terzopoulos, Demetri},
+	title     = {Image Segmentation Using Deep Learning: A Survey},
+	journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	volume    = {44},
+	number    = {7},
+	pages     = {3523--3542},
+	year      = {2021},
+	doi       = {10.1109/TPAMI.2021.3059968}
+}
+
+@article{tschandl2018ham10000,
+	author    = {Tschandl, Philipp and Rosendahl, Cliff and Kittler, Harald},
+	title     = {The HAM10000 dataset: A large collection of multi-source dermatoscopic images of common pigmented skin lesions},
+	journal   = {Scientific Data},
+	volume    = {5},
+	pages     = {180161},
+	year      = {2018},
+	doi       = {10.1038/sdata.2018.161}
+}
+
+@article{shen2017deep,
+	author    = {Shen, Dinggang and Wu, Guorong and Suk, Heung-Il},
+	title     = {Deep Learning in Medical Image Analysis},
+	journal   = {Annual Review of Biomedical Engineering},
+	volume    = {19},
+	pages     = {221--248},
+	year      = {2017},
+	doi       = {10.1146/annurev-bioeng-071516-044442}
+}
+
+@article{reinke2021commonlimitations,
+	author  = {Reinke, Annika and Eisenmann, Matthias and Tizabi, Mohammad D. and Sudre, Carole and Rädsch, Tim and Antonelli, Michela and Arbel, Tal and Bakas, Spyridon and Cardoso, M. Jorge and Cheplygina, Veronika and et al.},
+	title   = {Common Limitations of Image Processing Metrics: A Picture Story},
+	journal = {arXiv preprint arXiv:2104.05642},
+	year    = {2021},
+	url     = {https://arxiv.org/abs/2104.05642}
+}
+
+
+@inproceedings{ronneberger2015unet,
+	title={U-Net: Convolutional networks for biomedical image segmentation},
+	author={Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+	booktitle={Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+	year={2015},
+	organization={Springer},
+	pages={234--241}
+}
+
+@article{alom2018r2unet,
+	title={Recurrent residual convolutional neural network based on U-Net (R2U-Net) for medical image segmentation},
+	author={Alom, Md Zahangir and Hasan, M T and Yakopcic, C and Taha, T M and Asari, V K},
+	journal={arXiv preprint arXiv:1802.06955},
+	year={2018}
+}
+
+@inproceedings{oktay2018attentionunet,
+	title={Attention U-Net: Learning where to look for the pancreas},
+	author={Oktay, Ozan and Schlemper, Jo and Folgoc, Loic Le and Lee, Matthew and Heinrich, Mattias and Misawa, Kazunari and Mori, Kensaku and McDonagh, Steven and Hammerla, Nils and Kainz, Bernhard and others},
+	booktitle={arXiv preprint arXiv:1804.03999},
+	year={2018}
+}
+
+@article{alom2019attentionr2unet,
+	title={Attention based residual and recurrent convolutional neural network for skin lesion classification},
+	author={Alom, Md Zahangir and Hasan, M T and Yakopcic, C and Taha, T M and Asari, V K},
+	journal={arXiv preprint arXiv:1907.07344},
+	year={2019}
+}
+
+@misc{leejunhyun2018segmentationrepo,
+	title={Image Segmentation Architectures: Implementation of U-Net, R2U-Net, Attention U-Net, and Attention R2U-Net},
+	author={Lee, JunHyun},
+	howpublished={\url{https://github.com/LeeJunHyun/Image_Segmentation}},
+	year={2018}
+}
+
+@article{taha2015metrics,
+	author    = {Taha, Abdel Aziz and Hanbury, Allan},
+	title     = {Metrics for Evaluating 3D Medical Image Segmentation: Analysis, Selection, and Tool},
+	journal   = {BMC Medical Imaging},
+	volume    = {15},
+	number    = {1},
+	pages     = {29},
+	year      = {2015},
+	doi       = {10.1186/s12880-015-0068-x}
+}
+
+@article{minaee2021image,
+	author    = {Minaee, Shervin and Boykov, Yuri Y. and Porikli, Fatih and Plaza, Antonio J. and Kehtarnavaz, Nasser and Terzopoulos, Demetri},
+	title     = {Image Segmentation Using Deep Learning: A Survey},
+	journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	volume    = {44},
+	number    = {7},
+	pages     = {3523--3542},
+	year      = {2021},
+	doi       = {10.1109/TPAMI.2021.3059968}
+}
+
+@inproceedings{menze2015brats,
+	author    = {Menze, Bjoern H. and Jakab, Andras and Bauer, Stefan and Kalpathy-Cramer, Jayashree and Farahani, Keyvan and Kirby, Justin and Burren, Yuliya and Porz, Nicole and Slotboom, Johannes and Wiest, Roland and et al.},
+	title     = {The Multimodal Brain Tumor Image Segmentation Benchmark (BRATS)},
+	booktitle = {IEEE Transactions on Medical Imaging},
+	volume    = {34},
+	number    = {10},
+	pages     = {1993--2024},
+	year      = {2015},
+	doi       = {10.1109/TMI.2014.2377694}
+}
+
+@inproceedings{isic2019challenge,
+	author    = {Codella, Noel and Rotemberg, Veronica and Tschandl, Philipp and Celebi, M. Emre and Dusza, Stephen and Gutman, David and Helba, Brian and Kalloo, Aadi and Liopyris, Konstantinos and Marchetti, Michael and et al.},
+	title     = {Skin Lesion Analysis Toward Melanoma Detection 2019: A Challenge Hosted by the International Skin Imaging Collaboration (ISIC)},
+	booktitle = {arXiv preprint arXiv:1902.03368},
+	year      = {2019}
+}
+
+@article{yeghiazaryan2018overview,
+	author    = {Yeghiazaryan, Vahagn and Voiculescu, Irina},
+	title     = {An Overview of Current Evaluation Methods Used in Medical Image Segmentation},
+	journal   = {arXiv preprint arXiv:1512.01844},
+	year      = {2018}
+}
+
+@article{karimi2019hausdorff,
+	author    = {Karimi, Davood and Salcudean, Septimiu E.},
+	title     = {Reducing the Hausdorff Distance in Medical Image Segmentation with Convolutional Neural Networks},
+	journal   = {IEEE Transactions on Medical Imaging},
+	volume    = {39},
+	number    = {2},
+	pages     = {499--513},
+	year      = {2019},
+	doi       = {10.1109/TMI.2019.2930068}
+}
+
+
+
+############
+### LLMS ###
+############
+
+%%% -----------------------------------------------------------------------
+%%% ATENÇÃO: Verifique as URLs abaixo antes da submissão final.
+%%% GPT-5.4-nano é um identificador de API; a referência canônica
+%%% é o System Card do GPT-5 publicado pela OpenAI em maio de 2025.
+%%% Gemini 3.1 flash-lite: consulte o relatório técnico oficial em
+%%% https://deepmind.google/technologies/gemini/ e atualize o campo url.
+%%% -----------------------------------------------------------------------
+
+@inproceedings{mendonca2013ph2,
+  author    = {Mendon{\c c}a, Teresa and Ferreira, Pedro M. and Marques, Jorge S. and Mar{\c c}al, Andr{\'e} R. S. and Rozeira, Jorge},
+  title     = {{PH2} -- {A} dermoscopic image database for research and benchmarking},
+  booktitle = {35th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)},
+  year      = {2013},
+  pages     = {5437--5440},
+  doi       = {10.1109/EMBC.2013.6610779}
+}
+
+@misc{openai2025gpt5nano,
+  author       = {OpenAI},
+  title        = {{GPT-5} System Card},
+  year         = {2025},
+  howpublished = {\url{https://openai.com/index/gpt-5-system-card/}},
+  note         = {Acesso em: jun. 2025}
+}
+
+@misc{google2025gemini31,
+  author       = {Google {DeepMind}},
+  title        = {Gemini 3 Technical Report},
+  year         = {2025},
+  howpublished = {\url{https://deepmind.google/technologies/gemini/}},
+  note         = {Acesso em: jun. 2025}
+}
+@article{devlin2019bert,
+  author  = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  title   = {BERT: Pre-training of deep bidirectional transformers for language understanding},
+  journal = {NAACL-HLT},
+  year    = {2019},
+  pages   = {4171--4186},
+  url     = {https://arxiv.org/abs/1810.04805}
+}
+
+@article{brown2020language,
+  author  = {Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and others},
+  title   = {Language Models are Few-Shot Learners},
+  journal = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year    = {2020},
+  volume  = {33},
+  pages   = {1877--1901},
+  url     = {https://arxiv.org/abs/2005.14165}
+}
+
+@misc{openai2023gpt4,
+  author       = {OpenAI},
+  title        = {GPT-4 Technical Report},
+  year         = {2023},
+  url          = {https://arxiv.org/abs/2303.08774}
+}
+
+@inproceedings{liu2023visual,
+  author    = {Liu, Haotian and Li, Chunyuan and Wu, Qingyang and Lee, Yong Jae},
+  title     = {Visual Instruction Tuning},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023},
+  url       = {https://arxiv.org/abs/2304.08485}
+}
+
+@article{nori2023capabilitiesgpt4medicalchallenge,
+  author  = {Nori, Harsha and King, Nicholas and McKinney, Scott M. and Carignan, Daniel and Horvitz, Eric},
+  title   = {Capabilities of GPT-4 on Medical Challenge Problems},
+  journal = {Nature Medicine},
+  year    = {2023},
+  volume  = {29},
+  pages   = {1524--1531},
+  doi     = {10.1038/s41591-023-02448-8}
+}
+
+@inproceedings{lu2024multimodal,
+  author    = {Lu, Zeyu and Zhang, Qi and Li, Xin and Li, Liang and Gao, Wen},
+  title     = {Multimodal Large Language Models for Medical Applications: Opportunities and Challenges},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2024},
+  pages     = {1522--1533},
+  url       = {https://arxiv.org/abs/2402.08936}
+}
+
+@article{rao2023large,
+  author  = {Rao, Shreya and Pang, Chieh-Chi and Sun, Jenny and Zhang, Eric and Lee, Hyung Won and Yu, Kun-Hsing},
+  title   = {Large language models in medicine},
+  journal = {Nature Medicine},
+  year    = {2023},
+  volume  = {29},
+  pages   = {1930--1940},
+  doi     = {10.1038/s41591-023-02502-4}
+}
+
+@article{yang2022evaluating,
+  author  = {Yang, Kevin and Chen, Tiffany and Zhang, Eric and Mavromatis, Chris and Hwang, T. J. and Zou, James Y.},
+  title   = {Evaluating large language models on medical evidence summarization},
+  journal = {npj Digital Medicine},
+  year    = {2022},
+  volume  = {5},
+  number  = {1},
+  pages   = {140},
+  doi     = {10.1038/s41746-022-00681-0}
+}
+
+#############################
+### Sistemas Multiagentes ###
+#############################
+
+@book{wooldridge2009introduction,
+  author    = {Wooldridge, Michael},
+  title     = {An Introduction to MultiAgent Systems},
+  publisher = {John Wiley \& Sons},
+  year      = {2009},
+  edition   = {2}
+}
+
+@article{jenkins2020multiagent,
+  author  = {Jenkins, Simon and Paramythis, Alexandros and Kameas, Achilles},
+  title   = {Multi-agent systems in healthcare: a review of applications and challenges},
+  journal = {Artificial Intelligence in Medicine},
+  year    = {2020},
+  volume  = {104},
+  pages   = {101843},
+  doi     = {10.1016/j.artmed.2020.101843}
+}
+
+@article{carvalho2020multiagent,
+  author  = {Carvalho, Jo{\~a}o and Costa, Ant{\'o}nio and Novais, Paulo},
+  title   = {Multi-agent decision support systems in healthcare},
+  journal = {Journal of Medical Systems},
+  year    = {2020},
+  volume  = {44},
+  number  = {9},
+  pages   = {161},
+  doi     = {10.1007/s10916-020-01639-7}
+}
+
+@article{ke2024mitigating,
+  author  = {Ke, Bin and Zhou, Xin and Zhang, Yifan and others},
+  title   = {Mitigating hallucinations in large language models for clinical decision support with a multi-agent debate framework},
+  journal = {Nature Medicine},
+  year    = {2024},
+  volume  = {30},
+  pages   = {123--131},
+  doi     = {10.1038/s41591-024-02999-3}
+}
+
+#########################
+### Desafios na Saúde ###
+#########################
+
+@article{tschandl2018ham10000,
+  author  = {Tschandl, Philipp and Rosendahl, Cliff and Kittler, Harald},
+  title   = {The {HAM10000} dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions},
+  journal = {Scientific Data},
+  year    = {2018},
+  volume  = {5},
+  pages   = {180161},
+  doi     = {10.1038/sdata.2018.161}
+}
+
+@inproceedings{codella2019skin,
+  author    = {Codella, Noel C. F. and Rotemberg, Veronica and Tschandl, Philipp and Celebi, M. Emre and Dusza, Stephen and Gutman, David and Helba, Brian and Kalloo, Aditi and Liopyris, Konstantinos and Marchetti, Michael and others},
+  title     = {Skin lesion analysis toward melanoma detection 2019: A challenge hosted by the International Skin Imaging Collaboration (ISIC)},
+  booktitle = {2019 IEEE 16th International Symposium on Biomedical Imaging (ISBI)},
+  year      = {2019},
+  pages     = {1685--1689},
+  doi       = {10.1109/ISBI.2019.8759341}
+}
+
+@article{brinker2019deep,
+  author  = {Brinker, Titus J. and Hekler, Antonia and Enk, Alexander H. and Berking, Carola and Haferkamp, Sebastian and Hauschild, Axel and Weichenthal, Michael and Klode, Joachim and Schadendorf, Dirk and Holland-Letz, Tim and others},
+  title   = {Deep learning outperformed 136 of 157 dermatologists in a head-to-head dermoscopic melanoma image classification task},
+  journal = {European Journal of Cancer},
+  year    = {2019},
+  volume  = {113},
+  pages   = {47--54},
+  doi     = {10.1016/j.ejca.2019.04.001}
+}
+
+@article{holzinger2017we,
+  author  = {Holzinger, Andreas and Biemann, Chris and Pattichis, Constantinos S. and Kell, Douglas B.},
+  title   = {What do we need to build explainable AI systems for the medical domain?},
+  journal = {Methods of Information in Medicine},
+  year    = {2017},
+  volume  = {56},
+  number  = {4},
+  pages   = {e1--e6},
+  doi     = {10.3414/ME17-02-0022}
+}
+
+@inproceedings{selvaraju2017gradcam,
+  author    = {Selvaraju, Ramprasaath R. and Cogswell, Michael and Das, Abhishek and Vedantam, Ramakrishna and Parikh, Devi and Batra, Dhruv},
+  title     = {Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization},
+  booktitle = {2017 IEEE International Conference on Computer Vision (ICCV)},
+  year      = {2017},
+  pages     = {618--626},
+  doi       = {10.1109/ICCV.2017.74}
+}
+
+@article{daneshjou2022disparities,
+  author  = {Daneshjou, Roxana and Barata, Catarina and Betz-Stablein, Brendan and Celebi, M. Emre and Codella, Noel and Combalia, Marc and Gutman, David and Helba, Brian and Kittler, Harald and Marghoob, Ashfaq A. and others},
+  title   = {Disparities in dermatology AI performance on a diverse, curated clinical image set},
+  journal = {Science Advances},
+  year    = {2022},
+  volume  = {8},
+  number  = {31},
+  pages   = {eabq6147},
+  doi     = {10.1126/sciadv.abq6147}
+}
+
+@article{gill2022regulatory,
+  author  = {Gill, Sheraz and Qayyum, Adeel and Razzak, Imran and Xu, Guandong and M{\"u}nsterberg, Astrid},
+  title   = {Regulatory aspects of artificial intelligence in healthcare},
+  journal = {Digital Medicine},
+  year    = {2022},
+  volume  = {5},
+  number  = {1},
+  pages   = {16},
+  doi     = {10.1038/s41746-022-00612-z}
+}
+
+
+
+###################
+### Segmentação ###
+###################
+
+@misc{vaswani2023attentionneed,
+      title={Attention Is All You Need}, 
+      author={Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
+      year={2023},
+      eprint={1706.03762},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/1706.03762}, 
+}
+@misc{wang2023chatcadinteractivecomputeraideddiagnosis,
+      title={ChatCAD: Interactive Computer-Aided Diagnosis on Medical Image using Large Language Models}, 
+      author={Sheng Wang and Zihao Zhao and Xi Ouyang and Qian Wang and Dinggang Shen},
+      year={2023},
+      eprint={2302.07257},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2302.07257}, 
+}
+
+@misc{nori2023capabilitiesgpt4medicalchallenge,
+      title={Capabilities of GPT-4 on Medical Challenge Problems}, 
+      author={Harsha Nori and Nicholas King and Scott Mayer McKinney and Dean Carignan and Eric Horvitz},
+      year={2023},
+      eprint={2303.13375},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2303.13375}, 
+}
+
+@inproceedings{polikar2010multimodal,
+  title={Multimodal EEG, MRI and PET data fusion for Alzheimer's disease diagnosis},
+  author={Polikar, Robi and Tilley, Christopher and Hillis, Brendan and Clark, Chris M},
+  booktitle={2010 Annual international conference of the IEEE engineering in medicine and biology},
+  pages={6058--6061},
+  year={2010},
+  organization={IEEE}
+}
+
+@misc{oktay2018attentionunetlearninglook,
+      title={Attention U-Net: Learning Where to Look for the Pancreas}, 
+      author={Ozan Oktay and Jo Schlemper and Loic Le Folgoc and Matthew Lee and Mattias Heinrich and Kazunari Misawa and Kensaku Mori and Steven McDonagh and Nils Y Hammerla and Bernhard Kainz and Ben Glocker and Daniel Rueckert},
+      year={2018},
+      eprint={1804.03999},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/1804.03999}, 
+}
+@misc{wang2022uctransnetrethinkingskipconnections,
+      title={UCTransNet: Rethinking the Skip Connections in U-Net from a Channel-wise Perspective with Transformer}, 
+      author={Haonan Wang and Peng Cao and Jiaqi Wang and Osmar R. Zaiane},
+      year={2022},
+      eprint={2109.04335},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2109.04335}, 
+}
+@inproceedings{azad2019bi,
+  title={Bi-directional ConvLSTM U-Net with densley connected convolutions},
+  author={Azad, Reza and Asadi-Aghbolaghi, Maryam and Fathy, Mahmood and Escalera, Sergio},
+  booktitle={Proceedings of the IEEE/CVF international conference on computer vision workshops},
+  pages={0--0},
+  year={2019}
+}
+@inproceedings{klug2021bayesian,
+  title={Bayesian skip net: building on prior information for the prediction and segmentation of stroke lesions},
+  author={Klug, Julian and Leclerc, Guillaume and Dirren, Elisabeth and Preti, Maria Giulia and Van De Ville, Dimitri and Carrera, Emmanuel},
+  booktitle={Brainlesion: Glioma, Multiple Sclerosis, Stroke and Traumatic Brain Injuries: 6th International Workshop, BrainLes 2020, Held in Conjunction with MICCAI 2020, Lima, Peru, October 4, 2020, Revised Selected Papers, Part I 6},
+  pages={168--180},
+  year={2021},
+  organization={Springer}
+}
+@misc{drozdzal2016importanceskipconnectionsbiomedical,
+      title={The Importance of Skip Connections in Biomedical Image Segmentation}, 
+      author={Michal Drozdzal and Eugene Vorontsov and Gabriel Chartrand and Samuel Kadoury and Chris Pal},
+      year={2016},
+      eprint={1608.04117},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/1608.04117}, 
+}
+#####################
+### Classificação ###
+#####################
+@INPROCEEDINGS{9025632,
+  author={Mishra, Sourav and Imaizumi, Hideaki and Yamasaki, Toshihiko},
+  booktitle={2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)}, 
+  title={Interpreting Fine-Grained Dermatological Classification by Deep Learning}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={2729-2737},
+  keywords={Training;Tumors;Skin;Machine learning;Diseases;Computational modeling},
+  doi={10.1109/CVPRW.2019.00331}}
+
+@article{8333693,
+  author={Kawahara, Jeremy and Daneshvar, Sara and Argenziano, Giuseppe and Hamarneh, Ghassan},
+  journal={IEEE Journal of Biomedical and Health Informatics}, 
+  title={Seven-Point Checklist and Skin Lesion Classification Using Multitask Multimodal Neural Nets}, 
+  year={2019},
+  volume={23},
+  number={2},
+  pages={538-546},
+  keywords={Lesions;Skin;Malignant tumors;Feature extraction;Pattern analysis;Convolutional neural networks;Classification;convolutional neural networks;deep learning;dermatology;melanoma;skin;7-point checklist},
+  doi={10.1109/JBHI.2018.2824327}}
+
+@INPROCEEDINGS{9025590,
+  author={Perez, Fábio and Avila, Sandra and Valle, Eduardo},
+  booktitle={2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)}, 
+  title={Solo or Ensemble? Choosing a CNN Architecture for Melanoma Classification}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={2775-2783},
+  keywords={Task analysis;Melanoma;Computer architecture;Lesions;Skin;Training;Correlation},
+  doi={10.1109/CVPRW.2019.00336}}
+
+@article{onevall,
+author = {Polat, Kemal and Koc, Kaan},
+year = {2020},
+month = {01},
+pages = {80-97},
+title = {Detection of Skin Diseases from Dermoscopy Image Using the combination of Convolutional Neural Network and One-versus-All},
+volume = {2},
+journal = {Journal of Artificial Intelligence and Systems},
+doi = {10.33969/AIS.2020.21006}
+}
+
+@article{rahman2021approach,
+  title={An approach for multiclass skin lesion classification based on ensemble learning},
+  author={Rahman, Zillur and Hossain, Md Sabir and Islam, Md Rabiul and Hasan, Md Mynul and Hridhee, Rubaiyat Alim},
+  journal={Informatics in Medicine Unlocked},
+  volume={25},
+  pages={100659},
+  year={2021},
+  publisher={Elsevier}
+}
+
+
+###########
+### LLM ###
+###########
+
+@article{benary2023leveraging,
+  title={Leveraging large language models for decision support in personalized oncology},
+  author={Benary, Manuela and Wang, Xing David and Schmidt, Max and Soll, Dominik and Hilfenhaus, Georg and Nassir, Mani and Sigler, Christian and Kn{\"o}dler, Maren and Keller, Ulrich and Beule, Dieter and others},
+  journal={JAMA Network Open},
+  volume={6},
+  number={11},
+  pages={e2343689--e2343689},
+  year={2023},
+  publisher={American Medical Association}
+}
+
+@misc{shaaban2024medpromptxgroundedmultimodalprompting,
+      title={MedPromptX: Grounded Multimodal Prompting for Chest X-ray Diagnosis}, 
+      author={Mai A. Shaaban and Adnan Khan and Mohammad Yaqub},
+      year={2024},
+      eprint={2403.15585},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2403.15585}, 
+}
+
+@misc{xia2024carescomprehensivebenchmarktrustworthiness,
+      title={CARES: A Comprehensive Benchmark of Trustworthiness in Medical Vision Language Models}, 
+      author={Peng Xia and Ze Chen and Juanxi Tian and Yangrui Gong and Ruibo Hou and Yue Xu and Zhenbang Wu and Zhiyuan Fan and Yiyang Zhou and Kangyu Zhu and Wenhao Zheng and Zhaoyang Wang and Xiao Wang and Xuchao Zhang and Chetan Bansal and Marc Niethammer and Junzhou Huang and Hongtu Zhu and Yun Li and Jimeng Sun and Zongyuan Ge and Gang Li and James Zou and Huaxiu Yao},
+      year={2024},
+      eprint={2406.06007},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2406.06007}, 
+}
+
+@misc{vashisht2024umassbionlpmediqam3g2024dermprompt,
+      title={UMass-BioNLP at MEDIQA-M3G 2024: DermPrompt -- A Systematic Exploration of Prompt Engineering with GPT-4V for Dermatological Diagnosis}, 
+      author={Parth Vashisht and Abhilasha Lodha and Mukta Maddipatla and Zonghai Yao and Avijit Mitra and Zhichao Yang and Junda Wang and Sunjae Kwon and Hong Yu},
+      year={2024},
+      eprint={2404.17749},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2404.17749}, 
+}
+
+@article{busch2024integrating,
+  title={Integrating Text and Image Analysis: Exploring GPT-4V’s Capabilities in Advanced Radiological Applications Across Subspecialties},
+  author={Busch, Felix and Han, Tianyu and Makowski, Marcus R and Truhn, Daniel and Bressem, Keno K and Adams, Lisa},
+  journal={Journal of Medical Internet Research},
+  volume={26},
+  pages={e54948},
+  year={2024},
+  publisher={JMIR Publications Toronto, Canada}
+}
+
+@article{brinker2019deep,
+  title={Deep learning outperformed 136 of 157 dermatologists in a head-to-head dermoscopic melanoma image classification task},
+  author={Brinker, Titus J and Hekler, Achim and Enk, Alexander H and Berking, Carola and Haferkamp, Sebastian and Hauschild, Axel and Weichenthal, Michael and Klode, Joachim and Schadendorf, Dirk and von Kalle, Christof and others},
+  journal={European Journal of Cancer},
+  volume={113},
+  pages={47--54},
+  year={2019},
+  publisher={Elsevier},
+  doi={10.1016/j.ejca.2019.04.001}
+}
+
+@article{ke2024mitigating,
+  title={Mitigating Cognitive Biases in Clinical Decision-Making Through Multi-Agent Conversations Using Large Language Models: Simulation Study},
+  author={Ke, Yingqi and Chen, Xinyu and Hou, Lei and Chang, Kai and Tang, Jin and Gao, Yuan and Zhang, Xiang},
+  journal={Journal of Medical Internet Research},
+  volume={26},
+  pages={e59439},
+  year={2024},
+  doi={10.2196/59439},
+  publisher={JMIR Publications}
+}
+
+
+##################
+### INTRODUÇÃO ###
+##################
+@article{esteva2017dermatologist,
+  title={Dermatologist-level classification of skin cancer with deep neural networks},
+  author={Esteva, Andre and Kuprel, Brett and Novoa, Roberto A and Ko, Justin and Swetter, Susan M and Blau, Helen M and Thrun, Sebastian},
+  journal={Nature},
+  volume={542},
+  number={7639},
+  pages={115--118},
+  year={2017},
+  publisher={Nature Publishing Group},
+  doi={10.1038/nature21056}
+}
+
+@article{haenssle2018man,
+  title={Man against machine: diagnostic performance of a deep learning convolutional neural network for dermoscopic melanoma recognition in comparison to 58 dermatologists},
+  author={Haenssle, Holger A and Fink, Claudia and Toberer, Florian and Winkler, Julia K and Stolz, Werner and Deinlein, Tanja and Hofmann-Wellenhof, Rainer and Lallas, Aimilios and Emmert, Steffen and Buhl, Thomas and others},
+  journal={Annals of Oncology},
+  volume={29},
+  number={8},
+  pages={1836--1842},
+  year={2018},
+  publisher={Oxford University Press},
+  doi={10.1093/annonc/mdy166}
+}
+
+@article{brinker2019deep,
+  title={Deep learning outperformed 136 of 157 dermatologists in a head-to-head dermoscopic melanoma image classification task},
+  author={Brinker, Titus J and Hekler, Achim and Enk, Alexander H and Klode, Jochen and Hauschild, Axel and Berking, Carola and Schilling, Bastian and Haferkamp, Sebastian and Schadendorf, Dirk and Holland-Letz, Tim and others},
+  journal={European Journal of Cancer},
+  volume={113},
+  pages={47--54},
+  year={2019},
+  publisher={Elsevier},
+  doi={10.1016/j.ejca.2019.04.001}
+}
+
+@article{chen2021mt-transunet,
+  title={MT-TransUNet: Mediating Multi-Task Tokens in Transformers for Skin Lesion Segmentation and Classification},
+  author={Chen, Jingye and Chen, Jieneng and Zhou, Zongwei and Li, Bin and Yuille, Alan and Lu, Yongyi},
+  journal={arXiv preprint arXiv:2112.01767},
+  year={2021}
+}
+
+@article{xia_mutual_bootstrapping_2019,
+  title={A Mutual Bootstrapping Model for Automated Skin Lesion Segmentation and Classification},
+  author={Xie, Yutong and Zhang, Jianpeng and Xia, Yong and Shen, Chunhua},
+  journal={arXiv preprint arXiv:1903.03313},
+  year={2019}
+}
+
+@article{anand2025gs-transunet,
+  title={GS-TransUNet: Integrated 2D Gaussian Splatting and Transformer UNet for Accurate Skin Lesion Analysis},
+  author={Kumar, Anand and Kanthen, Kavinder Roghit and John, Josna},
+  journal={arXiv preprint arXiv:2502.16748},
+  year={2025}
+}
+
+###################
+### METODOLOGIA ###
+###################
+
+@inproceedings{codella2018isic,
+	title={Skin lesion analysis toward melanoma detection 2018: A challenge hosted by the International Skin Imaging Collaboration (ISIC)},
+	author={Codella, Noel and Rotemberg, Veronica and Tschandl, Philipp and others},
+	booktitle={IEEE 15th International Symposium on Biomedical Imaging (ISBI 2018)},
+	pages={168--172},
+	year={2018},
+	doi={10.1109/ISBI.2018.8363547}
+}
+
+@article{tschandl2018ham10000,
+	title={The HAM10000 dataset: A large collection of multi-source dermatoscopic images of common pigmented skin lesions},
+	author={Tschandl, Philipp and Rosendahl, Cliff and Kittler, Harald},
+	journal={Scientific Data},
+	volume={5},
+	pages={180161},
+	year={2018},
+	publisher={Nature Publishing Group},
+	doi={10.1038/sdata.2018.161}
+}
+
+@article{ronneberger2015unet,
+	title={U-Net: Convolutional networks for biomedical image segmentation},
+	author={Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+	journal={Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+	pages={234--241},
+	year={2015}
+}
+
+@article{ronneberger2015unet,
+	title={U-Net: Convolutional networks for biomedical image segmentation},
+	author={Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+	journal={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+	pages={234--241},
+	year={2015},
+	publisher={Springer}
+}
+
+@article{oktay2018attentionunet,
+	title={Attention U-Net: Learning where to look for the pancreas},
+	author={Oktay, Ozan and Schlemper, Jo and Le Folgoc, Louis and others},
+	journal={arXiv preprint arXiv:1804.03999},
+	year={2018}
+}
+
+@article{alom2018r2unet,
+	title={Recurrent residual convolutional neural network based on U-Net (R2U-Net) for medical image segmentation},
+	author={Alom, Md Zahangir and Hasan, M T and Yakopcic, C and Taha, T M and Asari, V K},
+	journal={arXiv preprint arXiv:1802.06955},
+	year={2018}
+}
+
+@article{jadon2020survey,
+	title={A survey of loss functions for semantic segmentation},
+	author={Jadon, Shruti},
+	journal={2020 IEEE Conference on Computational Intelligence in Bioinformatics and Computational Biology (CIBCB)},
+	pages={1--7},
+	year={2020},
+	organization={IEEE}
+}
+
+@article{taha2015metrics,
+	title={Metrics for evaluating 3D medical image segmentation: analysis, selection, and tool},
+	author={Taha, Abdel Aziz and Hanbury, Allan},
+	journal={BMC Medical Imaging},
+	volume={15},
+	number={29},
+	year={2015},
+	publisher={Springer}
+}
+
+@article{zhou2022selfconsistency,
+	title={Self-Consistency Improves Chain of Thought Reasoning in Language Models},
+	author={Zhou, Denny and Le, Quoc V and Sohl-Dickstein, Jascha and others},
+	journal={arXiv preprint arXiv:2203.11171},
+	year={2022}
+}
+
+@article{singhal2023medprompt,
+	title={Towards Expert-Level Medical Question Answering with Large Language Models},
+	author={Singhal, Karan and Azizi, Shekoofeh and Tu, Tsung-Yen and et al.},
+	journal={Nature},
+	volume={620},
+	pages={560--568},
+	year={2023},
+	publisher={Nature Publishing Group}
+}
+
+@article{ke2024mitigating,
+	title={Mitigating hallucination in large multimodal models via self-knowledge consistency},
+	author={Ke, Zixian and Xu, Han and Lin, Hongzhan and others},
+	journal={Proceedings of the AAAI Conference on Artificial Intelligence},
+	volume={38},
+	number={13},
+	pages={14535--14543},
+	year={2024}
+}
+
+@inproceedings{wu2024autogen,
+	title={AutoGen: Enabling next-generation large language model applications through multi-agent conversation},
+	author={Wu, Han and Gao, Jidong and Liu, Zekun and Wang, Mingyu and Li, Eric and Chen, Weizhu},
+	booktitle={Proceedings of the 40th International Conference on Machine Learning (ICML)},
+	year={2024}
+}
+
+@article{lu2023multiagent,
+	title={Multi-Agent Collaboration with Large Language Models for Complex Reasoning},
+	author={Lu, Xing and Zhao, Qi and Ma, Yutong and Wang, Liwei},
+	journal={arXiv preprint arXiv:2308.08155},
+	year={2023}
+}
+
+@inproceedings{wu2024autogen,
+	title={AutoGen: Enabling next-generation large language model applications through multi-agent conversation},
+	author={Wu, Han and Gao, Jidong and Liu, Zekun and Wang, Mingyu and Li, Eric and Chen, Weizhu},
+	booktitle={Proceedings of the 40th International Conference on Machine Learning (ICML)},
+	year={2024}
+}
+
+@article{lu2023multiagent,
+	title={Multi-Agent Collaboration with Large Language Models for Complex Reasoning},
+	author={Lu, Xing and Zhao, Qi and Ma, Yutong and Wang, Liwei},
+	journal={arXiv preprint arXiv:2308.08155},
+	year={2023}
+}
+
+@article{nachbar1994abcd,
+	title={The ABCD rule of dermatoscopy: high prospective value in the diagnosis of doubtful melanocytic skin lesions},
+	author={Nachbar, F. and Stolz, W. and Merkle, T. and Cognetta, A. and Vogt, T. and Landthaler, M. and Bilek, P. and Braun-Falco, O. and Plewig, G.},
+	journal={Journal of the American Academy of Dermatology},
+	volume={30},
+	number={4},
+	pages={551--559},
+	year={1994}
+}
+
+@article{rajpurkar2022ai,
+	title={AI in health and medicine},
+	author={Rajpurkar, Pranav and Chen, Emily and Banerjee, Oishi and Topol, Eric J},
+	journal={Nature Medicine},
+	volume={28},
+	number={1},
+	pages={31--38},
+	year={2022},
+	publisher={Nature Publishing Group}
+}
+
+@article{holzinger2022explainable,
+	title={Explainable AI systems for healthcare through hybrid intelligence},
+	author={Holzinger, Andreas and Goebel, Randy and Mengel, Manfred and Müller, Henning},
+	journal={Nature Machine Intelligence},
+	volume={4},
+	number={5},
+	pages={343--352},
+	year={2022},
+	publisher={Nature Publishing Group}
+}
+
+@article{vasconcelos2023openai,
+	title={Challenges in applying open large language models to biomedical imaging: a review},
+	author={Vasconcelos, Guilherme and Rodrigues, Filipe and Silva, Ana},
+	journal={Frontiers in Artificial Intelligence},
+	volume={6},
+	pages={1241132},
+	year={2023},
+	publisher={Frontiers Media}
+}
+
+@article{wilson2021best,
+	title={Best practices for reproducible machine learning: A technical perspective},
+	author={Wilson, Greg and Bryan, Jennifer and Cranmer, Miles and et al.},
+	journal={Patterns},
+	volume={2},
+	number={9},
+	pages={100322},
+	year={2021},
+	publisher={Elsevier}
+}
+
+@article{wilkinson2016fair,
+	title={The FAIR Guiding Principles for scientific data management and stewardship},
+	author={Wilkinson, Mark D and Dumontier, Michel and Aalbersberg, IJsbrand Jan and et al.},
+	journal={Scientific Data},
+	volume={3},
+	number={160018},
+	pages={1--9},
+	year={2016},
+	publisher={Nature Publishing Group}
+}

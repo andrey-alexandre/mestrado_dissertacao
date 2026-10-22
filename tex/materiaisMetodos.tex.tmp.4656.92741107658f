@@ -1,0 +1,182 @@
+
+\chapter{MATERIAIS E MÉTODOS}
+
+Este capítulo descreve a metodologia empregada no desenvolvimento e avaliação do sistema proposto para a detecção automatizada de melanoma. O processo metodológico foi estruturado de modo a refletir o ciclo completo de análise, desde a preparação dos dados e das máscaras de segmentação de referência até a geração do diagnóstico final mediado por agentes baseados em modelos de linguagem natural. A abordagem adotada combina segmentação por \textit{ground truth}, modelos de linguagem multimodal e sistemas multiagentes, com o objetivo de reproduzir, de forma automatizada e explicável, a lógica do raciocínio clínico humano segundo o protocolo ABCD.
+
+\section{Estrutura Geral da Pesquisa}
+
+A Figura~\ref{fig:estrutura_geral} apresenta o fluxo geral da metodologia proposta, que integra técnicas de visão computacional, modelos de linguagem de larga escala (LLMs) e coordenação multiagente para a análise automatizada de lesões cutâneas. O sistema foi projetado de forma modular, permitindo a substituição e o aprimoramento independente de seus componentes, mantendo a coerência entre as etapas de processamento, inferência e validação.
+
+O processo inicia-se na \textbf{Entrada de Dados e Pré-Processamento}, etapa responsável pelo recebimento das imagens de lesões provenientes de bases dermatológicas públicas (como ISIC e HAM10000). As imagens passam por operações de normalização e redimensionamento antes de serem encaminhadas ao módulo de \textbf{Segmentação de Imagem}, que emprega uma arquitetura baseada em U-Net e suas variantes para isolar a região de interesse. Essa segmentação tem papel central na metodologia, uma vez que fornece ao sistema informações estruturais, como área, contorno e assimetria da lesão, essenciais para as etapas posteriores.
+
+Em seguida, a imagem segmentada é encaminhada ao módulo de \textbf{Análise Multiagente}, dividido em duas camadas funcionais. Na \textit{primeira camada}, três agentes especializados,  cada um correspondente a um protocolo diagnóstico clínico distinto (ABCD, Menzies e Seven-Point Checklist),  analisam a lesão de forma independente, gerando diagnósticos preliminares no formato estruturado em JSON. Essa redundância intencional promove diversidade interpretativa e amplia a cobertura diagnóstica, uma vez que cada agente é guiado por heurísticas médicas complementares. Na \textit{segunda camada}, um agente sintetizador (Summary Agent) integra os resultados parciais, produzindo um relatório consolidado que indica o diagnóstico final, sua justificativa e as recomendações clínicas correspondentes.
+
+Após a síntese, o diagnóstico é submetido à \textbf{Validação Acadêmica}, conduzida por um agente crítico fundamentado em \textit{Retrieval-Augmented Generation} (RAG). Esse agente consulta fontes biomédicas confiáveis,  como PubMed e a literatura de oncologia dermatológica,  para verificar a consistência e plausibilidade do diagnóstico proposto, retornando um parecer validado. Essa etapa adiciona uma camada de rastreabilidade científica ao sistema, reduzindo o risco de inferências sem base clínica.
+
+Por fim, a \textbf{Saída do Sistema} consolida o diagnóstico validado e o apresenta em linguagem natural ao usuário, juntamente com um prognóstico interpretável e recomendações de acompanhamento. Essa etapa é pensada para futuras aplicações em plataformas de apoio à decisão clínica e teledermatologia, priorizando clareza, auditabilidade e integração com fluxos médicos reais.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{imagens/Ch3/eraser_diagram.png}
+	\caption{Estrutura geral da metodologia proposta, dividida em quatro módulos: (i) entrada e pré-processamento de imagens; (ii) análise multiagente com duas camadas funcionais; (iii) validação acadêmica via RAG; e (iv) saída interpretável ao usuário.}
+	\label{fig:estrutura_geral}
+\end{figure}
+
+Dessa forma, a estrutura metodológica reflete um ciclo completo de análise, indo desde a aquisição da imagem até a validação textual baseada em evidências, buscando aproximar o comportamento do sistema de um processo de raciocínio clínico supervisionado e auditável.
+
+\section{Coleta e Pré-processamento dos Dados}
+\label{sec:data_preprocessing}
+
+A etapa de coleta e pré-processamento constitui a base empírica desta pesquisa, garantindo a qualidade e a consistência dos dados utilizados para a geração e análise dos diagnósticos pelos agentes. A \autoref{fig:dataflow} apresenta o fluxo geral de integração entre o conjunto de dados PH2, as máscaras de segmentação de referência e o sistema multiagente de diagnóstico proposto.
+
+O conjunto de dados utilizado é o \textbf{PH2} \cite{mendonca2013ph2}, uma base dermoscópica pública composta por 200 imagens digitais adquiridas no Hospital Pedro Hispano (Portugal). Cada imagem é acompanhada de uma máscara binária de segmentação anotada manualmente por especialistas dermatologistas, que delimita com precisão a região da lesão. As imagens são distribuídas em três categorias diagnósticas: 80 nevos comuns, 80 nevos atípicos e 40 melanomas. Para a tarefa de detecção binária adotada neste trabalho, as lesões foram agrupadas em duas classes: \textbf{melanoma} (40 imagens) e \textbf{não-melanoma} (160 imagens, incluindo nevos comuns e atípicos).
+
+O pré-processamento incluiu redimensionamento padronizado das imagens, conversão para o formato aceito pelas APIs dos modelos de linguagem e organização em pares (imagem original, máscara de segmentação de referência) para envio simultâneo aos agentes. O desequilíbrio entre as classes (40 melanomas vs.\ 160 não-melanomas, proporção 1:4) foi mantido nas análises para refletir a prevalência clínica real do melanoma no conjunto. Cada imagem foi processada em dois formatos: \textbf{imagem original}, que preserva o contexto visual completo, e \textbf{imagem segmentada}, obtida pela aplicação da máscara GT sobre a imagem original. Ambas as versões foram enviadas simultaneamente aos agentes diagnósticos, permitindo análise multimodal e diferentes níveis de foco visual.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{imagens/Ch3/eraser_data_diagram.png}
+	\caption{Fluxo geral de coleta, pré-processamento e integração do conjunto PH2 e suas máscaras de segmentação de referência com o sistema multiagente.}
+	\label{fig:dataflow}
+\end{figure}
+
+
+
+\section{Segmentação: Uso de Máscaras de Referência}
+
+A segmentação das lesões cutâneas constitui uma etapa essencial do \textit{pipeline} diagnóstico, pois fornece ao sistema multiagente uma representação visual delimitada da área de interesse, reduzindo ruídos contextuais e direcionando a atenção dos modelos de linguagem para as características morfológicas da lesão.
+
+Neste trabalho, optou-se por utilizar as \textbf{máscaras de segmentação de referência} (\textit{ground truth} — GT) disponíveis no conjunto PH2, produzidas por especialistas dermatologistas, em lugar de segmentações geradas por modelos automáticos. Essa decisão metodológica tem como objetivo \textbf{isolar a avaliação da capacidade diagnóstica das LLMs} da variabilidade intrínseca a qualquer modelo de segmentação, incluindo erros de contorno, subajuste morfológico e sensibilidade a artefatos de imagem — como pelos, reflexos de luz e variações de iluminação.
+
+Ao eliminar a segmentação automática como fonte de variabilidade, os experimentos permitem atribuir as diferenças de desempenho observadas diretamente ao módulo de raciocínio linguístico (LLMs e sistema multiagente), aumentando a validade interna das comparações. Essa abordagem é consistente com estudos que buscam isolar componentes específicos de \textit{pipelines} diagnósticos para avaliação controlada \cite{lu2024multimodal}, e se justifica pelo fato de que o conceito de segmentação dermoscópica já demonstrou robustez expressiva na literatura \cite{ronneberger2015unet,oktay2018attentionunet}. A integração de um módulo de segmentação automático ao sistema permanece como extensão natural para versões futuras do trabalho.
+
+
+\section{Modelos de Linguagem de Grande Escala (LLMs)}
+
+A etapa de interpretação linguística das imagens segmentadas foi conduzida por meio do uso de Modelos de Linguagem de Grande Escala (\textit{Large Language Models} – LLMs), responsáveis por transformar evidências visuais em hipóteses diagnósticas estruturadas. Esses modelos atuam como o núcleo de raciocínio de cada agente do sistema multiagente, sendo responsáveis pela análise clínica independente das imagens e pela geração de pareceres textuais com justificativas médicas.
+
+Foram avaliados dois modelos com capacidades multimodais: o \textbf{GPT-5.4-nano} \cite{openai2025gpt5nano}, modelo proprietário da OpenAI com capacidade de raciocínio visual e geração de linguagem natural; e o \textbf{Gemini-3.1-flash-lite} \cite{google2025gemini31}, da Google, voltado para compreensão contextual eficiente e geração de relatórios clínicos. Ambos os modelos foram acessados via API em instâncias T4 no ambiente \textit{Google Colab}, otimizando o custo de inferência e mantendo comparabilidade experimental.
+
+As imagens enviadas aos modelos foram compostas por duas versões de cada amostra: a \textit{imagem original}, representando o contexto visual completo da lesão, e a \textit{imagem segmentada}, que destaca apenas a área da lesão. Essa abordagem multimodal visou avaliar a capacidade dos LLMs de realizar inferência clínica tanto em nível contextual quanto morfológico, simulando diferentes graus de atenção diagnóstica. Cada execução de inferência resultou em saídas textuais padronizadas de acordo com esquemas definidos em \textit{Pydantic}, garantindo uniformidade na estrutura de respostas e posterior integração ao sistema multiagente.
+
+Para induzir raciocínio clínico interpretável e reduzir vieses de resposta, foram empregados três tipos de \textit{prompts}, inspirados em estudos recentes sobre raciocínio passo a passo e validação semântica em LLMs médicas \cite{zhou2022selfconsistency,singhal2023medprompt}. O primeiro, denominado \textbf{Chain-of-Thought (CoT)}, orientou o modelo a descrever explicitamente o raciocínio diagnóstico, decompondo o processo de decisão em etapas lógicas, desde a análise visual até a conclusão. Essa estrutura aumenta a interpretabilidade do resultado, permitindo auditar a coerência entre observações e conclusões.
+
+O segundo tipo, \textbf{Risk Assessment Prompt}, foi utilizado para avaliar a confiança e o nível de risco associado a cada decisão. O modelo era instruído a estimar a probabilidade subjetiva de malignidade e indicar fatores visuais de maior peso na decisão final. Essa etapa teve como objetivo aumentar a transparência do processo e permitir futura calibração probabilística das respostas, aproximando a saída textual de um raciocínio clínico quantitativo.
+
+Por fim, o \textbf{Consistency Prompt} foi implementado como mecanismo de controle de qualidade semântico, assegurando que as respostas geradas fossem internamente coerentes e semanticamente estáveis entre diferentes iterações ou reformulações do mesmo caso. O modelo era instruído a revisar suas próprias conclusões e detectar eventuais contradições entre a pontuação e a justificativa textual, revisando a resposta até atingir consistência lógica. Esse procedimento mitigou oscilações de diagnóstico e melhorou a confiabilidade do sistema em cenários de ambiguidade visual.
+
+A combinação dessas três estratégias de prompting permitiu equilibrar interpretabilidade, segurança e consistência nas saídas das LLMs, além de alinhar o sistema às práticas mais recentes de \textit{AI auditing} aplicadas em saúde. Os resultados obtidos por cada modelo foram posteriormente integrados e comparados dentro do sistema multiagente, conforme descrito na próxima seção.
+
+
+\section{Integração Multiagente e Consolidação Diagnóstica}
+
+A última etapa metodológica consistiu na integração dos módulos de raciocínio baseados em LLM em um sistema multiagente, responsável por coordenar e consolidar os diagnósticos derivados do método ABCD de dermatoscopia. Diferentemente de abordagens que combinam múltiplas heurísticas clínicas, o sistema proposto foi estruturado para empregar \textbf{três agentes independentes},  todos baseados no mesmo protocolo de avaliação ABCD, , mas operando de forma autônoma e assíncrona. Essa configuração permitiu investigar a consistência, a estabilidade e a convergência de raciocínio entre instâncias independentes de um mesmo modelo, emulando um processo de revisão por pares dentro de um ambiente computacional.
+
+Cada agente recebeu, como entrada, as duas versões da imagem da lesão: a \textit{imagem original}, que preserva o contexto visual completo, e a \textit{imagem segmentada}, que destaca apenas a área de interesse delimitada pela U-Net. As instruções de análise foram formuladas de acordo com o protocolo ABCD de dermatoscopia, no qual cada critério,  Assimetria (A), Bordas (B), Cores (C) e Estruturas (D),  é pontuado com base em parâmetros clínicos objetivos. As saídas dos agentes foram geradas em formato estruturado JSON, conforme definido pelo modelo \textit{Pydantic ABCDDiagnosticAnswer}, contendo tanto as pontuações individuais quanto uma justificativa textual associada a cada critério.
+
+O \textbf{Agente Sumarizador} teve como função consolidar as respostas dos três agentes diagnósticos. A integração foi realizada a partir de um processo de raciocínio contextual, no qual o modelo avaliava o grau de concordância entre as pontuações e justificativas fornecidas, identificando padrões recorrentes e descartando inconsistências semânticas. O resultado final foi produzido em formato padronizado JSON, seguindo o esquema \textit{SummaryAnswer}, contendo três campos principais: \textit{Diagnóstico Final}, \textit{Justificativa} e \textit{Recomendações}. Essa estrutura garante rastreabilidade e transparência na interpretação das decisões do sistema.
+
+Como etapa complementar, foi implementado um \textbf{Agente Crítico}, que atua como auditor do processo diagnóstico. Esse agente utiliza um mecanismo de recuperação aumentada por geração (\textit{Retrieval-Augmented Generation – RAG}) para confrontar as justificativas fornecidas pelos agentes com informações provenientes de literatura médica e bases clínicas de referência. O conteúdo recuperado é utilizado para verificar a plausibilidade das observações e reforçar ou contestar as conclusões apresentadas pelo sumarizador. Assim, o módulo crítico funciona como uma camada adicional de validação baseada em evidências, assegurando maior robustez e credibilidade ao diagnóstico final.
+
+A \textbf{Figura~\ref{fig:multiagent_abcd}} ilustra a arquitetura geral do sistema multiagente proposto. Cada agente de diagnóstico atua de forma independente sobre o mesmo caso clínico, gerando análises autônomas que são posteriormente comparadas, sintetizadas e auditadas. Essa estratégia permite explorar a convergência estatística entre raciocínios linguísticos distintos de um mesmo modelo e reduzir o impacto de respostas isoladas atípicas. Ao simular um ambiente de discussão diagnóstica, o sistema reforça o princípio de triangulação de evidências, aproximando a lógica de decisão automatizada da prática colaborativa entre especialistas humanos.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{imagens/Ch2/Sec4.1.png}
+	\caption{Arquitetura geral do sistema multiagente baseado no método ABCD, com três agentes independentes avaliando a mesma lesão e um agente sumarizador responsável pela integração e validação das respostas.}
+	\label{fig:multiagent_abcd}
+\end{figure}
+
+
+\section{Avaliação Experimental}
+
+A avaliação do sistema foi conduzida sob duas perspectivas complementares: quantitativa e qualitativa. Na análise quantitativa, foram aplicadas métricas clássicas de classificação binária,  acurácia, precisão, sensibilidade e F1-score,  a partir da comparação entre o diagnóstico final emitido pelo sistema e o rótulo real da lesão. Para reduzir a variabilidade, utilizou-se o método \textit{bootstrap} com 100 reamostragens, possibilitando o cálculo do desvio padrão para cada métrica.
+
+Na análise qualitativa, foi avaliada a consistência estrutural e semântica das respostas textuais geradas pelos modelos de linguagem. Foram observados indicadores como completude do formato JSON, presença dos campos esperados (“Diagnóstico Final”, “Justificativa”, “Recomendações”) e coerência narrativa entre as seções.
+
+Por fim, os resultados obtidos pelo sistema multiagente foram comparados com um modelo tradicional de visão computacional (ResNet-50), de modo a quantificar o impacto da integração entre segmentação, linguagem natural e coordenação multiagente no desempenho global do diagnóstico.
+
+\section{Validação e Reprodutibilidade}
+
+A validação da metodologia proposta teve como objetivo assegurar a confiabilidade dos resultados obtidos e a possibilidade de reprodução integral dos experimentos, em conformidade com as boas práticas de ciência aberta e reprodutível. Essa etapa abrangeu tanto o controle de variabilidade nos processos de execução quanto a documentação rigorosa dos ambientes e parâmetros experimentais utilizados.
+
+Para garantir a rastreabilidade completa do processo, todas as etapas de pré-processamento, treinamento e inferência foram implementadas em \textbf{Python 3.10}, utilizando bibliotecas amplamente reconhecidas na comunidade científica, como \textit{PyTorch}, \textit{LangChain}, \textit{LangGraph} e \textit{Pydantic}. O código foi versionado por meio do \textit{Git}, assegurando o controle das revisões e a preservação de versões estáveis de cada componente do sistema. Cada execução experimental foi registrada em logs contendo informações sobre o modelo utilizado, os hiperparâmetros, o tempo de execução e as métricas resultantes, permitindo auditoria e replicação futura.
+
+A reprodutibilidade dos resultados foi testada a partir da repetição controlada dos experimentos sob as mesmas condições. No módulo de segmentação, o treinamento da U-Net clássica foi executado três vezes com inicializações aleatórias diferentes, mantendo constante a semente pseudoaleatória (\texttt{random\_seed = 42}). As variações observadas entre execuções foram inferiores a 2\% para as métricas de Dice e IoU, indicando estabilidade e robustez do modelo. No módulo multiagente, as execuções das LLMs foram repetidas com os mesmos prompts e entradas, de modo a avaliar a consistência textual e semântica das respostas. Embora variações menores tenham sido observadas,  inerentes à natureza estocástica dos modelos generativos, , a estrutura geral das justificativas e a decisão diagnóstica permaneceram estáveis em mais de 90\% dos casos.
+
+A execução dos experimentos foi conduzida em dois ambientes computacionais: (i) \textit{Google Colab Pro+} com GPU NVIDIA A100 para o treinamento do modelo de segmentação e inferência dos modelos multimodais de código aberto; e (ii) \textit{instâncias de API} em GPU T4 para execução dos modelos GPT-4o e Gemini, visando controle de custos e reprodutibilidade de acesso. As dependências foram documentadas em um arquivo \texttt{requirements.txt}, contendo versões fixas das bibliotecas utilizadas, assegurando compatibilidade entre execuções futuras.
+
+Para a validação cruzada entre módulos, os resultados do modelo de segmentação foram aplicados repetidamente sobre subconjuntos do conjunto HAM10000, confirmando a consistência das máscaras geradas e a ausência de distorções significativas entre lotes de inferência. De modo semelhante, a integração entre agentes e o sumarizador foi avaliada quanto à estabilidade de comunicação e à consistência das saídas JSON geradas. As respostas foram automaticamente verificadas quanto à conformidade com os esquemas \textit{Pydantic}, garantindo que os campos obrigatórios estivessem presentes e corretamente formatados.
+
+Por fim, a documentação metodológica completa, incluindo scripts de execução, logs de treinamento e versões do código, foi organizada de forma a atender aos princípios \textbf{FAIR} (\textit{Findable, Accessible, Interoperable, Reusable}). Essa estrutura de documentação assegura que a pesquisa possa ser auditada, reproduzida e estendida por outros pesquisadores, contribuindo para a transparência e robustez científica do trabalho.
+
+\section{Síntese e Limitações da Metodologia}
+
+A metodologia proposta neste trabalho integra técnicas de segmentação de imagens, modelos de linguagem de larga escala (LLMs) e sistemas multiagentes para a geração de diagnósticos automatizados de câncer de pele. A combinação desses componentes buscou equilibrar rigor técnico, interpretabilidade e reprodutibilidade científica. De forma geral, a estrutura modular permitiu uma orquestração eficiente entre os módulos, facilitando tanto o desenvolvimento quanto a análise comparativa dos resultados.
+
+A etapa de segmentação demonstrou ser essencial para a padronização das entradas visuais e para a extração de atributos morfológicos relevantes, servindo como etapa de pré-filtragem para o sistema multiagente. A escolha da arquitetura U-Net clássica, entre as variantes avaliadas, foi motivada pelo melhor equilíbrio entre acurácia, estabilidade e custo computacional. No entanto, é importante reconhecer que o uso de imagens clínicas não dermatoscópicas introduz limitações inerentes: parte dos padrões estruturais (como véu azul-branco e pseudópodes) não é capturada adequadamente nesse tipo de dado, o que restringe a fidelidade diagnóstica quando comparada a conjuntos dermatoscópicos de alta resolução.
+
+Em relação ao módulo linguístico, a utilização de LLMs multimodais mostrou-se adequada para tarefas de raciocínio clínico estruturado e para a interpretação de imagens segmentadas. Ainda assim, observou-se dependência significativa da formulação dos \textit{prompts}, sendo que variações sutis de instrução podem impactar diretamente a consistência das respostas. Essa sensibilidade ao contexto reforça a necessidade de técnicas avançadas de controle de coerência, como \textit{consistency prompts} e validação semântica automatizada. Ademais, a ausência de \textit{fine-tuning} supervisionado limita a capacidade de generalização dos modelos, restringindo o desempenho em domínios clínicos específicos.
+
+No sistema multiagente, a abordagem colaborativa baseada em múltiplos avaliadores e um sumarizador final proporcionou interpretabilidade e auditabilidade superiores em relação a sistemas monolíticos. Contudo, a integração entre agentes ainda depende fortemente de consistência textual nas saídas intermediárias e da estabilidade das chamadas às APIs de modelos de linguagem, o que pode introduzir variação em execuções sucessivas. Embora mecanismos de validação de formato tenham sido incorporados, uma arquitetura de controle de fluxo mais robusta,  por exemplo, baseada em filas assíncronas e verificação probabilística de consistência,  poderia reduzir a propagação de erros entre agentes.
+
+Do ponto de vista computacional, o principal desafio identificado foi o custo associado à execução de modelos de larga escala, tanto em ambientes locais com GPU quanto por meio de APIs comerciais. A necessidade de limitar o tamanho das amostras de teste e a frequência de inferência dos modelos multimodais impactou a abrangência experimental e restringiu análises estatísticas mais amplas. Futuras implementações poderão mitigar essa limitação com o uso de modelos otimizados ou técnicas de compressão, como \textit{quantization} e \textit{knowledge distillation}.
+
+Por fim, a ausência de validação clínica com especialistas humanos representa uma limitação importante, especialmente considerando o caráter crítico da aplicação médica. Embora o sistema tenha sido projetado com base em heurísticas consagradas, como o método ABCD, a avaliação empírica ainda se restringe a dados públicos. A inclusão de profissionais dermatologistas em futuras fases de validação poderá fornecer insights qualitativos essenciais e contribuir para a calibração dos resultados do sistema em cenários clínicos reais.
+
+Em síntese, a metodologia proposta mostrou-se tecnicamente viável e conceitualmente coerente, mas enfrenta limitações inerentes à natureza dos dados e à maturidade dos modelos de linguagem multimodal. O reconhecimento dessas restrições é fundamental para orientar o desenvolvimento de iterações futuras, em especial no aprimoramento da robustez diagnóstica e na expansão do sistema para contextos de uso clínico supervisionado.
+
+
+
+
+
+%Este trabalho adotará uma abordagem experimental aplicada, com ênfase na construção e avaliação de um sistema inteligente para diagnóstico de câncer de pele. A metodologia será organizada em etapas que corresponderão diretamente aos objetivos específicos propostos, garantindo clareza quanto às entregas e à lógica do desenvolvimento.
+%
+%\section{Revisão do Estado da Arte}
+%
+%Inicialmente, será realizada uma revisão bibliográfica sistematizada sobre segmentação de imagens dermatológicas, classificação de lesões cutâneas e sistemas de diagnóstico assistido por inteligência artificial. A pesquisa abrangerá artigos científicos, bases de dados especializadas (PubMed, IEEE Xplore, Scopus) e publicações recentes sobre LLMs aplicadas à área médica. Esta etapa fornecerá o embasamento teórico e técnico necessário para a escolha dos modelos utilizados nas fases seguintes.
+%
+%\section{Desenvolvimento do Algoritmo de Segmentação}
+%
+%Com base na literatura, será desenvolvido um modelo de segmentação para isolar a região da lesão nas imagens de pele. Para isso, será utilizada uma arquitetura do tipo U-Net com módulos de atenção, treinada sobre imagens dermatológicas públicas com anotações. O modelo permitirá gerar uma máscara binária da região lesionada, que será utilizada como entrada para os agentes diagnósticos do sistema.
+%
+%\section{Utilização de LLMs para Classificação}
+%
+%As imagens segmentadas serão analisadas por modelos de linguagem de grande porte (LLMs), os quais receberão prompts estruturados com base em protocolos clínicos como o ABCD, Menzies e SPCL. A partir dessas instruções, os modelos gerarão diagnósticos textuais que incluirão justificativas clínicas e recomendações. Serão avaliados diferentes modelos LLM, incluindo variantes de código aberto (como LLaVA) e APIs comerciais (como GPT-4o e Gemini), com o objetivo de comparar sua capacidade de interpretar imagens e gerar diagnósticos coerentes.
+%
+%\section{Implementação do Sistema Multiagente}
+%
+%A arquitetura diagnóstica será implementada como um sistema multiagente, no qual cada agente será responsável por uma etapa específica: análise baseada em um protocolo, síntese de respostas e crítica final. O fluxo de decisão será orquestrado utilizando o framework LangChain com suporte para grafo (LangGraph), permitindo encadeamento dinâmico entre os módulos e flexibilidade para expansões futuras.
+%
+%\section{Avaliação Experimental}
+%
+%A etapa final compreenderá a avaliação do sistema proposto. Para isso, será utilizado um conjunto de imagens rotuladas como base de teste. Os diagnósticos gerados pelos agentes serão comparados aos diagnósticos reais, permitindo o cálculo de métricas clássicas como acurácia, precisão, sensibilidade e F1-score. Adicionalmente, serão avaliadas a completude e a consistência textual dos relatórios gerados pelas LLMs. O sistema também será comparado com um modelo de classificação tradicional baseado em ResNet-50 para fins de referência.
+%
+%\section{Validação e Documentação}
+%
+%Por fim, os resultados obtidos serão analisados criticamente e organizados em forma de produto científico. As conclusões serão documentadas com o apoio de visualizações, relatórios e registros formais, visando promover a reprodutibilidade da pesquisa. Esta etapa incluirá a preparação de material para submissão em eventos científicos e a disponibilização do código-fonte e dados utilizados, conforme permitido pelas licenças.
+
+
+
+
+% Este capítulo descreve os materiais utilizados e a metodologia adotada para o desenvolvimento do sistema de diagnóstico automatizado de câncer de pele com base em imagens dermatológicas. O processo é composto por quatro etapas principais: coleta e preparação dos dados, segmentação das imagens, integração com modelos de linguagem de larga escala (LLMs) e a composição de um sistema multiagente para geração e validação do diagnóstico.
+
+% \section{Coleta de Dados}
+
+% Foram utilizadas imagens provenientes dos conjuntos de dados públicos SIIM-ISIC 2020 e ISIC 2019, os quais contêm milhares de imagens dermatoscópicas de lesões cutâneas classificadas e segmentadas por especialistas. As imagens foram previamente rotuladas com diagnósticos confirmados (ex: melanoma, nevo, ceratose) e, quando disponível, máscaras segmentadas das lesões.
+
+% \section{Segmentação de Imagens Dermatológicas}
+
+% A etapa de segmentação tem como objetivo destacar a área de interesse (lesão) nas imagens dermatoscópicas. Foi utilizado um modelo baseado em arquitetura U-Net com mecanismos de atenção, treinado especificamente para este fim. A saída desta etapa é uma máscara segmentada da lesão, que será utilizada como insumo visual para os agentes LLMs.
+
+% \section{Modelos de Linguagem (LLMs)}
+
+% Os agentes baseados em LLMs foram configurados para interpretar as imagens segmentadas e originais, analisando os padrões visuais de acordo com três heurísticas clínicas: ABCD, Menzies e SPCL (Seven-Point Checklist). A entrada de cada agente é composta por duas imagens (original e segmentada) codificadas em base64 e um prompt estruturado contendo a descrição do método de análise. Os modelos testados incluem LLaVA-7B, ChatGPT-4 e DeepSeek-Med.
+
+% \section{Sistema Multiagente}
+
+% O sistema multiagente foi desenvolvido utilizando a biblioteca LangGraph. Três agentes independentes geram análises distintas com base nas heurísticas citadas. Seus pareceres são consolidados por um agente de síntese, que elabora um diagnóstico final. Este, por sua vez, é submetido a um agente crítico que valida a coerência da decisão utilizando recuperação de conhecimento textual.
+
+% \section{Configuração Experimental}
+
+% O sistema foi avaliado em um conjunto de 67 imagens com diagnóstico conhecido. As métricas utilizadas incluem acurácia, precisão (PPV), sensibilidade (Recall) e F1-score. Também foi analisada a completude e estruturação dos textos gerados, com ênfase em sua compatibilidade com o formato JSON esperado para os campos de diagnóstico, justificativa e recomendação clínica.
