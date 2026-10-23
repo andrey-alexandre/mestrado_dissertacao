@@ -112,7 +112,7 @@ A Figura~\ref{fig:lenet_architecture} apresenta a arquitetura clássica da rede 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{imagens/Ch2/Sec2.2.png}
-	\caption{Arquitetura clássica da rede convolucional LeNet-5, proposta por \cite{lecun1998gradient}. A rede é composta por camadas convolucionais intercaladas com operações de \textit{subsampling}, seguidas por camadas totalmente conectadas responsáveis pela classificação. Essa estrutura serviu de base para o desenvolvimento das CNNs modernas.}
+	\caption{Arquitetura clássica da rede convolucional LeNet-5, proposta por \citeonline{lecun1998gradient}. A rede é composta por camadas convolucionais intercaladas com operações de \textit{subsampling}, seguidas por camadas totalmente conectadas responsáveis pela classificação. Essa estrutura serviu de base para o desenvolvimento das CNNs modernas.}
 	\label{fig:lenet_architecture}
 \end{figure}
 
@@ -125,12 +125,12 @@ Entretanto, a aplicação de CNNs em contextos médicos apresenta desafios parti
 
 O mecanismo de atenção foi introduzido como uma solução para superar as limitações dos modelos sequenciais tradicionais, como as redes neurais recorrentes (RNNs), que apresentavam dificuldades em capturar dependências de longo alcance em tarefas de processamento de linguagem natural. A atenção permite que o modelo atribua pesos diferenciados a partes distintas da entrada, concentrando-se seletivamente nas informações mais relevantes para a tarefa em execução \cite{bahdanau2014neural}. 
 
-Esse conceito foi expandido pelo \textit{Transformer}, proposto por \cite{vaswani2017attention}, que substituiu completamente a recorrência pelo uso de múltiplos cabeçalhos de atenção (\textit{multi-head attention}) e mecanismos de normalização, tornando-se o paradigma dominante em modelos de linguagem. A Figura~\ref{fig:transformer_architecture} ilustra a arquitetura básica do Transformer, composta por blocos de \textit{encoder} e \textit{decoder}, nos quais o mecanismo de atenção é aplicado em paralelo a camadas de normalização e redes alimentadas adiante (\textit{feed-forward}).
+Esse conceito foi expandido pelo \textit{Transformer}, proposto por \citeonline{vaswani2017attention}, que substituiu completamente a recorrência pelo uso de múltiplos cabeçalhos de atenção (\textit{multi-head attention}) e mecanismos de normalização, tornando-se o paradigma dominante em modelos de linguagem. A Figura~\ref{fig:transformer_architecture} ilustra a arquitetura básica do Transformer, composta por blocos de \textit{encoder} e \textit{decoder}, nos quais o mecanismo de atenção é aplicado em paralelo a camadas de normalização e redes alimentadas adiante (\textit{feed-forward}).
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.85\textwidth]{imagens/Ch2/Sec2.4.png}
-	\caption{Arquitetura do modelo Transformer proposto por \cite{vaswani2017attention}, composta por blocos de \textit{encoder} e \textit{decoder} conectados por mecanismos de atenção multi-cabeças. Essa estrutura permitiu substituir totalmente a recorrência e impulsionou o desenvolvimento de modelos de linguagem e visão em larga escala.}
+	\caption{Arquitetura do modelo Transformer proposto por \citeonline{vaswani2017attention}, composta por blocos de \textit{encoder} e \textit{decoder} conectados por mecanismos de atenção multi-cabeças. Essa estrutura permitiu substituir totalmente a recorrência e impulsionou o desenvolvimento de modelos de linguagem e visão em larga escala.}
 	\label{fig:transformer_architecture}
 \end{figure}
 
@@ -187,7 +187,7 @@ Além disso, o uso da segmentação semântica apresenta vantagens computacionai
 		(B) segmentação semântica,  classificação por pixel;
 		(C) detecção de objetos,  reconhecimento e localização de instâncias por caixas delimitadoras; 
 		(D) segmentação por instância,  diferenciação individual de múltiplos objetos de mesma classe.
-		Adaptado de \cite{reinke2021commonlimitations}.}
+		Adaptado de \citeonline{reinke2021commonlimitations}.}
 	\label{fig:segmentacao_tipos}
 \end{figure}
 
