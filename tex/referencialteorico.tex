@@ -13,7 +13,7 @@ A distribuição geográfica desses casos apresenta forte variação entre regi�
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{imagens/Ch2/Sec1.1.png}
-	\caption{Risco cumulativo estimado (\%) de incidência de câncer de pele (melanoma e não melanoma), ambos os sexos, entre 0 e 74 anos, em 2022. As áreas em azul-escuro indicam maior risco de desenvolvimento da doença. Fonte: IARC, \textit{Cancer Today – GLOBOCAN 2022} \cite{iarc2022globocan}.}
+	\caption{Risco cumulativo estimado (\%) de incidência de câncer de pele (melanoma e não melanoma), ambos os sexos, entre 0 e 74 anos, em 2022. As áreas em azul-escuro indicam maior risco de desenvolvimento da doença. Fonte: \citeonline{iarc2022globocan}.}
 	\label{fig:epidemiologia}
 \end{figure}
 
@@ -148,7 +148,7 @@ A segmentação de imagens médicas representa uma das etapas mais fundamentais 
 
 As três modalidades representadas não têm o objetivo de comparação direta, mas de evidenciar a natureza universal do processo de segmentação,  um mesmo princípio algorítmico capaz de isolar regiões de interesse sob diferentes perspectivas e condições de aquisição. Em ressonância magnética, a segmentação permite delimitar tumores cerebrais e quantificar volumes afetados, contribuindo para protocolos de neurocirurgia e acompanhamento terapêutico \cite{minaee2021image}. Em dermatoscopia, a técnica destaca as fronteiras entre a lesão pigmentada e a pele saudável, fornecendo uma base morfológica para classificadores que diferenciam lesões benignas e malignas \cite{tschandl2018ham10000}. Já em tomografia computadorizada, é aplicada na detecção e mensuração de nódulos pulmonares, oferecendo suporte ao rastreamento precoce de neoplasias \cite{shen2017deep}.
 
-A escolha dessas representações se justifica pela coerência conceitual entre os domínios: embora as propriedades ópticas, os artefatos e os parâmetros físicos variem entre modalidades, o núcleo computacional da segmentação,  baseado em extração hierárquica de características espaciais e reconstrução morfológica,  permanece o mesmo. Essa convergência técnica reforça a plausibilidade de estender arquiteturas já consolidadas, como a U-Net, ao domínio da dermatologia. No contexto desta pesquisa, a segmentação é concebida não apenas como um pré-processamento visual, mas como a etapa estruturante que possibilita a análise textual posterior por modelos de linguagem natural e agentes colaborativos, sustentando assim a integração entre visão computacional e raciocínio clínico automatizado.
+A escolha dessas representações se justifica pela coerência conceitual entre os domínios: embora as propriedades ópticas, os artefatos e os parâmetros físicos variem entre modalidades, o núcleo computacional da segmentação,  baseado em extração hierárquica de características espaciais e reconstrução morfológica,  permanece o mesmo. Essa convergência técnica reforça a plausibilidade de estender arquiteturas já consolidadas, como a U-Net \cite{ronneberger2015unet}, ao domínio da dermatologia. No contexto desta pesquisa, a segmentação é concebida não apenas como um pré-processamento visual, mas como a etapa estruturante que possibilita a análise textual posterior por modelos de linguagem natural e agentes colaborativos, sustentando assim a integração entre visão computacional e raciocínio clínico automatizado.
 
 \begin{figure}[H]
 	\centering
