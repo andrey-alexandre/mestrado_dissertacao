@@ -206,19 +206,13 @@ Em síntese, as variantes da U-Net representam uma progressão natural de refina
 
 \section{Modelos de Linguagem de Larga Escala (LLMs)}
 
-\subsection{Fundamentos}
-
 Os Modelos de Linguagem de Larga Escala (LLMs, do inglês \textit{Large Language Models}) são arquiteturas de aprendizado profundo, em geral baseadas em Transformers, treinadas sobre grandes volumes de dados textuais. Eles possuem bilhões de parâmetros e aprendem representações semânticas que permitem realizar tarefas de compreensão, geração e raciocínio textual \cite{devlin2019bert,brown2020language}. Diferentemente de abordagens anteriores em processamento de linguagem natural (PLN), que eram altamente dependentes de recursos linguísticos manuais, os LLMs capturam padrões complexos diretamente a partir de dados em larga escala, tornando-se modelos de propósito geral capazes de adaptação a múltiplos domínios.
 
 Esses modelos demonstraram desempenho acima do esperado em tarefas de múltipla escolha, resolução de problemas, geração de explicações e sumarização. Sua principal inovação reside na capacidade de generalizar conhecimento aprendido em contextos amplos e aplicá-lo em domínios específicos, frequentemente com pouco ou nenhum ajuste adicional (\textit{zero-shot} e \textit{few-shot learning}) \cite{openai2023gpt4}. No campo da saúde, essa característica é particularmente relevante, visto que permite adaptar o modelo a tarefas médicas sem a necessidade de treinamento extenso em bases clínicas.
 
-\subsection{LLMs com capacidade multimodal}
-
 Uma evolução dos LLMs é a incorporação de entradas multimodais, como imagens e texto. Modelos multimodais, como GPT-5.4-nano \cite{openai2025gpt5nano}, Gemini-3.1-flash-lite \cite{google2025gemini31} e LLaVA \cite{liu2023visual}, são capazes de analisar simultaneamente descrições clínicas e imagens, ampliando sua aplicabilidade em diagnósticos médicos. Essa capacidade torna possível integrar informações visuais (lesões, radiografias, histopatologia) e contextuais (histórico clínico, sintomas relatados), aproximando a inteligência artificial da prática diagnóstica real.
 
-No campo da dermatologia, essa integração já vem sendo explorada em sistemas que combinam imagens de lesões cutâneas e descrições clínicas, permitindo a geração de relatórios estruturados e recomendações diagnósticas. Estudos recentes demonstram que tais modelos podem alcançar acurácia comparável à de especialistas em triagem de melanoma e outras neoplasias cutâneas, além de oferecer explicações em linguagem natural que facilitam a auditabilidade \cite{nori2023capabilitiesgpt4medicalchallenge,vashisht2024umassbionlpmediqam3g2024dermprompt}. 
-
-\subsection{Desafios e limitações em saúde}
+No campo da dermatologia, essa integração já vem sendo explorada em sistemas que combinam imagens de lesões cutâneas e descrições clínicas, permitindo a geração de relatórios estruturados e recomendações diagnósticas. Estudos recentes demonstram que tais modelos podem alcançar acurácia comparável à de especialistas em triagem de melanoma e outras neoplasias cutâneas, além de oferecer explicações em linguagem natural que facilitam a auditabilidade \cite{nori2023capabilitiesgpt4medicalchallenge,vashisht2024umassbionlpmediqam3g2024dermprompt}.
 
 Apesar do potencial, a aplicação de LLMs em medicina enfrenta desafios importantes. Um deles é a ocorrência de alucinações, quando o modelo gera informações plausíveis, porém incorretas, que podem comprometer decisões clínicas \cite{rao2023large}. Outro aspecto crítico refere-se à confiabilidade: embora sejam poderosos, os LLMs não foram originalmente projetados para contextos de alto risco como a saúde, exigindo validação rigorosa e supervisão humana constante. Além disso, há questões éticas associadas ao uso de dados sensíveis, como privacidade e viés algorítmico, que podem impactar a equidade no acesso a diagnósticos \cite{tang2023evaluating}.
 
@@ -227,31 +221,18 @@ Essas limitações indicam que os LLMs devem ser considerados ferramentas de apo
 
 \section{Sistemas Multiagentes}
 
-\subsection{Fundamentos}
-
 Sistemas Multiagentes (SMAs) são compostos por múltiplas entidades autônomas, denominadas agentes, que interagem em um ambiente compartilhado para resolver problemas complexos de forma cooperativa ou competitiva. Cada agente é caracterizado por sua autonomia, capacidade de percepção do ambiente, habilidade de comunicação e competência para tomar decisões baseadas em objetivos individuais ou coletivos \cite{wooldridge2009introduction}. Diferentemente de sistemas centralizados, os SMAs apresentam maior robustez e escalabilidade, uma vez que o comportamento global emerge da interação distribuída entre agentes especializados, sem a necessidade de um controle único.
 
-A aplicação desse paradigma no domínio médico apresenta paralelos diretos com a prática clínica interdisciplinar, na qual profissionais de diferentes especialidades colaboram para construir um diagnóstico mais preciso e confiável \cite{ke2024mitigating}. A combinação de agentes especializados amplia a capacidade de análise do sistema, permitindo que múltiplos métodos de raciocínio,  quantitativos, heurísticos e linguísticos,  atuem de forma complementar. Assim, o uso de sistemas multiagentes em saúde favorece a criação de diagnósticos mais interpretáveis, auditáveis e resilientes a falhas locais, além de oferecer uma estrutura natural para incorporar novas modalidades de dados e agentes de validação.
-
-
-\subsection{Aplicações em saúde}
-
-Na área da saúde, os SMAs vêm sendo explorados em aplicações que vão desde o agendamento inteligente de consultas até sistemas de suporte à decisão clínica. Trabalhos recentes destacam seu uso em diagnósticos assistidos por inteligência artificial, nos quais diferentes agentes podem executar tarefas específicas,  como segmentar imagens, classificar padrões ou gerar relatórios explicativos,  para, posteriormente, integrar os resultados em uma síntese unificada \cite{ke2024mitigating}.
+A aplicação desse paradigma no domínio médico apresenta paralelos diretos com a prática clínica interdisciplinar, na qual profissionais de diferentes especialidades colaboram para construir um diagnóstico mais preciso e confiável. Na área da saúde, os SMAs vêm sendo explorados em aplicações que vão desde o agendamento inteligente de consultas até sistemas de suporte à decisão clínica, incluindo diagnósticos assistidos por inteligência artificial nos quais diferentes agentes executam tarefas específicas, como segmentar imagens, classificar padrões ou gerar relatórios explicativos, para, posteriormente, integrar os resultados em uma síntese unificada \cite{ke2024mitigating}. Essa combinação de agentes especializados amplia a capacidade de análise do sistema, permitindo que múltiplos métodos de raciocínio,  quantitativos, heurísticos e linguísticos,  atuem de forma complementar. Assim, o uso de sistemas multiagentes em saúde favorece a criação de diagnósticos mais interpretáveis, auditáveis e resilientes a falhas locais, além de oferecer uma estrutura natural para incorporar novas modalidades de dados e agentes de validação.
 
 Em dermatologia, a aplicação de arquiteturas multiagentes mostra-se promissora, pois permite simular o processo de avaliação de uma junta médica virtual: agentes especializados em diferentes protocolos clínicos podem fornecer pareceres independentes sobre uma mesma lesão cutânea, enquanto um agente integrador consolida essas opiniões em um relatório unificado. Essa abordagem reflete práticas clínicas reais de revisão por pares e contribui para maior transparência e auditabilidade em diagnósticos automatizados.
 
 
 \section{Desafios na Aplicação de IA em Dermatologia}
 
-\subsection{Limitações de dados}
-
 Um dos maiores desafios para o uso de inteligência artificial em dermatologia é a escassez de bases de dados clínicas amplas, balanceadas e bem anotadas. Embora iniciativas como a ISIC Archive e a HAM10000 tenham disponibilizado milhares de imagens dermatoscópicas para pesquisa, esses conjuntos ainda apresentam desequilíbrio entre classes, com predominância de lesões benignas em relação às malignas \cite{tschandl2018ham10000,codella2019skin}. Além disso, a qualidade das imagens pode variar significativamente em função do equipamento utilizado, das condições de iluminação e da experiência do profissional responsável pela captura, comprometendo a generalização dos modelos \cite{brinker2019deep}. Esse problema é particularmente crítico em cenários que envolvem fotografias clínicas convencionais, onde detalhes estruturais, como redes pigmentadas ou véus azulados, podem não estar visíveis.
 
-\subsection{Aspectos de interpretabilidade}
-
 Outro desafio importante refere-se à interpretabilidade dos modelos. Arquiteturas profundas, como CNNs e Transformers, são frequentemente tratadas como “caixas-pretas”, dificultando a compreensão sobre quais características foram determinantes para a decisão \cite{holzinger2017we}. Em aplicações clínicas, essa limitação pode comprometer a confiança de médicos e pacientes nos resultados, além de dificultar auditorias diagnósticas. Técnicas de explicabilidade, como mapas de ativação (\textit{Grad-CAM}) ou métodos baseados em atenção, vêm sendo desenvolvidas para mitigar esse problema, mas ainda enfrentam limitações quanto à granularidade e robustez das explicações \cite{selvaraju2017gradcam}.
-
-\subsection{Questões éticas e de equidade}
 
 A aplicação de IA em dermatologia também levanta preocupações éticas e sociais. Estudos mostram que modelos de visão computacional podem apresentar vieses relacionados à cor de pele, devido à sub-representação de populações não brancas nos conjuntos de treinamento \cite{daneshjou2022disparities}. Isso pode levar a desigualdades na performance diagnóstica e perpetuar disparidades já existentes no sistema de saúde. Além disso, há desafios relacionados à privacidade e ao uso de dados sensíveis, que exigem conformidade com legislações como a LGPD no Brasil e o GDPR na União Europeia \cite{pantanowitz2024regulatory}. Tais aspectos reforçam a necessidade de validações multicêntricas, inclusão de dados representativos e auditoria contínua para garantir a segurança e a equidade no uso de modelos de IA em contextos clínicos.
 
