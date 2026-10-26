@@ -89,7 +89,7 @@ De forma convergente, estudos indicam que a dermatoscopia melhora a acurácia di
 \end{figure}
 
 
-As Redes Neurais Artificiais (RNAs) constituem a base teórica do aprendizado profundo e são inspiradas em mecanismos biológicos do cérebro humano. Seu princípio fundamental consiste em unidades computacionais denominadas neurônios artificiais, organizadas em camadas, que processam sinais de entrada, aplicam funções de ativação e produzem saídas ajustáveis por meio de um processo de treinamento. Esse treinamento é realizado, em geral, pelo algoritmo de retropropagação do erro, que ajusta os pesos das conexões neuronais de forma iterativa até minimizar a função de perda \cite{rumelhart1986learning}.
+As Redes Neurais Artificiais (RNAs) constituem a base teórica do aprendizado profundo e são inspiradas em mecanismos biológicos do cérebro humano. Seu princípio fundamental consiste em unidades computacionais denominadas neurônios artificiais, organizadas em camadas (Figura~\ref{fig:mlp_schematic}), que processam sinais de entrada, aplicam funções de ativação e produzem saídas ajustáveis por meio de um processo de treinamento. Esse treinamento é realizado, em geral, pelo algoritmo de retropropagação do erro, que ajusta os pesos das conexões neuronais de forma iterativa até minimizar a função de perda \cite{rumelhart1986learning}.
 
 O avanço das RNAs está intrinsecamente ligado à disponibilidade de dados em larga escala e ao aumento do poder computacional. A partir da década de 2010, o campo de aprendizado profundo (\textit{deep learning}) emergiu como uma abordagem dominante, trazendo inovações arquiteturais que impulsionaram a performance em diversas tarefas, como reconhecimento de imagens, processamento de linguagem natural e diagnóstico médico assistido por computador \cite{lecun2015deep, schmidhuber2015deep}. No contexto da saúde, as RNAs permitem identificar padrões complexos em imagens clínicas que seriam de difícil percepção por métodos convencionais de análise estatística, aumentando a acurácia e reduzindo a variabilidade intra e interobservador.
 
@@ -122,7 +122,7 @@ Esse conceito foi expandido pelo \textit{Transformer}, proposto por \citeonline{
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.85\textwidth]{imagens/Ch2/Sec2.4.png}
+	\includegraphics[width=0.6\textwidth]{imagens/Ch2/Sec2.4.png}
 	\caption{Arquitetura do modelo Transformer proposto por \citeonline{vaswani2017attention}, composta por blocos de \textit{encoder} e \textit{decoder} conectados por mecanismos de atenção multi-cabeças. Essa estrutura permitiu substituir totalmente a recorrência e impulsionou o desenvolvimento de modelos de linguagem e visão em larga escala.}
 	\label{fig:transformer_architecture}
 \end{figure}
@@ -145,14 +145,31 @@ A escolha dessas representações se justifica pela coerência conceitual entre 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.32\textwidth]{imagens/Ch2/Sec2.3.Intro1.jpg}
-	\includegraphics[width=0.32\textwidth]{imagens/Ch2/Sec2.3.Intro2.jpg}
-	\includegraphics[width=0.32\textwidth]{imagens/Ch2/Sec2.3.Intro3.jpg}
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{imagens/Ch2/Sec2.3.Intro1.jpg}
+		\caption{Delineamento de tumor cerebral em ressonância magnética \cite{minaee2021image}.}
+		\label{fig:segmentacao_medica_rm}
+	\end{subfigure}
+	\\[1ex]
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{imagens/Ch2/Sec2.3.Intro2.jpg}
+		\caption{Isolamento de lesão cutânea pigmentada em dermatoscopia \cite{tschandl2018ham10000}.}
+		\label{fig:segmentacao_medica_dermato}
+	\end{subfigure}
+	\\[1ex]
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{imagens/Ch2/Sec2.3.Intro3.jpg}
+		\caption{Segmentação de nódulos pulmonares em tomografia computadorizada \cite{shen2017deep}.}
+		\label{fig:segmentacao_medica_tc}
+	\end{subfigure}
 	\caption{
-		Exemplos de aplicação da segmentação em diferentes modalidades médicas: 
-		(A) delineamento de tumor cerebral em ressonância magnética \cite{minaee2021image}, 
-		(B) isolamento de lesão cutânea pigmentada em dermatoscopia \cite{tschandl2018ham10000}, e 
-		(C) segmentação de nódulos pulmonares em tomografia computadorizada \cite{shen2017deep}.
+		Exemplos de aplicação da segmentação em diferentes modalidades médicas:
+		(a) delineamento de tumor cerebral em ressonância magnética \cite{minaee2021image},
+		(b) isolamento de lesão cutânea pigmentada em dermatoscopia \cite{tschandl2018ham10000}, e
+		(c) segmentação de nódulos pulmonares em tomografia computadorizada \cite{shen2017deep}.
 		As imagens foram reproduzidas e adaptadas de seus respectivos estudos para fins ilustrativos e acadêmicos.}
 	\label{fig:segmentacao_medica_exemplos}
 \end{figure}
@@ -167,10 +184,6 @@ A Figura~\ref{fig:segmentacao_tipos} ilustra, de forma esquemática, os quatro p
 (C) \textbf{detecção de objetos}, que reconhece e localiza instâncias individuais por meio de \textit{bounding boxes}; e  
 (D) \textbf{segmentação por instância}, que combina as abordagens anteriores, distinguindo múltiplos objetos da mesma classe \cite{reinke2021commonlimitations}.
 
-No contexto dermatológico, a \textbf{segmentação semântica} é a mais apropriada, pois as lesões cutâneas tendem a compor uma única estrutura contínua. Nesse caso, o foco analítico recai sobre a geometria da lesão,  área, borda, assimetria e variação de cor,  e não sobre a distinção entre instâncias múltiplas. Essa característica torna o problema mais alinhado a uma formulação pixel a pixel, em que a precisão dos limites é mais relevante do que a diferenciação entre objetos. 
-
-Além disso, o uso da segmentação semântica apresenta vantagens computacionais e metodológicas para integração com sistemas baseados em linguagem natural. Ao delimitar a área de interesse de forma consistente e explicável, o modelo gera uma entrada visual estruturada que pode ser convertida em descrições clínicas compreensíveis por modelos de linguagem (LLMs). Assim, o equilíbrio entre granularidade e interpretabilidade faz da segmentação semântica uma escolha técnica e clinicamente fundamentada para o escopo desta pesquisa.
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{imagens/Ch2/Section2.3.2.jpg}
@@ -178,12 +191,15 @@ Além disso, o uso da segmentação semântica apresenta vantagens computacionai
 		Comparação entre níveis de granularidade em tarefas de visão computacional aplicadas à medicina:
 		(A) classificação de imagem,  decisão global por rótulo;
 		(B) segmentação semântica,  classificação por pixel;
-		(C) detecção de objetos,  reconhecimento e localização de instâncias por caixas delimitadoras; 
+		(C) detecção de objetos,  reconhecimento e localização de instâncias por caixas delimitadoras;
 		(D) segmentação por instância,  diferenciação individual de múltiplos objetos de mesma classe.
 		Adaptado de \citeonline{reinke2021commonlimitations}.}
 	\label{fig:segmentacao_tipos}
 \end{figure}
 
+No contexto dermatológico, a \textbf{segmentação semântica} é a mais apropriada, pois as lesões cutâneas tendem a compor uma única estrutura contínua. Nesse caso, o foco analítico recai sobre a geometria da lesão,  área, borda, assimetria e variação de cor,  e não sobre a distinção entre instâncias múltiplas. Essa característica torna o problema mais alinhado a uma formulação pixel a pixel, em que a precisão dos limites é mais relevante do que a diferenciação entre objetos.
+
+Além disso, o uso da segmentação semântica apresenta vantagens computacionais e metodológicas para integração com sistemas baseados em linguagem natural. Ao delimitar a área de interesse de forma consistente e explicável, o modelo gera uma entrada visual estruturada que pode ser convertida em descrições clínicas compreensíveis por modelos de linguagem (LLMs). Assim, o equilíbrio entre granularidade e interpretabilidade faz da segmentação semântica uma escolha técnica e clinicamente fundamentada para o escopo desta pesquisa.
 
 \subsection{Arquiteturas baseadas em U-Net}
 
