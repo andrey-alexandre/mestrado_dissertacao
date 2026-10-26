@@ -85,14 +85,14 @@ Grande parte da literatura concentra-se nas etapas isoladas de segmentação e c
 
 Propõe-se a aplicação de sistemas multiagentes para a detecção de melanoma em imagens dermoscópicas, avaliando a acurácia diagnóstica e a consistência textual dos pareceres gerados a partir de imagens e suas respectivas máscaras de segmentação de referência. Além da comparação de acurácia com um \textit{baseline} supervisionado, este trabalho propõe um \textbf{framework de cinco eixos} para a avaliação automatizada da consistência estrutural e lógica dos relatórios diagnósticos gerados pelas LLMs, complementado por uma \textbf{análise de calibração de incerteza} que investiga se os modelos concentram sua hesitação diagnóstica nos casos clinicamente mais ambíguos. Essa dupla contribuição metodológica constitui o principal diferencial desta pesquisa frente à literatura de classificação binária tradicional.
 
-A arquitetura será composta por três módulos principais:
+A arquitetura é composta por três módulos principais:
 \begin{enumerate}
     \item Uso das máscaras de segmentação de referência do conjunto PH2 como entrada padronizada ao sistema;
     \item Detecção de melanoma por modelos de linguagem multimodal (melanoma vs.\ não-melanoma);
     \item Diagnóstico de melanoma via sistema multiagente, com consolidação dos pareceres pelo agente sumarizador.
 \end{enumerate}
 
-A avaliação contemplará métricas clínicas como acurácia, sensibilidade e precisão, bem como critérios de completude e consistência textual dos pareceres. Entre as limitações previstas, destacam-se a sensibilidade dos modelos de linguagem a variações de \textit{prompt}, a ausência de contexto clínico complementar e o tamanho reduzido do conjunto PH2 (200 imagens), que poderá limitar a generalização dos resultados. A validação ocorrerá em ambiente experimental controlado, o que deverá ser considerado na interpretação das métricas obtidas.
+A avaliação contemplou métricas clínicas como acurácia, sensibilidade e precisão, bem como critérios de completude e consistência textual dos pareceres. Entre as limitações, destacam-se a sensibilidade dos modelos de linguagem a variações de \textit{prompt}, a ausência de contexto clínico complementar e o tamanho reduzido do conjunto PH2 (200 imagens), que limita a generalização dos resultados. A validação ocorreu em ambiente experimental controlado, o que deve ser considerado na interpretação das métricas obtidas.
 
 \section{Objetivos}
 
@@ -171,8 +171,6 @@ Avaliar a eficácia de modelos multiagentes na detecção de melanoma em imagens
         \end{itemize}
     \end{itemize}
 \end{itemize}
-
-A distribuição temporal dessas atividades ao longo do mestrado é detalhada no cronograma de execução apresentado ao final desta dissertação (Figura~\ref{fig:crono}).
 
 \section{Metodologia}
 
