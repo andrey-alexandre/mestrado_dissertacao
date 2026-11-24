@@ -1,0 +1,136 @@
+/*
+ * Figura 1 - Visao geral do desenho experimental.
+ * Futura substituta (fora do escopo desta entrega) da imagem usada por
+ * fig:estrutura_geral em tex/materiaisMetodos.tex. NAO toca o .tex nem
+ * imagens/Ch3/eraser_diagram.png.
+ *
+ * Identidade visual (replicando _estilo_comum.py manualmente, pois DOT
+ * nao importa Python): fonte "Helvetica" (generica, amplamente
+ * disponivel, proxima da familia sem-serifa usada nas figuras
+ * matplotlib), paleta discreta, uma cor de destaque por bloco logico
+ * (desenvolvimento vs. avaliacao vs. reaproveitamento), setas tracejadas
+ * reservadas exclusivamente para "reaproveitamento de resultado
+ * existente" (nunca para fluxo de execucao nova) - distincao por
+ * ESTILO de linha, nao so por cor, para nao depender so de cor.
+ *
+ * Renderizar com: dot -Tpdf fig1_desenho_experimental.dot -o fig1_desenho_experimental.pdf
+ *                 dot -Tpng -Gdpi=300 fig1_desenho_experimental.dot -o fig1_desenho_experimental.png
+ */
+
+digraph fig1_desenho_experimental {
+    rankdir=TB;
+    compound=true;
+    charset="UTF-8";
+    fontname="Helvetica";
+    fontsize=12;
+    labelloc="t";
+    label="Figura 1 - Visão geral do desenho experimental";
+    bgcolor="white";
+    nodesep=0.35;
+    ranksep=0.55;
+
+    node [fontname="Helvetica", fontsize=10, shape=box, style="rounded,filled", color="#8C8C8C", fillcolor="#F7F6F4", fontcolor="#2B2B2B", margin="0.15,0.10"];
+    edge [fontname="Helvetica", fontsize=9, color="#4C6B8A", fontcolor="#2B2B2B"];
+
+    /* ---------------------------------------------------------------
+     * PAINEL A - DESENVOLVIMENTO (preparacao independente, paralela)
+     * ------------------------------------------------------------- */
+    subgraph cluster_desenvolvimento {
+        label="Painel A - Desenvolvimento (independente, paralelo)";
+        style="rounded";
+        color="#4C6B8A";
+        fontsize=11;
+        fontcolor="#4C6B8A";
+        bgcolor="#FCFCFB";
+
+        subgraph cluster_segmentacao {
+            label="Segmentação - ISIC2018 Task 1";
+            style="rounded,dashed";
+            color="#8C8C8C";
+            fontsize=9.5;
+
+            isic [label="ISIC2018 Task 1\n(2.594 pares imagem/máscara)", shape=note, fillcolor="#EFEFEA"];
+            cv_seg [label="Validação cruzada aninhada 5x4\n(seleção de arquitetura)", shape=box];
+            unet [label="U-Net\n(candidata)\nDice = 0,8568", shape=box, fillcolor="#EFEFEA"];
+            deeplab [label="DeepLabV3+-ResNet34\n(candidata)\nDice = 0,8687", shape=box, fillcolor="#EFEFEA"];
+            seg_final [label="Modelo de segmentação final\n= DeepLabV3+-ResNet34\n(vencedora na validação cruzada)", fillcolor="#E4ECF2", color="#4C6B8A", peripheries=2];
+
+            isic -> cv_seg;
+            cv_seg -> unet;
+            cv_seg -> deeplab;
+            unet -> seg_final [label="comparadas", style=dashed, color="#8C8C8C", fontcolor="#8C8C8C"];
+            deeplab -> seg_final [label="vencedora", color="#4C6B8A"];
+        }
+
+        subgraph cluster_cnn_dev {
+            label="CNN - BCN20000 (treino oficial rotulado)";
+            style="rounded,dashed";
+            color="#8C8C8C";
+            fontsize=9.5;
+
+            bcn [label="BCN20000, treino oficial\n(12.413 imagens / 3.576 lesões)", shape=note, fillcolor="#EFEFEA"];
+            split_bcn [label="Divisão interna por lesão\n80/20 (seed 20261107)\n2.861 lesões treino / 715 validação", shape=box];
+            treino_cnn [label="Treino EfficientNetV2-S\n(subconjunto de treino)", shape=box];
+            selecao_cnn [label="Seleção de checkpoint\ne limiar (índice de Youden)\nSOMENTE na validação interna do BCN20000", shape=box];
+            cnn_final [label="CNN final (checkpoint + limiar)\ncongelados antes de qualquer\nuso no HAM10000", fillcolor="#E4ECF2", color="#4C6B8A", peripheries=2];
+
+            bcn -> split_bcn;
+            split_bcn -> treino_cnn [label="80%"];
+            split_bcn -> selecao_cnn [label="20% (validação interna)"];
+            treino_cnn -> selecao_cnn;
+            selecao_cnn -> cnn_final;
+        }
+    }
+
+    /* ---------------------------------------------------------------
+     * PAINEL B - AVALIACAO PRINCIPAL (3.000 lesoes HAM10000 congeladas)
+     * ------------------------------------------------------------- */
+    subgraph cluster_avaliacao_principal {
+        label="Painel B - Avaliação principal (3.000 lesões HAM10000 congeladas, 1 imagem/lesão)";
+        style="rounded";
+        color="#4C6B8A";
+        fontsize=11;
+        fontcolor="#4C6B8A";
+        bgcolor="#FCFCFB";
+
+        ham3000 [label="Amostra congelada HAM10000\n3.000 lesões distintas\n(amostragem estratificada, seed 20261106)", shape=note, fillcolor="#EFEFEA"];
+
+        cnn_s0 [label="CNN\ncondição S0 (imagem original)", shape=box];
+        vlm_direto_s0 [label="VLM-direto\ncondição S0\n(chamada única, sem arquitetura multiagente)\nmodelos: Gemini e GPT", shape=box];
+        multiagente_s0s1s2 [label="Sistema multiagente\ncondições S0 / S1 / S2\n(ABCD + Menzies + SPCL + sumarizador)\nmodelos: Gemini e GPT\n(matriz principal completa)", shape=box, fillcolor="#E4ECF2"];
+
+        ham3000 -> cnn_s0;
+        ham3000 -> vlm_direto_s0;
+        ham3000 -> multiagente_s0s1s2;
+
+        seg_final -> multiagente_s0s1s2 [label="máscara predita\n(base de S2)", lhead=cluster_avaliacao_principal, ltail=cluster_desenvolvimento, constraint=false];
+        cnn_final -> cnn_s0 [label="checkpoint + limiar\ncongelados", lhead=cluster_avaliacao_principal, ltail=cluster_desenvolvimento, constraint=false];
+    }
+
+    note_sem_ajuste [label="Nenhum ajuste de modelo,\ncheckpoint ou limiar acontece\nsobre dados do HAM10000.\nDesenvolvimento e avaliação\nnão compartilham dados.", shape=note, style="filled", fillcolor="white", color="#8A5A3A", fontcolor="#8A5A3A", fontsize=8.5];
+    { rank=same; note_sem_ajuste; }
+    cnn_final -> note_sem_ajuste [style=invis];
+
+    /* ---------------------------------------------------------------
+     * PAINEL C - AVALIACAO COMPLEMENTAR (mesmas 300 lesoes, so S2)
+     * ------------------------------------------------------------- */
+    subgraph cluster_avaliacao_complementar {
+        label="Painel C - Avaliação complementar (mesmas 300 lesões dentro das 3.000, somente condição S2)";
+        style="rounded";
+        color="#4C6B8A";
+        fontsize=11;
+        fontcolor="#4C6B8A";
+        bgcolor="#FCFCFB";
+
+        subset300 [label="Subconjunto de 300 lesões\n(já selecionadas dentro das 3.000)", shape=note, fillcolor="#EFEFEA"];
+        multiagente_local_s2 [label="Sistema multiagente\ncondição S2 (somente)\nmodelos locais: Qwen3-VL e MedGemma\n(executados localmente, por viabilidade computacional)", shape=box];
+        comparacao_300 [label="Comparação complementar pareada\n(todos contra todos, nas mesmas 300 lesões):\nCNN S0, Gemini multiagente S2,\nGPT multiagente S2, Qwen3-VL S2, MedGemma S2", shape=box, fillcolor="#E4ECF2", peripheries=2];
+
+        subset300 -> multiagente_local_s2;
+        multiagente_local_s2 -> comparacao_300 [label="execução nova"];
+    }
+
+    ham3000 -> subset300 [label="subconjunto\n(mesmas 300 lesões)", style=dashed, color="#8C8C8C", fontcolor="#8C8C8C"];
+    cnn_s0 -> comparacao_300 [label="predições já existentes,\nreaproveitadas (não reexecutadas)", style=dashed, color="#8C8C8C", fontcolor="#8C8C8C", constraint=false];
+    multiagente_s0s1s2 -> comparacao_300 [label="predições S2 já existentes\n(Gemini e GPT),\nreaproveitadas (não reexecutadas)", style=dashed, color="#8C8C8C", fontcolor="#8C8C8C", constraint=false];
+}

@@ -1,0 +1,177 @@
+/*
+ * Figura 3 - Exemplo real das entradas e saída do sistema multiagente.
+ * Redesenhada TRÊS vezes após feedback do pesquisador:
+ *   (1) fluxo horizontal (esquerda->direita), substituindo a grade
+ *       matplotlib original que ficou "embolada";
+ *   (2) os três pareceres (ABCD, Menzies, SPCL) passaram a ser BLOCOS
+ *       JSON reais (chaves/valores literais do raw_response_text de cada
+ *       agente), não mais uma frase corrida resumindo a conclusão;
+ *   (3) o agente sumarizador também passou a ser um bloco JSON - o
+ *       registro de log real desse papel É, na verdade, uma lista Python
+ *       de um dicionário ({'type': 'text', 'text': ..., 'extras':
+ *       {'signature': ...}}), formato do content-block bruto do provedor,
+ *       não uma frase narrativa inventada por este script; e a nota de
+ *       rastreabilidade (modelo/condição/lesão/timestamps, antes um nó
+ *       ao lado da imagem, alongando a figura) foi movida para baixo da
+ *       caixa do sumarizador (mesma coluna/rank), não mais esticando a
+ *       imagem à direita.
+ * Valores longos (sobretudo os campos "explicacao" e "text") continuam
+ * truncados com "(...)", nunca reescritos; texto integral verbatim em
+ * fig3_textos_completos.md.
+ *
+ * PRÉ-REQUISITO: rodar `python preparar_imagem_s2.py` NESTA PASTA antes
+ * de renderizar este .dot - ele gera `fig3_s2_panel_real.png` (recorte
+ * real do painel S2, sem reconstrução a partir de pixels/máscaras cruas).
+ * O atributo `image=` abaixo é resolvido relativo ao diretório de
+ * trabalho onde `dot` é chamado - rode `dot` também a partir desta pasta.
+ *
+ * SELEÇÃO DO CASO E REGISTRO DE ORIGEM (resumo - detalhe completo em
+ * fig3_textos_completos.md e no README):
+ *   - Mesma lesão da Figura 2: ISIC_0027950 / HAM_0000193 (dx=akiec,
+ *     não-melanoma), condição S2. Esta é a única, dentre as 5 composições
+ *     de exemplo disponíveis localmente, que também pertence ao manifesto
+ *     complementar de 300 lesões (linha 13) com máscara S2 não vazia -
+ *     desvio assumido e documentado (ver fig2_s0_s1_s2.py e README),
+ *     não escolhida por estética/resultado.
+ *   - Modelo: gemini-3.1-flash-lite - primeiro modelo multiagente na
+ *     ordem determinística já usada no protocolo (CNN -> Gemini -> GPT ->
+ *     Qwen3-VL -> MedGemma, doc 34, Análise 6) - escolhido pela ordem,
+ *     não pelo resultado.
+ *   - Fonte: experiments/multiagent/full_scale_matrix/gemini-3.1-flash-lite/
+ *     call_log_main.jsonl, 4 registros (ABCD/Menzies/SPCL/sumarizador),
+ *     mesmo lesion_id/image_id/model_name/condition, call_status="ok" nos
+ *     4, timestamps consecutivos entre 2026-11-16T22:41:25 e 22:41:36 UTC.
+ *   - Excertos abaixo são literais, marcados com "(...)" onde cortados;
+ *     texto completo e verbatim em fig3_textos_completos.md.
+ *   - RESSALVA DE FIDELIDADE (não escondida - nó próprio no fluxo, estilo
+ *     tracejado/cor de alerta, não só texto de rodapé): o texto bruto do
+ *     sumarizador termina em "decisao_final: indeterminado", mas os
+ *     campos estruturados do mesmo registro são classified_status_v2=
+ *     "negativo", decision_status="field_absent", decisao_final=null -
+ *     o extrator automático não capturou esse valor. Leitura plausível
+ *     (não confirmada por reexecução) documentada em
+ *     fig3_textos_completos.md e docs/reconstruction/
+ *     22_final_answer_extraction_preprocessing.md.
+ *
+ * Renderizar com: dot -Tpdf fig3_multiagente_exemplo.dot -o fig3_multiagente_exemplo.pdf
+ *                 dot -Tpng -Gdpi=300 fig3_multiagente_exemplo.dot -o fig3_multiagente_exemplo.png
+ */
+
+digraph fig3_multiagente_exemplo {
+    rankdir=LR;
+    compound=true;
+    charset="UTF-8";
+    fontname="Helvetica";
+    fontsize=12;
+    labelloc="t";
+    label="Figura 3 - Exemplo real de entradas e saída do sistema multiagente (condição S2)";
+    bgcolor="white";
+    nodesep=0.45;
+    ranksep=0.65;
+
+    node [fontname="Helvetica", fontsize=9.5, shape=box, style="rounded,filled", color="#8C8C8C", fillcolor="#F7F6F4", fontcolor="#2B2B2B", margin="0.16,0.12"];
+    edge [fontname="Helvetica", fontsize=8.5, color="#4C6B8A", fontcolor="#2B2B2B"];
+
+    /* Nó de imagem real (painel S2 recortado por preparar_imagem_s2.py).
+     * width/height em polegadas - ajustar se a proporção real do recorte
+     * (não conferida visualmente nesta sessão) destoar de um quase-quadrado. */
+    imagem_s2 [
+        label="";
+        image="fig3_s2_panel_real.png";
+        imagescale=true;
+        fixedsize=true;
+        width=1.9; height=1.9;
+        shape=box; style="rounded";
+        color="#4C6B8A";
+    ];
+
+    subgraph cluster_pareceres {
+        label="Três pareceres independentes (mesma imagem, protocolos distintos)";
+        style="rounded,dashed";
+        color="#8C8C8C";
+        fontsize=9.5;
+        fontcolor="#2B2B2B";
+
+        abcd [shape=box, style="rounded,filled", fillcolor="white", label=<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+<tr><td align="left"><b>Parecer ABCD</b> <font point-size="7">(JSON, campos reais)</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">{</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"assimetria": "1 - A lesão apresenta assimetria<br align="left"/>&#160;&#160;em apenas um dos eixos principais.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"bordas": "6 - bordas nítidas e bem delimitadas<br align="left"/>&#160;&#160;em seis dos oito quadrantes.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"cor": "3 - três cores distintas: branco/bege,<br align="left"/>&#160;&#160;vermelho/rosa e marrom claro.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"estruturas": "2 - duas estruturas principais:<br align="left"/>&#160;&#160;áreas sem estrutura e rede pigmentada.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"explicacao": "(1×1,3)+(6×0,1)+(3×0,5)+(2×0,5)<br align="left"/>&#160;&#160;= 4,4 &lt; 4,75 → benigna (...)"</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">}</font></td></tr>
+</table>>];
+        menzies [shape=box, style="rounded,filled", fillcolor="white", label=<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+<tr><td align="left"><b>Parecer Menzies</b> <font point-size="7">(JSON, campos reais)</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">{</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"positivas": {</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"veu_azul_branco": "0. Ausente.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"multiplos_pontos_marrons": "0. Ausente.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"pseudopodes": "0. Ausente.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"streaming_radial": "0. Ausente.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"despigmentacao_tipo_cicatriz": "0. Ausente.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"pontos_pretos_perifericos": "0. Ausente.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"multiplas_cores": "0. Não apresenta cinco ou<br align="left"/>&#160;&#160;&#160;&#160;seis cores distintas."</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;},</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"negativas": {</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"simetria": "1. Padrão de distribuição de<br align="left"/>&#160;&#160;&#160;&#160;pigmento relativamente simétrico.",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;&#160;&#160;"cor_unica": "0. Múltiplas tonalidades:<br align="left"/>&#160;&#160;&#160;&#160;marrom, bege e rosa."</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;},</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"explicacao": "ausência de critérios<br align="left"/>&#160;&#160;positivos → lesão benigna (...)"</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">}</font></td></tr>
+</table>>];
+        spcl [shape=box, style="rounded,filled", fillcolor="white", label=<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+<tr><td align="left"><b>Parecer Seven-Point Checklist</b> <font point-size="7">(JSON, campos reais)</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">{</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;"padrao_de_pigmentacao_atipico": "Sim (...)<br align="left"/>&#160;&#160;(2 pontos)",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;"veu_azul_branco_irregular": "Não (0 pontos)",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;"vasos_atipicos": "Sim, vasos lineares e<br align="left"/>&#160;&#160;arboriformes irregulares (2 pontos)",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;"padrao_de_reticulo_irregular": "Não (0 pontos)",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;"padrao_de_globulos_irregulares": "Não (0 pontos)",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;"hiperpigmentacao_localizada": "Sim (...)<br align="left"/>&#160;&#160;(1 ponto)",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7">&#160;&#160;"regressao": "Não (0 pontos)",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;"explicacao": "total 5 pontos (≥3 →<br align="left"/>&#160;&#160;avaliação clínica especializada) (...)"</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">}</font></td></tr>
+</table>>];
+    }
+
+    sumarizador [shape=box, style="rounded,filled", fillcolor="#E4ECF2", color="#4C6B8A", peripheries=2, label=<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+<tr><td align="left"><b>Agente sumarizador</b> <font point-size="7">(JSON, campos reais - recebe a imagem + os 3 pareceres)</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">[</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;{</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;&#160;&#160;"type": "text",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;&#160;&#160;"text": "(...) conflito claro: ABCD/Menzies<br align="left"/>&#160;&#160;&#160;&#160;apontam benigna, mas o SPCL detecta vasos<br align="left"/>&#160;&#160;&#160;&#160;atípicos e pigmentação heterogênea (...)<br align="left"/>&#160;&#160;&#160;&#160;evidência insuficiente para classificação<br align="left"/>&#160;&#160;&#160;&#160;binária segura neste momento.<br align="left"/>&#160;&#160;&#160;&#160;decisao_final: indeterminado",</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;&#160;&#160;"extras": { "signature": "(opaco, omitido)" }</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">&#160;&#160;}</font></td></tr>
+<tr><td align="left"><font face="Courier" point-size="7.5">]</font></td></tr>
+</table>>];
+
+    ressalva [
+        label="Ressalva de fidelidade: texto bruto termina em\n\"decisao_final: indeterminado\", mas os campos\nestruturados do registro (classified_status_v2=\"negativo\",\ndecision_status=\"field_absent\", decisao_final=null)\nnão capturaram esse valor - leitura plausível, não\nconfirmada, em fig3_textos_completos.md.",
+        shape=note, style="filled,dashed", fillcolor="#FBF1E6", color="#8A5A3A", fontcolor="#8A5A3A", fontsize=8
+    ];
+
+    rastreabilidade [
+        label="Imagem S2: ISIC_0027950 (HAM_0000193)\nModelo: gemini-3.1-flash-lite | Condição: S2\ncall_status=\"ok\" nos 4 registros, mesma janela de ~11s (2026-11-16, 22:41:25-22:41:36 UTC)\nExecução real registrada, não demonstração sintética. O diagnóstico não constitui confirmação clínica.",
+        shape=plaintext, fontsize=8, fontcolor="#2B2B2B"
+    ];
+
+    imagem_s2 -> abcd;
+    imagem_s2 -> menzies;
+    imagem_s2 -> spcl;
+    abcd -> sumarizador;
+    menzies -> sumarizador;
+    spcl -> sumarizador;
+    sumarizador -> ressalva [style=dashed, color="#8A5A3A", dir=none];
+
+    /* Nota de rastreabilidade: mesma coluna (rank) do sumarizador em vez
+     * de uma coluna final própria - fica no rodapé, abaixo da caixa do
+     * sumarizador, em vez de alongar a imagem ou flutuar à direita de tudo. */
+    { rank=same; sumarizador; rastreabilidade; }
+    sumarizador -> rastreabilidade [style=invis];
+}

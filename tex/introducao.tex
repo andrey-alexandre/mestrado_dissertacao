@@ -65,14 +65,14 @@ Em nível global, estimativas da Agência Internacional para Pesquisa em Câncer
 
 Além da radiação UV, fatores como predisposição genética, pigmentação cutânea, histórico de queimaduras solares e idade influenciam significativamente o desenvolvimento da doença \cite{shraim2023systematic}. No contexto brasileiro, a conscientização sobre diagnóstico precoce é essencial, sobretudo em áreas com acesso limitado a especialistas. Nesse sentido, estudos indicam que tecnologias baseadas em inteligência artificial (IA) e em teledermatologia podem ampliar o acesso ao diagnóstico dermatológico, apoiando médicos não especialistas, como clínicos de atenção primária e enfermeiros, mesmo em regiões com escassez de recursos humanos especializados \cite{jain2021development,giavinabianchi2020teledermatology}.
 
-Esta pesquisa propõe o desenvolvimento de um sistema baseado em \textit{Large Language Models} (LLMs), mais especificamente os modelos GPT-5.4-nano \cite{openai2025gpt5nano} e Gemini-3.1-flash-lite \cite{google2025gemini31}, empregando sua capacidade multimodal de análise visual e geração de linguagem natural para a \textbf{detecção de melanoma} em imagens dermoscópicas. Os experimentos utilizam o conjunto PH2 \cite{mendonca2013ph2}, composto por 200 imagens dermoscópicas com diagnósticos e máscaras de segmentação anotadas por especialistas, o que permite isolar a avaliação diagnóstica das LLMs da variabilidade introduzida por modelos de segmentação automática. O objetivo central é avaliar a acurácia diagnóstica, a interpretabilidade clínica e a consistência textual dos pareceres gerados, contribuindo para o desenvolvimento de ferramentas de triagem assistida por IA acessíveis e explicáveis.
+Esta pesquisa propõe e avalia um sistema multiagente baseado em modelos de linguagem multimodais (VLMs) -- Gemini-3.1-flash-lite \cite{google2025gemini31}, GPT-5.4-nano \cite{openai2025gpt5nano}, Qwen3-VL \cite{qwen2025qwen3vl} e MedGemma 1.5 \cite{google2025medgemma}, sem designar um modelo principal -- para a \textbf{classificação binária melanoma versus não melanoma} em imagens dermoscópicas, comparando-o a uma CNN supervisionada (EfficientNetV2-S). Os experimentos utilizam três bases públicas distintas, cada uma associada a uma etapa do protocolo (desenvolvimento da segmentação, treinamento da CNN e avaliação principal), detalhadas no Capítulo~4, e uma avaliação estruturada em seis análises comparativas que isolam, na medida do possível, a contribuição da organização multiagente (frente ao mesmo modelo em chamada única) e do contorno de segmentação predito (frente à ausência de contorno). O objetivo central é avaliar o desempenho diagnóstico e a coerência/rastreabilidade textual dos pareceres gerados, como apoio proposto a médicos não especialistas -- não como demonstração de interpretabilidade clínica ou de melhora na decisão médica, pontos que esta pesquisa não investiga diretamente (Capítulo~4).
 
 \section{Motivação}
 
 Nos últimos anos, técnicas de aprendizado profundo e aprendizado de máquina vêm demonstrando alto potencial como ferramentas auxiliares em diagnósticos médicos, com especial utilidade em regiões com déficit de especialistas. Na dermatologia, \citeonline{esteva2017dermatologist} demonstraram que uma CNN treinada em imagens clínicas e dermatoscópicas atinge acurácia equivalente à de pelo menos 21 dermatologistas certificados na classificação de carcinomas cutâneos e melanoma; \citeonline{haenssle2018man} compararam uma rede convolucional a 58 dermatologistas de 17 países, incluindo 30 com mais de cinco anos de experiência em dermatoscopia, na classificação dermatoscópica de lesões melanocíticas, obtendo desempenho diagnóstico superior; e \citeonline{brinker2019deep} superaram 136 dos 157 dermatologistas avaliados, de 12 hospitais universitários alemães e diferentes níveis de experiência (de médicos em formação a médicos-chefes), em tarefa de classificação dermatoscópica de melanoma.
  
 
-O Brasil, devido à sua extensão territorial e desigualdades regionais, enfrenta desafios para garantir diagnóstico precoce universal. Assim, modelos computacionais aplicáveis de forma remota tornam-se alternativas viáveis para promover saúde pública mais acessível. A relevância é ainda maior para o melanoma, que, apesar de menos incidente, responde pela maioria das mortes por câncer de pele. Esta investigação se diferencia pela integração entre modelos de linguagem multimodal com máscaras de segmentação de referência e sistemas multiagentes para análise e emissão de diagnósticos, ampliando a interpretabilidade e a confiabilidade na tomada de decisão.
+O Brasil, devido à sua extensão territorial e desigualdades regionais, enfrenta desafios para garantir diagnóstico precoce universal. Assim, modelos computacionais aplicáveis de forma remota tornam-se alternativas viáveis para promover saúde pública mais acessível. A relevância é ainda maior para o melanoma, que, apesar de menos incidente, responde pela maioria das mortes por câncer de pele. Esta investigação se diferencia pela integração entre modelos de linguagem multimodal, um modelo de segmentação automática e um sistema multiagente para análise e emissão de diagnósticos, comparado a uma CNN supervisionada, com o objetivo de caracterizar, de forma proporcional à evidência reunida, onde essa organização contribui e onde ainda apresenta limitações.
 
 \section{Lacuna do Conhecimento}
 
@@ -83,100 +83,50 @@ Grande parte da literatura concentra-se nas etapas isoladas de segmentação e c
 
 \section{Proposta da Pesquisa}
 
-Propõe-se a aplicação de sistemas multiagentes para a detecção de melanoma em imagens dermoscópicas, avaliando a acurácia diagnóstica e a consistência textual dos pareceres gerados a partir de imagens e suas respectivas máscaras de segmentação de referência. Além da comparação de acurácia com um \textit{baseline} supervisionado, este trabalho propõe um \textbf{framework de cinco eixos} para a avaliação automatizada da consistência estrutural e lógica dos relatórios diagnósticos gerados pelas LLMs, complementado por uma \textbf{análise de calibração de incerteza} que investiga se os modelos concentram sua hesitação diagnóstica nos casos clinicamente mais ambíguos. Essa dupla contribuição metodológica constitui o principal diferencial desta pesquisa frente à literatura de classificação binária tradicional.
+Propõe-se a avaliação de um sistema multiagente para a classificação binária melanoma versus não melanoma em imagens dermoscópicas, comparado a uma CNN supervisionada, com três contribuições avaliadas: o desempenho diagnóstico de ambas as abordagens; a coerência e a rastreabilidade das respostas textuais produzidas pelo sistema multiagente; e a contribuição isolável da organização multiagente (frente ao mesmo modelo de linguagem em chamada única) e dos contornos de segmentação (de referência e predito, frente à imagem sem contorno). Essas três frentes são investigadas por meio de seis análises comparativas, detalhadas no Capítulo~4, e não por um \textit{framework} único de verificação -- a dupla contribuição proposta na fase de qualificação deste trabalho (um conjunto de eixos de verificação textual e uma análise de calibração de incerteza, ambos específicos do protocolo então vigente) foi substituída, após a qualificação, por esse desenho comparativo mais amplo.
 
-A arquitetura é composta por três módulos principais:
+O sistema é composto por três componentes desenvolvidos e avaliados de forma independente:
 \begin{enumerate}
-    \item Uso das máscaras de segmentação de referência do conjunto PH2 como entrada padronizada ao sistema;
-    \item Detecção de melanoma por modelos de linguagem multimodal (melanoma vs.\ não-melanoma);
-    \item Diagnóstico de melanoma via sistema multiagente, com consolidação dos pareceres pelo agente sumarizador.
+    \item Um modelo de segmentação automática, que gera a máscara predita da lesão usada para compor o contorno da condição visual S2;
+    \item Uma CNN supervisionada (EfficientNetV2-S), treinada e avaliada de forma inteiramente independente do sistema multiagente;
+    \item Um sistema multiagente composto por três agentes diagnósticos (ABCD, Menzies, \textit{Seven-Point Checklist}) e um agente sumarizador, que integra a imagem e os pareceres disponíveis em uma decisão final, sem agente crítico, sem recuperação de conhecimento (\textit{Retrieval-Augmented Generation}) e sem extração de \textit{features} por visão computacional tradicional como entrada adicional às LLMs.
 \end{enumerate}
 
-A avaliação contemplou métricas clínicas como acurácia, sensibilidade e precisão, bem como critérios de completude e consistência textual dos pareceres. Entre as limitações, destacam-se a sensibilidade dos modelos de linguagem a variações de \textit{prompt}, a ausência de contexto clínico complementar e o tamanho reduzido do conjunto PH2 (200 imagens), que limita a generalização dos resultados. A validação ocorreu em ambiente experimental controlado, o que deve ser considerado na interpretação das métricas obtidas.
+A avaliação quantitativa emprega cinco métricas (acurácia, precisão, sensibilidade, especificidade e F1), com intervalos de confiança de Wilson e \textit{bootstrap} (Capítulo~4), sobre uma amostra congelada de 3.000 lesões e um subconjunto complementar de 300. Entre as limitações já identificadas, destacam-se a impossibilidade de afirmar independência absoluta entre as bases utilizadas, a ausência de validação clínica com profissionais em consulta real, e as duas frentes qualitativas de conferência humana, com amostragem, unidade de análise e critérios próprios a cada uma (Capítulo~5): a revisão de fidelidade das sínteses multiagente teve conferência humana sobre uma amostra de sínteses, sem divergências frente à avaliação assistida por IA; a leitura dos mapas de Grad-CAM da CNN teve conferência humana sobre a totalidade dos mapas desta frente, sem adjudicação entre a leitura humana e a assistida por IA, registrando onde as duas leituras divergem -- um resultado que, por ter desenho distinto, não é apresentado como ponto de comparação direta com o da revisão das sínteses.
 
 \section{Objetivos}
 
 \subsection{Objetivo Principal}
-Avaliar a eficácia de modelos multiagentes na detecção de melanoma em imagens dermoscópicas, utilizando máscaras de segmentação de referência do conjunto PH2 e os protocolos clínicos ABCD, Menzies e SPCL como base do raciocínio diagnóstico estruturado.
+Avaliar o desempenho diagnóstico e a coerência/rastreabilidade textual de um sistema multiagente baseado em modelos de linguagem multimodais, estruturado nos protocolos clínicos ABCD, Menzies e \textit{Seven-Point Checklist}, comparando-o a uma CNN supervisionada e investigando a contribuição isolável da organização multiagente e dos contornos de segmentação, como apoio proposto a médicos não especialistas na interpretação de imagens dermatoscópicas.
 
 
 \subsection{Objetivos Específicos}
 \label{sec:objetivos_especificos}
 \begin{itemize}
-    \item Objetivos até a qualificação
-    \begin{itemize}
-        \item Investigar o estado da arte em segmentação de imagens, classificação de lesões cutâneas e sistemas diagnósticos baseados em inteligência artificial aplicados à dermatologia
-        \begin{itemize}
-            \item Capítulo de revisão bibliográfica na dissertação;
-            \item Documento de mapeamento de protocolos clínicos (ABCD, Menzies, SPCL);
-            \item Arquivo de referências bibliográficas organizado (\texttt{.bib});
-            \item Quadro comparativo entre abordagens existentes.
-        \end{itemize}
-    
-        \item Preparar o conjunto PH2 e suas máscaras de segmentação de referência como base para a avaliação diagnóstica
-        \begin{itemize}
-            \item Pré-processamento e normalização das imagens PH2;
-            \item Integração das máscaras de referência (\textit{ground truth}) ao \textit{pipeline} de inferência das LLMs;
-            \item Organização do conjunto em subconjuntos para avaliação binária (melanoma vs.\ não-melanoma).
-        \end{itemize}
-    
-        \item Avaliar a eficácia de diferentes modelos de linguagem natural (LLMs) na detecção de melanoma com base na imagem dermoscópica e sua máscara de segmentação de referência
-        \begin{itemize}
-            \item Relatório comparativo das LLMs testadas (GPT-5.4-nano e Gemini-3.1-flash-lite);
-            \item Base de prompts (Chain of Thought, Risk Prompt, etc.);
-            \item Tabela de desempenho quantitativo com métricas clássicas;
-            \item Discussão qualitativa das respostas geradas pelas LLMs.
-        \end{itemize}
-    
-        \item Implementar um sistema multiagente baseado em LLMs para geração de diagnósticos estruturados, considerando diferentes protocolos clínicos
-        \begin{itemize}
-            \item Arquitetura funcional implementada com LangChain/LangGraph;
-            \item Diagrama do fluxo de agentes e estados do sistema;
-            \item Diagnósticos gerados pelos agentes com base em diferentes protocolos;
-            \item Código-fonte modularizado e reusável.
-        \end{itemize}
+    \item Investigar o estado da arte em segmentação de imagens, classificação de lesões cutâneas e sistemas diagnósticos baseados em inteligência artificial aplicados à dermatologia, incluindo o mapeamento dos protocolos clínicos ABCD, Menzies e \textit{Seven-Point Checklist} e o posicionamento desta pesquisa frente a arquiteturas multiagentes e modelos de linguagem multimodal já publicados;
 
-        \item Validar o desempenho do sistema proposto por meio de comparação com modelos tradicionais de visão computacional e análise de consistência textual
-        \begin{itemize}
-            \item Treinamento do \textit{baseline} ResNet-50 diretamente sobre o conjunto PH2 (divisão estratificada 70/30, \textit{fine-tuning} completo com ponderação de classes), eliminando a dependência de transferência de conhecimento entre bases distintas;
-            \item Tabelas comparativas com o modelo \textit{baseline} retreinado;
-            \item Análise de consistência estrutural e lógica das respostas por meio de cinco eixos de verificação objetiva;
-            \item Avaliação da completude e estrutura das respostas em linguagem natural;
-            \item Discussão sobre limitações, falsos positivos e interpretabilidade.
-        \end{itemize}
-    \end{itemize}
-    \item Objetivos até a defesa
-    \begin{itemize}
-        \item Investigar uma variante do sistema multiagente na qual \textit{features} associadas aos critérios dos protocolos clínicos (ABCD, Menzies, SPCL) sejam extraídas por métodos tradicionais de visão computacional e fornecidas como entrada estruturada às LLMs, em complemento ao envio direto da imagem
-        \begin{itemize}
-            \item Extração de \textit{features} morfológicas (assimetria, bordas, cor, estruturas dermoscópicas) por técnicas clássicas de visão computacional;
-            \item Comparação de desempenho entre a abordagem por \textit{features} extraídas e a abordagem atual de envio direto da imagem à LLM;
-            \item Discussão sobre o impacto da informação estruturada previamente extraída na qualidade do raciocínio diagnóstico gerado.
-        \end{itemize}
+    \item Desenvolver e selecionar, por validação cruzada aninhada sobre o ISIC2018 Task 1 (U-Net vs.\ DeepLabV3+-ResNet34), um modelo de segmentação automática cuja máscara predita é usada exclusivamente para compor o contorno sobreposto à imagem original (condição S2), nunca para recortar ou substituir a imagem;
 
-        \item Implementar de forma completa o Agente Crítico baseado em \textit{Retrieval-Augmented Generation} (RAG), ainda em estágio preliminar na fase de qualificação, e mensurar isoladamente sua contribuição ao diagnóstico final
-        \begin{itemize}
-            \item Definição da base de conhecimento biomédica a ser consultada (e.g., PubMed);
-            \item Definição do método de recuperação e do modelo de \textit{embeddings} utilizado;
-            \item Integração do Agente Crítico à versão do sistema efetivamente avaliada;
-            \item Análise comparativa do desempenho e da consistência textual do sistema com e sem o Agente Crítico.
-        \end{itemize}
+    \item Treinar e calibrar, sobre o conjunto de treino oficial do BCN20000, uma CNN supervisionada (EfficientNetV2-S) como \textit{baseline} de classificação binária melanoma versus não melanoma, com \textit{checkpoint} e limiar de decisão selecionados sem acesso ao HAM10000;
 
-        \item Organizar os resultados obtidos em um protótipo funcional e documentar as análises por meio de relatórios técnicos e artigos científicos
-        \begin{itemize}
-            \item Protótipo final em ambiente executável (e.g., Colab ou App);
-            \item Relatório técnico consolidado com testes e resultados;
-            \item Artigo científico no formato IEEE ou Elsevier;
-            \item Materiais de apoio à defesa (slides e roteiro).
-        \end{itemize}
-    \end{itemize}
+    \item Implementar, com a biblioteca LangGraph, um sistema multiagente composto por três agentes diagnósticos independentes (ABCD, Menzies e \textit{Seven-Point Checklist}) e um agente sumarizador, sem agente crítico baseado em recuperação de conhecimento (RAG);
+
+    \item Avaliar quatro modelos de linguagem multimodal (Gemini-3.1-flash-lite, GPT-5.4-nano, Qwen3-VL e MedGemma 1.5), tanto em chamada direta (VLM-direto) quanto integrados ao sistema multiagente, na detecção de melanoma em imagens dermatoscópicas do HAM10000;
+
+    \item Avaliar o sistema por meio de seis análises comparativas sobre a amostra congelada de 3.000 lesões do HAM10000 e o subconjunto complementar de 300 lesões -- CNN versus sistema multiagente; organização multiagente versus VLM-direto; e os efeitos dos contornos de referência (S1) e predito (S2) -- com as métricas de acurácia, precisão, sensibilidade, especificidade e F1, e intervalos de confiança de Wilson e \textit{bootstrap};
+
+    \item Avaliar a fidelidade estrutural e a rastreabilidade das sínteses textuais produzidas pelo agente sumarizador, por meio de revisão assistida por inteligência artificial com conferência humana por amostragem;
+
+    \item Avaliar o raciocínio espacial da CNN por meio de mapas de Grad-CAM;
+
+    \item Organizar os resultados obtidos em relatórios técnicos reprodutíveis -- com \textit{checkpoints} e manifestos identificados por hash criptográfico, sementes fixas e dependências versionadas -- e documentar as análises para subsídio à redação desta dissertação e dos materiais de apoio à defesa.
 \end{itemize}
 
 \section{Metodologia}
 
-A pesquisa é de natureza aplicada e experimental, estruturada em quatro etapas interdependentes: (i) revisão do estado da arte em detecção de melanoma e diagnóstico assistido por IA em dermatologia; (ii) preparação do conjunto PH2 \cite{mendonca2013ph2} e integração de suas máscaras de segmentação de referência ao \textit{pipeline} diagnóstico, eliminando a variabilidade de modelos de segmentação automática; (iii) avaliação comparativa dos modelos de linguagem multimodal GPT-5.4-nano \cite{openai2025gpt5nano} e Gemini-3.1-flash-lite \cite{google2025gemini31} para detecção de melanoma e geração de pareceres clínicos estruturados; e (iv) implementação e validação de um sistema multiagente coordenado pelos \textit{frameworks} LangChain e LangGraph. O detalhamento de conjuntos de dados, arquiteturas, estratégias de \textit{prompting} e métricas de avaliação é apresentado no Capítulo~4.
+A pesquisa é de natureza aplicada e experimental, estruturada em quatro etapas amplamente independentes: (i) revisão do estado da arte em segmentação, classificação e diagnóstico assistido por IA em dermatologia; (ii) desenvolvimento e seleção do modelo de segmentação automática (ISIC2018 Task 1) e treinamento da CNN supervisionada (BCN20000); (iii) avaliação dos quatro modelos de linguagem multimodal (Gemini-3.1-flash-lite, GPT-5.4-nano, Qwen3-VL e MedGemma 1.5) na condição VLM-direto e integrados ao sistema multiagente, sobre a amostra congelada do HAM10000; e (iv) análise comparativa estruturada em seis análises, com intervalos de confiança de Wilson e \textit{bootstrap}. O detalhamento de conjuntos de dados, arquiteturas, protocolo multiagente e métricas de avaliação é apresentado no Capítulo~4.
 
 
 
 \section{Estrutura da Dissertação}
-Esta dissertação está organizada em seis capítulos. O Capítulo~2 apresenta o referencial teórico, discutindo os principais conceitos e abordagens relacionados à segmentação de imagens dermoscópicas, ao uso de modelos de linguagem multimodal na medicina e à aplicação de sistemas multiagentes em diagnósticos automatizados. O Capítulo~3 revisa o estado da arte, posicionando este trabalho em relação às pesquisas existentes em classificação de lesões cutâneas, diagnóstico médico assistido por LLMs e sistemas multiagentes para suporte clínico. O Capítulo~4 descreve os materiais e métodos empregados, incluindo a preparação do conjunto PH2, o uso das máscaras de segmentação de referência, a arquitetura multiagente baseada nos protocolos ABCD, Menzies e SPCL, e as estratégias de avaliação adotadas. O Capítulo~5 apresenta e discute os resultados obtidos, tanto quantitativos quanto qualitativos, com ênfase na comparação entre o \textit{baseline} supervisionado e os modelos de linguagem e na análise da consistência textual dos pareceres gerados. Por fim, o Capítulo~6 reúne as conclusões, destacando as contribuições alcançadas, as limitações encontradas e as perspectivas para estudos futuros.
+Esta dissertação está organizada em seis capítulos. O Capítulo~2 apresenta o referencial teórico, discutindo os principais conceitos e abordagens relacionados à segmentação de imagens dermoscópicas, ao uso de modelos de linguagem multimodal na medicina e à aplicação de sistemas multiagentes em diagnósticos automatizados. O Capítulo~3 revisa o estado da arte, posicionando este trabalho em relação às pesquisas existentes em classificação de lesões cutâneas, diagnóstico médico assistido por LLMs e sistemas multiagentes para suporte clínico. O Capítulo~4 descreve os materiais e métodos empregados: as três bases de dados utilizadas, o desenvolvimento do modelo de segmentação e da CNN, a arquitetura multiagente baseada nos protocolos ABCD, Menzies e \textit{Seven-Point Checklist}, o cenário de uso proposto para o sistema, e o protocolo de avaliação em seis análises comparativas. O Capítulo~5 apresenta e discute os resultados obtidos, quantitativos (as seis análises, com as métricas e intervalos de confiança do protocolo) e qualitativos (a revisão de fidelidade das sínteses multiagente e a conferência humana da leitura de Grad-CAM, ambas concluídas, com achados e taxas de concordância distintos entre si). Por fim, o Capítulo~6 reúne as conclusões, incluindo a ilustração do cenário de uso proposto, as contribuições alcançadas, as limitações encontradas e as perspectivas para estudos futuros.

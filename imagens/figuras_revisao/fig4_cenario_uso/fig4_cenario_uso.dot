@@ -1,0 +1,47 @@
+/*
+ * Figura 4 - Cenário de uso proposto (fluxo conceitual, NÃO validado).
+ * Mostra apenas o fluxo do sistema multiagente em S2 (sem S1, sem CNN,
+ * sem máscara de referência - essas pertencem ao desenho experimental,
+ * não ao cenário de uso proposto).
+ *
+ * Renderizar com: dot -Tpdf fig4_cenario_uso.dot -o fig4_cenario_uso.pdf
+ *                 dot -Tpng -Gdpi=300 fig4_cenario_uso.dot -o fig4_cenario_uso.png
+ */
+
+digraph fig4_cenario_uso {
+    rankdir=TB;
+    charset="UTF-8";
+    fontname="Helvetica";
+    fontsize=12;
+    bgcolor="white";
+    nodesep=0.4;
+    ranksep=0.5;
+
+    node [fontname="Helvetica", fontsize=10, shape=box, style="rounded,filled", color="#8C8C8C", fillcolor="#F7F6F4", fontcolor="#2B2B2B", margin="0.18,0.12"];
+    edge [fontname="Helvetica", fontsize=9, color="#4C6B8A", fontcolor="#2B2B2B"];
+
+    /* Faixa de aviso - parte gráfica da figura, não só da legenda */
+    aviso [
+        label="CENÁRIO DE USO PROPOSTO - NÃO VALIDADO COM PROFISSIONAIS EM CONSULTA",
+        shape=box, style="filled", fillcolor="#8A5A3A", fontcolor="white", fontsize=11,
+        margin="0.25,0.15", width=6
+    ];
+
+    passo1 [label="1. Médico obtém e fornece\numa imagem dermatoscópica"];
+    passo2 [label="2. Sistema gera a máscara predita\ne apresenta o contorno sobre a imagem\n(condição S2)"];
+    passo3 [label="3. Três agentes diagnósticos produzem\ninformações estruturadas\n(ABCD, Menzies, Seven-Point Checklist)"];
+    passo4 [label="4. Agente sumarizador integra a imagem\ne os três pareceres, e retorna:\ndecisão, justificativa e eventuais limitações", fillcolor="#E4ECF2"];
+    indeterminado [label="Resultado indeterminado ou\nausência de saída utilizável\n(saída válida, não é decisão binária)", shape=box, style="rounded,dashed,filled", fillcolor="#FBF1E6", color="#8A5A3A", fontcolor="#2B2B2B"];
+    passo5 [label="5. Médico interpreta as informações\n(decisão, justificativa, limitações ou\nindeterminação) e conduz a decisão clínica", fillcolor="#E4ECF2", peripheries=2];
+
+    aviso -> passo1 [style=invis];
+    passo1 -> passo2;
+    passo2 -> passo3;
+    passo3 -> passo4;
+    passo4 -> indeterminado [label="quando aplicável", style=dashed];
+    passo4 -> passo5 [label="decisão + justificativa"];
+    indeterminado -> passo5 [label="sem encaminhamento\nautomático adicional"];
+
+    { rank=same; passo4; }
+    { rank=same; indeterminado; }
+}
